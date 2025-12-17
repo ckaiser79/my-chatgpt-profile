@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,6 +12,7 @@
     <!-- Alpine.js for simple declarative binding -->
     <script src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
 </head>
+
 <body x-data="{ 
     data: {}, 
     jsonInput: '', 
@@ -43,47 +45,49 @@
       } 
     }, 
     clearInput(){ this.jsonInput = ''; this.error = '' } 
-  }" 
-  x-init="load()">
-  
+  }" x-init="load()">
+
     <header class="jumbotron jumbotron-fluid text-white bg-primary mb-4">
         <div class="container">
             <h1 class="display-4" x-text="data.header?.title ?? 'ChatGPT Usage Type'">ChatGPT Usage Type</h1>
             <p class="lead">
-              <span x-text="data.header?.lead ?? 'A brief summary of how you used ChatGPT in'">A brief summary of how you used chatGPT in</span>
-              <span data-year x-text="data.header?.year ?? (data.meta?.year ?? 2025)">2025</span>.
+                A brief summary of how you used chatGPT in
+                <span data-year x-text="data.header?.year">2025</span>.
             </p>
         </div>
     </header>
 
     <!-- Toggle + JSON input form: paste custom JSON and apply it to the page (collapsed by default) -->
     <section class="container mb-4" id="custom-json-input">
-      <div class="d-flex justify-content-start">
-        <button class="btn btn-sm btn-outline-light mr-2" @click="showJsonForm = !showJsonForm" 
+        <div class="d-flex justify-content-start">
+            <button class="btn btn-sm btn-outline-light mr-2" @click="showJsonForm = !showJsonForm"
                 :class="showJsonForm ? 'btn-outline-light' : 'btn-outline-secondary'"
                 x-text="showJsonForm ? 'Hide JSON form' : 'Show JSON form'"></button>
-        <small class="text-muted align-self-center">Insert custom JSON (collapsed by default)</small>
-      </div>
-
-      <div x-show="showJsonForm" x-cloak x-transition class="mt-3">
-        <div class="card">
-          <div class="card-body">
-            <h2 class="card-title">Insert custom JSON</h2>
-            <form @submit.prevent="applyJson()" novalidate>
-              <div class="form-group">
-                <label for="jsonInput">Paste JSON (<a href="data/sample1.json" target="_blank">sample1.json</a>)</label>
-                <textarea id="jsonInput" x-model="jsonInput" rows="8" class="form-control" placeholder='{"usageProfile": {...}}'></textarea>
-              </div>
-              <div class="mt-2">
-                <button class="btn btn-primary" type="submit">Apply JSON</button>
-                <button type="button" class="btn btn-secondary ml-2" @click="loadSample()">Load sample</button>
-                <button type="button" class="btn btn-light ml-2" @click="clearInput()">Clear</button>
-              </div>
-              <div class="text-danger mt-2" x-text="error" x-show="error"></div>
-            </form>
-          </div>
+            <small class="text-muted align-self-center">Insert custom JSON (collapsed by default)</small>
         </div>
-      </div>
+
+        <div x-show="showJsonForm" x-cloak x-transition class="mt-3">
+            <div class="card">
+                <div class="card-body">
+                    <h2 class="card-title">Insert custom JSON</h2>
+                    <form @submit.prevent="applyJson()" novalidate>
+                        <div class="form-group">
+                            <label for="jsonInput">Paste JSON (<a href="data/sample1.json"
+                                    target="_blank">sample1.json</a>)</label>
+                            <textarea id="jsonInput" x-model="jsonInput" rows="8" class="form-control"
+                                placeholder='{"usageProfile": {...}}'></textarea>
+                        </div>
+                        <div class="mt-2">
+                            <button class="btn btn-primary" type="submit">Apply JSON</button>
+                            <button type="button" class="btn btn-secondary ml-2" @click="loadSample()">Load
+                                sample</button>
+                            <button type="button" class="btn btn-light ml-2" @click="clearInput()">Clear</button>
+                        </div>
+                        <div class="text-danger mt-2" x-text="error" x-show="error"></div>
+                    </form>
+                </div>
+            </div>
+        </div>
     </section>
 
     <main class="container">
@@ -91,39 +95,31 @@
         <!-- My personal AI Usage Profile -->
         <section id="usage-profile" class="card mb-3">
             <div class="card-body">
-                <h2 class="card-title" x-text="data.usageProfile?.title ?? 'My personal AI Usage Profile'">My personal AI Usage Profile</h2>
-                <p class="card-text">
-                  <span x-text="data.usageProfile?.summary ?? 'Summary of how often and in what contexts you use AI.'">Summary of how often and in what contexts you use AI.</span>
-                  <template x-if="data.usageProfile">
-                    <div class="mt-2"><small>
-                      <span x-text="data.usageProfile.frequency ? 'Frequency: ' + data.usageProfile.frequency : ''"></span>
-                      <span x-show="data.usageProfile.frequency && data.usageProfile.contexts"> • </span>
-                      <span x-text="data.usageProfile.contexts ? 'Contexts: ' + data.usageProfile.contexts.join(', ') : ''"></span>
-                      <span x-show="data.usageProfile.notes"> • </span>
-                      <span x-text="data.usageProfile.notes ?? ''"></span>
-                    </small></div>
-                  </template>
-                </p>
+
+                <!-- If JSON provides an archetype, show a large archetype headline + personal description -->
+                <template>
+                    <h2 class="card-title mb-1">
+                        <span class="display-4" x-text="data.archetype.name">Archetype Headline</span>
+                    </h2>
+
+                    <p class="lead text-muted mb-2" x-text="data.archetype.summary">
+                        Personal description of the archetype goes here.
+                    </p>
+                </template>
+
             </div>
         </section>
 
-        <!-- My type of AI interactions -->
         <section id="interaction-types" class="card mb-3">
             <div class="card-body">
-                <h2 class="card-title">My type of AI interactions</h2>
+                <h2 class="card-title">You used the AI for...</h2>
                 <p class="card-text">
-                  <template x-if="data.interactionTypes && data.interactionTypes.length">
                     <template x-for="(item, index) in data.interactionTypes" :key="index">
-                      <span
-                        x-text="item.word"
-                        :style="'font-size:' + (0.9 + (Math.min(10, item.weight || 1)/10)*1.5) + 'em; margin-right:0.5rem; display:inline-block; vertical-align:middle;'">
-                        brainstorming
-                      </span>
+                        <span x-text="item.word"
+                            :style="'font-size:' + (0.9 + (Math.min(10, item.weight || 1)/10)*1.5) + 'em; margin-right:0.5rem; display:inline-block; vertical-align:middle;'">
+                            brainstorming
+                        </span>
                     </template>
-                  </template>
-                  <template x-if="!data.interactionTypes || !data.interactionTypes.length">
-                    <span>A list of words, which describe my interactions visualised as a word cloud.</span>
-                  </template>
                 </p>
             </div>
         </section>
@@ -134,15 +130,12 @@
 
                 <!-- visual 10-block scale (left = interested, right = guru) -->
                 <div class="mb-2" aria-hidden="false">
-                  <div class="d-flex align-items-center" style="gap:8px;">
-                    <template x-for="(__, index) in 10" :key="index">
-                      <button
-                        type="button"
-                        class="p-0 border-0"
-                        :aria-pressed="(index+1) <= (data.userLevel?.value ?? 8) ? 'true' : 'false'"
-                        @click="data.userLevel = data.userLevel || {}; data.userLevel.value = index+1"
-                        :title="(index+1) + '/10'"
-                        :style="(() => {
+                    <div class="d-flex align-items-center" style="gap:8px;">
+                        <template x-for="(__, index) in 10" :key="index">
+                            <button type="button" class="p-0 border-0"
+                                :aria-pressed="(index+1) <= (data.userLevel?.value ?? 8) ? 'true' : 'false'"
+                                @click="data.userLevel = data.userLevel || {}; data.userLevel.value = index+1"
+                                :title="(index+1) + '/10'" :style="(() => {
                           const i = index + 1;
                           // green hue; compute lightness from very light (left) to dark (right)
                           const lightness = Math.round(96 - (i - 1) * 7); // ~96 -> ~31
@@ -150,39 +143,39 @@
                           const isActive = i <= (data.userLevel?.value ?? 8);
                           const boxShadow = isActive ? 'inset 0 -4px rgba(0,0,0,0.12)' : 'none';
                           return `background:${bg}; width:calc((100% - 72px)/10); min-width:22px; height:28px; border-radius:6px; display:inline-block; box-shadow:${boxShadow}; cursor:pointer;`;
-                        })()"
-                        class="user-level-block"
-                      ></button>
-                    </template>
-                  </div>
+                        })()" class="user-level-block"></button>
+                        </template>
+                    </div>
 
-                  <div class="d-flex justify-content-between mt-2 small text-muted" style="font-size:.85rem;">
-                    <span>Interested user</span>
-                    <span class="mx-auto">Senior / Experienced</span>
-                    <span class="text-right">Guru</span>
-                  </div>
+                    <div class="d-flex justify-content-between mt-2 small text-muted" style="font-size:.85rem;">
+                        <span>Interested user</span>
+                        <span class="mx-auto">Senior / Experienced</span>
+                        <span class="text-right">Guru</span>
+                    </div>
 
                 </div>
 
-                <p x-text="data.userLevel?.reason ?? 'A 8 is defined by precise prompts, know capabilities and limits of ai, regular punctual usage.'">A 8 is defined by precise prompts, know capabilities and limits of ai, regular punktual uasage.</p>
+                <p
+                    x-text="data.userLevel?.reason ?? 'A 8 is defined by precise prompts, know capabilities and limits of ai, regular punctual usage.'">
+                    A 8 is defined by precise prompts, know capabilities and limits of ai, regular punktual uasage.</p>
             </div>
         </section>
-        
+
         <!-- Tips how I can increase my user level -->
         <section id="tips-level-up" class="card mb-5">
             <div class="card-body">
                 <h2 class="card-title">Tips how I can increase my user level</h2>
                 <ul>
                     <template x-if="data.tips && data.tips.length">
-                      <template x-for="(tip, i) in data.tips" :key="i">
-                        <li x-text="tip">Practice crafting clearer, more specific prompts.</li>
-                      </template>
+                        <template x-for="(tip, i) in data.tips" :key="i">
+                            <li x-text="tip">Practice crafting clearer, more specific prompts.</li>
+                        </template>
                     </template>
                     <template x-if="!data.tips || !data.tips.length">
-                      <li>Practice crafting clearer, more specific prompts.</li>
-                      <li>Learn prompt engineering patterns and templates.</li>
-                      <li>Explore APIs and automation to integrate AI into your workflows.</li>
-                      <li>Review model outputs critically and iterate on prompts.</li>
+                        <li>Practice crafting clearer, more specific prompts.</li>
+                        <li>Learn prompt engineering patterns and templates.</li>
+                        <li>Explore APIs and automation to integrate AI into your workflows.</li>
+                        <li>Review model outputs critically and iterate on prompts.</li>
                     </template>
                 </ul>
             </div>
@@ -192,4 +185,5 @@
     <!-- keep lightweight: no jQuery required; bootstrap JS omitted (only CSS used) -->
     <script src="js/main.js"></script>
 </body>
+
 </html>
