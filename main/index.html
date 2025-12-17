@@ -9,17 +9,70 @@
     <!-- Alpine.js for simple declarative binding -->
     <script src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
 </head>
-<body x-data="{ data: {}, load(){ fetch('data/sample1.json').then(r=>r.json()).then(d=>this.data=d).catch(e=>console.warn('load failed',e)) } }" x-init="load()">
+<body x-data="{ 
+    data: {}, 
+    jsonInput: '', 
+    error: '', 
+    load(){ 
+      fetch('data/sample1.json')
+        .then(r=>r.json())
+        .then(d=>{ this.data = d; this.jsonInput = JSON.stringify(d, null, 2); })
+        .catch(e=>console.warn('load failed',e)) 
+    },
+    loadSample(){
+      fetch('data/sample1.json')
+        .then(r=>r.json())
+        .then(d=>{
+          this.jsonInput = JSON.stringify(d, null, 2);
+          this.error = '';
+        })
+        .catch(e=>{
+          this.error = 'Could not load sample: ' + (e.message || e);
+          console.warn('loadSample failed', e);
+        })
+    }, 
+    applyJson(){ 
+      try{ 
+        this.data = JSON.parse(this.jsonInput || '{}'); 
+        this.error = ''; 
+      }catch(e){ 
+        this.error = 'Invalid JSON: ' + e.message; 
+      } 
+    }, 
+    clearInput(){ this.jsonInput = ''; this.error = '' } 
+  }" 
+  x-init="load()">
     <!-- headline -->
     <header class="jumbotron jumbotron-fluid text-white bg-primary mb-4">
         <div class="container">
             <h1 class="display-4" x-text="data.header?.title ?? 'ChatGPT Usage Type'">ChatGPT Usage Type</h1>
             <p class="lead">
-              <span x-text="data.header?.lead ?? 'A brief summary of how you used chatGPT in'">A brief summary of how you used chatGPT in</span>
+              <span x-text="data.header?.lead ?? 'A brief summary of how you used ChatGPT in'">A brief summary of how you used chatGPT in</span>
               <span data-year x-text="data.header?.year ?? (data.meta?.year ?? 2025)">2025</span>.
             </p>
         </div>
     </header>
+
+    <!-- JSON input form: paste custom JSON and apply it to the page -->
+    <section class="container mb-4">
+      <div class="card">
+        <div class="card-body">
+          <h2 class="card-title">Insert custom JSON</h2>
+          <form @submit.prevent="applyJson()" novalidate>
+            <div class="form-group">
+              <label for="jsonInput">Paste JSON (<a href="data/sample1.json" target="_blank">sample1.json</a>)</label>
+              <textarea id="jsonInput" x-model="jsonInput" rows="8" class="form-control" placeholder='{"usageProfile": {...}}'></textarea>
+            </div>
+            <div class="mt-2">
+              <button class="btn btn-primary" type="submit">Apply JSON</button>
+              <button type="button" class="btn btn-secondary ml-2" @click="loadSample()">Load sample</button>
+              <button type="button" class="btn btn-light ml-2" @click="clearInput()">Clear</button>
+            </div>
+            <div class="text-danger mt-2" x-text="error" x-show="error"></div>
+          </form>
+        </div>
+      </div>
+    </section>
 
     <main class="container">
 
