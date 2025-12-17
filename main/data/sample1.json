@@ -1,0 +1,29 @@
+{
+  "usageProfile": {
+    "summary": "Summary of how often and in what contexts you use AI.",
+    "frequency": "daily",
+    "contexts": [
+      "brainstorming",
+      "coding help",
+      "research assistant"
+    ],
+    "notes": "Use AI daily for ideation and occasional coding tasks."
+  },
+  "interactionTypes": [
+    { "word": "brainstorming", "weight": 9 },
+    { "word": "coding", "weight": 8 },
+    { "word": "editing", "weight": 6 },
+    { "word": "research", "weight": 7 },
+    { "word": "automation", "weight": 5 }
+  ],
+  "userLevel": {
+    "value": 8,
+    "reason": "Precise prompts, knows capabilities and limits of AI, regular punctual usage."
+  },
+  "tips": [
+    "Practice crafting clearer, more specific prompts.",
+    "Learn prompt engineering patterns and templates.",
+    "Explore APIs and automation to integrate AI into workflows.",
+    "Review model outputs critically and iterate on prompts."
+  ]
+}
