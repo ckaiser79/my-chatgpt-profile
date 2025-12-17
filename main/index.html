@@ -155,9 +155,9 @@
 
                 </div>
 
-                <p
-                    x-text="data.userLevel?.reason ?? 'A 8 is defined by precise prompts, know capabilities and limits of ai, regular punctual usage.'">
-                    A 8 is defined by precise prompts, know capabilities and limits of ai, regular punktual uasage.</p>
+                <p x-text="data.userLevel.reason">
+                    A 8 is defined by precise prompts, know capabilities and limits of ai, regular punctual usage.</p>
+                </p>
             </div>
         </section>
 
@@ -170,12 +170,6 @@
                         <template x-for="(tip, i) in data.tips" :key="i">
                             <li x-text="tip">Practice crafting clearer, more specific prompts.</li>
                         </template>
-                    </template>
-                    <template x-if="!data.tips || !data.tips.length">
-                        <li>Practice crafting clearer, more specific prompts.</li>
-                        <li>Learn prompt engineering patterns and templates.</li>
-                        <li>Explore APIs and automation to integrate AI into your workflows.</li>
-                        <li>Review model outputs critically and iterate on prompts.</li>
                     </template>
                 </ul>
             </div>
