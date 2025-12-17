@@ -1,0 +1,27 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    color: #007bff;
+}
+
+.container {
+    margin-top: 20px;
+}
+
+.btn-custom {
+    background-color: #28a745;
+    color: white;
+}
+
+.footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #f8f9fa;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
