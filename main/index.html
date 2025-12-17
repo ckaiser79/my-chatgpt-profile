@@ -128,8 +128,8 @@
                 <h2 class="card-title text-center">Your experience level</h2>
 
                 <!-- visual 10-block scale (left = interested, right = guru) -->
-                <div class="user-level-scale my-3" style="height:48px;">
-                  <div class="d-flex align-items-center" style="gap:8px;">
+                <div class="user-level-scale my-3">
+                  <div class="d-flex align-items-center user-level-row">
                     <template x-for="(__, index) in 10" :key="index">
                       <button
                         type="button"
@@ -141,7 +141,7 @@
                           const i = index + 1;
                           const lightness = Math.round(96 - (i - 1) * 7); // ~96 -> ~31
                           const bg = `hsl(140,60%,${lightness}%)`;
-                          return `background:${bg}; flex:1; min-width:22px; height:28px; border-radius:6px; display:inline-block; box-shadow:none; cursor:pointer;`;
+                          return `background:${bg};`;
                         })()"
                       ></button>
                     </template>
@@ -159,7 +159,7 @@
                   ></div>
                 </div>
 
-                <div class="d-flex justify-content-between mt-2 small text-muted" style="font-size:.85rem;">
+                <div class="d-flex justify-content-between mt-2 small text-muted scale-labels">
                   <span>Interested user</span>
                   <span class="mx-auto">Senior / Experienced</span>
                   <span class="text-right">Guru</span>
