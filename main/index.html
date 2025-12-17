@@ -3,25 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simple Static Site</title>
+    <title x-text="data.meta?.title ?? 'Simple Static Site'">Simple Static Site</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/styles.css">
+    <!-- Alpine.js for simple declarative binding -->
+    <script src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
 </head>
-<body>
+<body x-data="{ data: {}, load(){ fetch('data/sample1.json').then(r=>r.json()).then(d=>this.data=d).catch(e=>console.warn('load failed',e)) } }" x-init="load()">
     <!-- headline -->
     <header class="jumbotron jumbotron-fluid text-white bg-primary mb-4">
         <div class="container">
-            <h1 class="display-4">Headline</h1>
-            <p class="lead">A concise one-line description for this static profile page.</p>
+            <h1 class="display-4" x-text="data.header?.title ?? 'ChatGPT Usage Type'">ChatGPT Usage Type</h1>
+            <p class="lead">
+              <span x-text="data.header?.lead ?? 'A brief summary of how you used chatGPT in'">A brief summary of how you used chatGPT in</span>
+              <span data-year x-text="data.header?.year ?? (data.meta?.year ?? 2025)">2025</span>.
+            </p>
         </div>
     </header>
 
     <main class="container">
+
         <!-- My personal AI Usage Profile -->
         <section id="usage-profile" class="card mb-3">
             <div class="card-body">
-                <h2 class="card-title">My personal AI Usage Profile</h2>
-                <p class="card-text">Summary of how often and in what contexts you use AI (e.g., daily for brainstorming, occasional for coding help, research assistant, etc.).</p>
+                <h2 class="card-title" x-text="data.usageProfile?.title ?? 'My personal AI Usage Profile'">My personal AI Usage Profile</h2>
+                <p class="card-text">
+                  <span x-text="data.usageProfile?.summary ?? 'Summary of how often and in what contexts you use AI.'">Summary of how often and in what contexts you use AI.</span>
+                  <template x-if="data.usageProfile">
+                    <div class="mt-2"><small>
+                      <span x-text="data.usageProfile.frequency ? 'Frequency: ' + data.usageProfile.frequency : ''"></span>
+                      <span x-show="data.usageProfile.frequency && data.usageProfile.contexts"> • </span>
+                      <span x-text="data.usageProfile.contexts ? 'Contexts: ' + data.usageProfile.contexts.join(', ') : ''"></span>
+                      <span x-show="data.usageProfile.notes"> • </span>
+                      <span x-text="data.usageProfile.notes ?? ''"></span>
+                    </small></div>
+                  </template>
+                </p>
             </div>
         </section>
 
@@ -29,34 +46,52 @@
         <section id="interaction-types" class="card mb-3">
             <div class="card-body">
                 <h2 class="card-title">My type of AI interactions</h2>
-                <p class="card-text">Describe the interaction modes you use: text prompts, code generation, chat conversations, API automation, voice assistants, etc.</p>
+                <p class="card-text">
+                  <template x-if="data.interactionTypes && data.interactionTypes.length">
+                    <template x-for="(item, index) in data.interactionTypes" :key="index">
+                      <span
+                        x-text="item.word"
+                        :style="'font-size:' + (0.9 + (Math.min(10, item.weight || 1)/10)*1.5) + 'em; margin-right:0.5rem; display:inline-block; vertical-align:middle;'">
+                        brainstorming
+                      </span>
+                    </template>
+                  </template>
+                  <template x-if="!data.interactionTypes || !data.interactionTypes.length">
+                    <span>A list of words, which describe my interactions visualised as a word cloud.</span>
+                  </template>
+                </p>
             </div>
         </section>
 
-        <!-- My AI User level and how it is defined -->
         <section id="user-level" class="card mb-3">
             <div class="card-body">
-                <h2 class="card-title">My AI User level and how it is defined</h2>
-                <p class="card-text">Define your level (e.g., Beginner, Intermediate, Advanced) and criteria (frequency, complexity of prompts, customization, use of tools/APIs).</p>
+                <h2 class="card-title">On a scale from 0 to 10 you are a <span data-user-level x-text="data.userLevel?.value ?? 8">8</span></h2>
+                <p x-text="data.userLevel?.reason ?? 'A 8 is defined by precise prompts, know capabilities and limits of ai, regular punktual uasage.'">A 8 is defined by precise prompts, know capabilities and limits of ai, regular punktual uasage.</p>    
             </div>
         </section>
-
+        
         <!-- Tips how I can increase my user level -->
         <section id="tips-level-up" class="card mb-5">
             <div class="card-body">
                 <h2 class="card-title">Tips how I can increase my user level</h2>
                 <ul>
-                    <li>Practice crafting clearer, more specific prompts.</li>
-                    <li>Learn prompt engineering patterns and templates.</li>
-                    <li>Explore APIs and automation to integrate AI into your workflows.</li>
-                    <li>Review model outputs critically and iterate on prompts.</li>
+                    <template x-if="data.tips && data.tips.length">
+                      <template x-for="(tip, i) in data.tips" :key="i">
+                        <li x-text="tip">Practice crafting clearer, more specific prompts.</li>
+                      </template>
+                    </template>
+                    <template x-if="!data.tips || !data.tips.length">
+                      <li>Practice crafting clearer, more specific prompts.</li>
+                      <li>Learn prompt engineering patterns and templates.</li>
+                      <li>Explore APIs and automation to integrate AI into your workflows.</li>
+                      <li>Review model outputs critically and iterate on prompts.</li>
+                    </template>
                 </ul>
             </div>
         </section>
     </main>
 
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+    <!-- keep lightweight: no jQuery required; bootstrap JS omitted (only CSS used) -->
     <script src="js/main.js"></script>
 </body>
 </html>
