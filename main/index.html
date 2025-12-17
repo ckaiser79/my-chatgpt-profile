@@ -6,6 +6,8 @@
     <title x-text="data.meta?.title ?? 'Simple Static Site'">Simple Static Site</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/print.css">
+
     <!-- Alpine.js for simple declarative binding -->
     <script src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
 </head>
@@ -13,6 +15,7 @@
     data: {}, 
     jsonInput: '', 
     error: '', 
+    showJsonForm: false, 
     load(){ 
       fetch('data/sample1.json')
         .then(r=>r.json())
@@ -42,7 +45,7 @@
     clearInput(){ this.jsonInput = ''; this.error = '' } 
   }" 
   x-init="load()">
-    <!-- headline -->
+  
     <header class="jumbotron jumbotron-fluid text-white bg-primary mb-4">
         <div class="container">
             <h1 class="display-4" x-text="data.header?.title ?? 'ChatGPT Usage Type'">ChatGPT Usage Type</h1>
@@ -53,23 +56,32 @@
         </div>
     </header>
 
-    <!-- JSON input form: paste custom JSON and apply it to the page -->
-    <section class="container mb-4">
-      <div class="card">
-        <div class="card-body">
-          <h2 class="card-title">Insert custom JSON</h2>
-          <form @submit.prevent="applyJson()" novalidate>
-            <div class="form-group">
-              <label for="jsonInput">Paste JSON (<a href="data/sample1.json" target="_blank">sample1.json</a>)</label>
-              <textarea id="jsonInput" x-model="jsonInput" rows="8" class="form-control" placeholder='{"usageProfile": {...}}'></textarea>
-            </div>
-            <div class="mt-2">
-              <button class="btn btn-primary" type="submit">Apply JSON</button>
-              <button type="button" class="btn btn-secondary ml-2" @click="loadSample()">Load sample</button>
-              <button type="button" class="btn btn-light ml-2" @click="clearInput()">Clear</button>
-            </div>
-            <div class="text-danger mt-2" x-text="error" x-show="error"></div>
-          </form>
+    <!-- Toggle + JSON input form: paste custom JSON and apply it to the page (collapsed by default) -->
+    <section class="container mb-4" id="custom-json-input">
+      <div class="d-flex justify-content-start">
+        <button class="btn btn-sm btn-outline-light mr-2" @click="showJsonForm = !showJsonForm" 
+                :class="showJsonForm ? 'btn-outline-light' : 'btn-outline-secondary'"
+                x-text="showJsonForm ? 'Hide JSON form' : 'Show JSON form'"></button>
+        <small class="text-muted align-self-center">Insert custom JSON (collapsed by default)</small>
+      </div>
+
+      <div x-show="showJsonForm" x-cloak x-transition class="mt-3">
+        <div class="card">
+          <div class="card-body">
+            <h2 class="card-title">Insert custom JSON</h2>
+            <form @submit.prevent="applyJson()" novalidate>
+              <div class="form-group">
+                <label for="jsonInput">Paste JSON (<a href="data/sample1.json" target="_blank">sample1.json</a>)</label>
+                <textarea id="jsonInput" x-model="jsonInput" rows="8" class="form-control" placeholder='{"usageProfile": {...}}'></textarea>
+              </div>
+              <div class="mt-2">
+                <button class="btn btn-primary" type="submit">Apply JSON</button>
+                <button type="button" class="btn btn-secondary ml-2" @click="loadSample()">Load sample</button>
+                <button type="button" class="btn btn-light ml-2" @click="clearInput()">Clear</button>
+              </div>
+              <div class="text-danger mt-2" x-text="error" x-show="error"></div>
+            </form>
+          </div>
         </div>
       </div>
     </section>
@@ -118,8 +130,41 @@
 
         <section id="user-level" class="card mb-3">
             <div class="card-body">
-                <h2 class="card-title">On a scale from 0 to 10 you are a <span data-user-level x-text="data.userLevel?.value ?? 8">8</span></h2>
-                <p x-text="data.userLevel?.reason ?? 'A 8 is defined by precise prompts, know capabilities and limits of ai, regular punktual uasage.'">A 8 is defined by precise prompts, know capabilities and limits of ai, regular punktual uasage.</p>    
+                <h2 class="card-title">Your experience level</h2>
+
+                <!-- visual 10-block scale (left = interested, right = guru) -->
+                <div class="mb-2" aria-hidden="false">
+                  <div class="d-flex align-items-center" style="gap:8px;">
+                    <template x-for="(__, index) in 10" :key="index">
+                      <button
+                        type="button"
+                        class="p-0 border-0"
+                        :aria-pressed="(index+1) <= (data.userLevel?.value ?? 8) ? 'true' : 'false'"
+                        @click="data.userLevel = data.userLevel || {}; data.userLevel.value = index+1"
+                        :title="(index+1) + '/10'"
+                        :style="(() => {
+                          const i = index + 1;
+                          // green hue; compute lightness from very light (left) to dark (right)
+                          const lightness = Math.round(96 - (i - 1) * 7); // ~96 -> ~31
+                          const bg = `hsl(140,60%,${lightness}%)`;
+                          const isActive = i <= (data.userLevel?.value ?? 8);
+                          const boxShadow = isActive ? 'inset 0 -4px rgba(0,0,0,0.12)' : 'none';
+                          return `background:${bg}; width:calc((100% - 72px)/10); min-width:22px; height:28px; border-radius:6px; display:inline-block; box-shadow:${boxShadow}; cursor:pointer;`;
+                        })()"
+                        class="user-level-block"
+                      ></button>
+                    </template>
+                  </div>
+
+                  <div class="d-flex justify-content-between mt-2 small text-muted" style="font-size:.85rem;">
+                    <span>Interested user</span>
+                    <span class="mx-auto">Senior / Experienced</span>
+                    <span class="text-right">Guru</span>
+                  </div>
+
+                </div>
+
+                <p x-text="data.userLevel?.reason ?? 'A 8 is defined by precise prompts, know capabilities and limits of ai, regular punctual usage.'">A 8 is defined by precise prompts, know capabilities and limits of ai, regular punktual uasage.</p>
             </div>
         </section>
         
