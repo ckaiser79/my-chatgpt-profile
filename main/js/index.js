@@ -9,7 +9,7 @@ window.myApp = {
     load(){
       fetch('data/sample1.json')
         .then(r=>r.json())
-        .then(d=>{ this.data = d; this.jsonInput = JSON.stringify(d, null, 2); this.groupTips(); this.registerDefaultListeners(); })
+        .then(d=>{ this.data = d; this.jsonInput = ''; this.groupTips(); this.registerDefaultListeners(); })
         .catch(e=>console.warn('load failed',e))
     },
     loadSample(){

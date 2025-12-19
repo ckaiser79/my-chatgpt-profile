@@ -5,7 +5,7 @@
             <button type="button" class="close" aria-label="Close" @click="showJsonForm = false">&times;</button>
         </div>
 
-        <form @submit.prevent="applyJson(); showJsonForm = false" novalidate>
+        <form @submit.prevent="applyJson(); showJsonForm = false" @keydown.enter.prevent="applyJson(); showJsonForm = false" novalidate>
             <div class="form-group">
                 <label for="jsonInput"><span data-i18n="home-json-form.pasteLabel">Paste JSON</span> (<a href="data/sample1.json" target="_blank">sample1.json</a>)</label>
                 <textarea id="jsonInput" x-model="jsonInput" rows="10" class="form-control"
