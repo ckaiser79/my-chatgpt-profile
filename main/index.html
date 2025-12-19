@@ -60,9 +60,8 @@
     <!-- Toggle + JSON input form: paste custom JSON and apply it to the page (collapsed by default) -->
     <section class="container mb-4" id="custom-json-input">
         <div class="d-flex justify-content-start">
-            <button class="btn btn-sm btn-outline-light mr-2" @click="showJsonForm = !showJsonForm"
-                :class="showJsonForm ? 'btn-outline-light' : 'btn-outline-secondary'"
-                x-text="showJsonForm ? 'Hide JSON form' : 'Show JSON form'"></button>
+            <button class="btn btn-sm btn-light mr-2" @click="showJsonForm = !showJsonForm"
+                x-text="showJsonForm ? 'Hide JSON form' : 'Show JSON form'">Show JSON Form</button>
             <small class="text-muted align-self-center">Insert custom JSON (collapsed by default)</small>
         </div>
 
@@ -150,10 +149,9 @@
                   <!-- red dot pointer placed over scale based on userLevel.value -->
                   <div
                     class="user-level-pointer"
-                    x-show="data.userLevel?.value"
                     x-cloak
                     :style="{
-                      left: (((data.userLevel?.value ?? 1) - 1) / 9 * 100) + '%'
+                      left: (((data.userLevel.value ?? 1) - 1) / 9 * 100) + '%'
                     }"
                     aria-hidden="true"
                   ></div>

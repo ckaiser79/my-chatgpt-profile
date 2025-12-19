@@ -53,14 +53,13 @@ h1 {
 /* made slightly larger than the green boxes and vertically centered */
 .user-level-pointer {
   position: absolute;
-  top: 50%;
+  top: 25%;
   width: 34px;    /* slightly bigger than block height (28px) */
   height: 34px;   /* slightly bigger than block height (28px) */
   background: #e53e3e; /* red */
   border-radius: 50%;
   transform: translate(-50%, -50%); /* center horizontally and vertically */
   box-shadow: 0 0 0 8px rgba(229,62,62,0.08), 0 2px 8px rgba(0,0,0,0.12);
-  transition: left 180ms ease;
   pointer-events: none;
   z-index: 2; /* sit above the blocks */
   border: 3px solid #fff; /* subtle white ring for contrast */
