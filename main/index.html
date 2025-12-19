@@ -9,62 +9,21 @@
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/print.css">
 
-    <!-- Alpine.js for simple declarative binding -->
-    <script src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
-    <!-- wordcloud2.js for word cloud visualization -->
+    <!--
+    Script loading order (all with defer for non-blocking execution):
+    1. wordcloud2.js: Defines window.WordCloud for word cloud rendering.
+    2. js/index.js: Defines window.myApp with Alpine.js data and methods.
+    3. Alpine.js: Initializes x-data="myApp" and runs x-init="load()".
+    Defer ensures scripts load in parallel but execute in this order after DOM parsing,
+    preventing race conditions and "undefined" errors.
+    -->
+   
     <script src="https://cdn.bootcdn.net/ajax/libs/wordcloud2.js/1.2.3/wordcloud2.min.js" defer></script>
+    <script src="js/index.js" defer></script>
+    <script src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
 </head>
 
-<body x-data="{ 
-    data: {}, 
-    jsonInput: '', 
-    error: '', 
-    showJsonForm: false, 
-    load(){ 
-      fetch('data/sample1.json')
-        .then(r=>r.json())
-        .then(d=>{ this.data = d; this.jsonInput = JSON.stringify(d, null, 2); this.renderWordCloud(); })
-        .catch(e=>console.warn('load failed',e)) 
-    },
-    loadSample(){
-      fetch('data/sample1.json')
-        .then(r=>r.json())
-        .then(d=>{
-          this.jsonInput = JSON.stringify(d, null, 2);
-          this.error = '';
-          this.data = d;
-          this.renderWordCloud();
-        })
-        .catch(e=>{
-          this.error = 'Could not load sample: ' + (e.message || e);
-          console.warn('loadSample failed', e);
-        })
-    }, 
-    applyJson(){ 
-      try{ 
-        this.data = JSON.parse(this.jsonInput || '{}'); 
-        this.error = '';
-        this.renderWordCloud();
-      }catch(e){ 
-        this.error = 'Invalid JSON: ' + e.message; 
-      } 
-    }, 
-    clearInput(){ this.jsonInput = ''; this.error = '' },
-    renderWordCloud(){
-      if(window.WordCloud && this.data.interactionTypes){
-        const list = this.data.interactionTypes.map(item => [item.word, item.weight]);
-        WordCloud(document.getElementById('wordcloud'), {
-          list: list,
-          gridSize: 10,
-          weightFactor: 8,
-          fontFamily: 'sans-serif',
-          color: 'random-dark',
-          rotateRatio: 0,
-          backgroundColor: '#fff'
-        });
-      }
-    }
-  }" x-init="load()">
+<body x-data="myApp" x-init="load()">
 
     <header class="jumbotron jumbotron-fluid text-white bg-primary mb-4">
         <div class="container">
@@ -195,7 +154,6 @@
     </main>
 
     <!-- keep lightweight: no jQuery required; bootstrap JS omitted (only CSS used) -->
-    <script src="js/main.js"></script>
 </body>
 
 </html>

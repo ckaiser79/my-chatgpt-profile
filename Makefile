@@ -1,3 +1,7 @@
+# To allow 'make deploy_local' to run without password prompts,
+# add the following line to /etc/sudoers (replace 'username' with your actual username):
+# username ALL=(ALL) NOPASSWD: /bin/mkdir, /bin/cp
+
 deploy_local_target_dir ?= /var/www/html/my-chatgpt-profile
 
 .PHONY: deploy_local
