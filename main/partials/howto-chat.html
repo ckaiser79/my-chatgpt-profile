@@ -4,7 +4,7 @@
 
     <ul class="list-unstyled d-flex align-items-center flex-wrap mb-0" style="gap: .35rem .75rem;">
       <li id="iphoneCopyFailure">
-        <button type="button" class="btn btn-sm btn-outline-secondary" id="copyDefaultPromptBtn" data-i18n-attr="textContent=nav.copyDefaultPrompt">Copy default prompt</button>
+        <button type="button" class="btn btn-link p-0 align-baseline" id="copyDefaultPromptBtn" data-i18n-attr="textContent=nav.copyDefaultPrompt">Copy default prompt</button>
       </li>
         <li class="text-muted">&rarr;</li>
         <li>
@@ -16,7 +16,7 @@
         </li>
         <li class="text-muted">&rarr;</li>
         <li class="d-flex align-items-center">
-            <button class="btn btn-sm btn-light mr-2" @click="showJsonForm = !showJsonForm"
+            <button type="button" class="btn btn-link p-0 align-baseline" @click="showJsonForm = !showJsonForm"
               x-text="showJsonForm ? PolyglotI18n.t('nav.hideJsonForm') : PolyglotI18n.t('nav.showJsonForm')">Show JSON Form</button>
         </li>
         <li class="text-muted invisible">
