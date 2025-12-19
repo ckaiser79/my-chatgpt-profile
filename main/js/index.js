@@ -2,7 +2,7 @@ window.myApp = {
     data: {},
     jsonInput: '',
     error: '',
-    showJsonForm: false,
+    showJsonForm: true,
     groupedTips: [],
     load(){
       fetch('data/sample1.json')
