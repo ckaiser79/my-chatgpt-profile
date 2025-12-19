@@ -35,23 +35,24 @@
                     <button id="copy-btn" class="btn btn-sm btn-outline-secondary" onclick="copyToClipboard('prompt-1', this)">Copy Prompt</button>
                 </div>
                 <pre class="prompt-code mb-2 p-3 bg-light rounded border" id="prompt-1">
-Create a detailed profile of my ChatGPT usage in the current year, 
-including my 
+Analyze and create a comprehensive ChatGPT usage profile for 2025. Based on your knowledge of my interactions with you, provide:
 
-- AI interaction types, 
-- user level in a range from 0 to 10,
-- tips for improvement
+1. An archetype name that describes my usage style (e.g., "Creative Coder", "Researcher", "Content Creator")
+2. A brief summary of how I use AI in my work and projects
+3. My interaction types - the main ways I use ChatGPT (e.g., brainstorming, coding, writing, research) with importance weights from 1-10
+4. My experience level with AI on a scale of 0-10, including a brief reason for the rating
+5. 3-5 actionable tips for improving my AI usage and prompting skills
 
-Use JSON as output format. Use this structure as an example:
+Return the response ONLY as valid JSON (no other text) matching this exact structure:
 
 ```json
-                    {
+{
     "header": {
         "year": 2025
     },
     "archetype": {
         "name": "Creative Coder",
-        "summary": "You are a Creative Coder who leverages AI to enhance your coding"
+        "summary": "A developer who uses AI for brainstorming ideas, rapid prototyping, and debugging code while maintaining critical thinking about generated outputs."
     },
     "interactionTypes": [
         {
@@ -63,73 +64,43 @@ Use JSON as output format. Use this structure as an example:
             "weight": 9
         },
         {
-            "word": "editing",
-            "weight": 8
-        },
-        {
-            "word": "research",
-            "weight": 7
-        },
-        {
-            "word": "automation",
-            "weight": 6
-        },
-        {
-            "word": "debugging",
-            "weight": 5
-        },
-        {
-            "word": "documentation",
-            "weight": 4
-        },
-        {
-            "word": "testing",
-            "weight": 3
-        },
-        {
-            "word": "optimization",
-            "weight": 2
-        },
-        {
-            "word": "learning",
-            "weight": 1
-        },
-        {
-            "word": "prototyping",
-            "weight": 10
-        },
-        {
-            "word": "collaboration",
+            "word": "problem-solving",
             "weight": 9
         },
         {
-            "word": "analysis",
+            "word": "debugging",
             "weight": 8
         },
         {
-            "word": "generation",
+            "word": "documentation",
             "weight": 7
         },
         {
-            "word": "integration",
+            "word": "learning",
+            "weight": 7
+        },
+        {
+            "word": "optimization",
             "weight": 6
+        },
+        {
+            "word": "testing",
+            "weight": 5
         }
     ],
     "userLevel": {
         "value": 8,
-        "reason": "Precise prompts, knows capabilities and limits of AI, regular punctual usage."
+        "reason": "Demonstrates consistent use with well-formed prompts, understands AI capabilities and limitations, iterates on outputs effectively, and maintains quality control."
     },
     "tips": [
-        "Practice crafting clearer, more specific prompts.",
-        "Learn prompt engineering patterns and templates.",
-        "Explore APIs and automation to integrate AI into workflows.",
-        "Review model outputs critically and iterate on prompts.",
-        "Bla"
+        "Provide context and constraints upfront - the more specific your prompt, the better the output.",
+        "Use follow-up questions to refine outputs rather than starting over.",
+        "Break complex tasks into smaller, manageable prompts for better accuracy.",
+        "Always review and critically evaluate AI-generated code before using it in production.",
+        "Share feedback in prompts - if an output is close but needs tweaking, explain what to adjust."
     ]
 }
 ```
-
-}
 
                 </pre>
             </div>
