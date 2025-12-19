@@ -68,15 +68,22 @@
             "weight": 6
         }
     ],
-    "userLevel": {
-        "value": 8,
-        "reason": "Precise prompts, knows capabilities and limits of AI, regular punctual usage."
-    },
     "tips": [
-        "Practice crafting clearer, more specific prompts.",
-        "Learn prompt engineering patterns and templates.",
-        "Explore APIs and automation to integrate AI into workflows.",
-        "Review model outputs critically and iterate on prompts.",
-        "Bla"
+        {
+            "category": "Prompting",
+            "text": "Practice crafting clearer, more specific prompts."
+        },
+        {
+            "category": "API usage",
+            "text": "Explore APIs and automation to integrate AI into workflows."
+        },
+        {
+            "category": "Model Capabilities",
+            "text": "Stay updated on latest AI model features and improvements."
+        },
+        {
+            "category": "Feedback Loops",
+            "text": "Implement feedback loops to refine AI outputs iteratively."
+        }
     ]
 }

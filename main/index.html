@@ -147,7 +147,7 @@
                 <ol>
                     <template x-if="data.tips && data.tips.length">
                         <template x-for="(tip, i) in data.tips" :key="i">
-                            <li x-text="tip">Practice crafting clearer, more specific prompts.</li>
+                            <li><strong x-text="tip.category">Category</strong>: <span x-text="tip.text">Tip text</span></li>
                         </template>
                     </template>
                 </ol>
