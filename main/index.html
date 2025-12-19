@@ -18,6 +18,7 @@
     preventing race conditions and "undefined" errors.
     -->
    
+    <script src="js/i18n.js" defer></script>
     <!-- wordcloud2 is lazy-loaded when Beta is enabled via myApp listener -->
     <script src="js/index.js" defer></script>
     <script src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
@@ -45,9 +46,9 @@
             <div class="d-flex align-items-center">
                 <div class="custom-control custom-switch mr-3">
                     <input type="checkbox" class="custom-control-input" id="betaSwitch">
-                    <label class="custom-control-label" for="betaSwitch">Show Beta</label>
+                    <label class="custom-control-label" for="betaSwitch" data-i18n="nav.showBeta">Show Beta</label>
                 </div>
-                <a href="example-prompts.html" class="align-self-center text-primary mr-2">View Example Prompts</a>
+                <a href="example-prompts.html" class="align-self-center text-primary mr-2" data-i18n="nav.viewPrompts">View Example Prompts</a>
                 <div class="d-flex align-items-center">
                     <button type="button" class="btn btn-sm btn-light lang-flag mr-1" data-lang="de" aria-label="Deutsch">🇩🇪</button>
                     <button type="button" class="btn btn-sm btn-light lang-flag" data-lang="en" aria-label="English">🇬🇧</button>
@@ -99,14 +100,14 @@
 
         <section id="interaction-types" class="card mb-3 beta-feature">
             <div class="card-body">
-                <h2 class="card-title">You used the AI for...</h2>
+                <h2 class="card-title" data-i18n="home.usedFor">You used the AI for...</h2>
                 <div id="wordcloud" style="width: 100%; height: 400px; border: 1px solid #ccc;"></div>
             </div>
         </section>
 
         <section id="user-level" class="card mb-3">
             <div class="card-body">
-                <h2 class="card-title text-center">Your experience level</h2>
+                <h2 class="card-title text-center" data-i18n="home.experience">Your experience level</h2>
 
                 <!-- visual 10-block scale (left = interested, right = guru) -->
                 <div class="user-level-scale my-3">
@@ -139,10 +140,10 @@
                   ></div>
                 </div>
 
-                <div class="d-flex justify-content-between mt-2 small text-muted scale-labels">
-                  <span>Interested user</span>
-                  <span class="mx-auto">Senior / Experienced</span>
-                  <span class="text-right">Guru</span>
+                                <div class="d-flex justify-content-between mt-2 small text-muted scale-labels">
+                                    <span data-i18n="home.scale.beginner">Interested user</span>
+                                    <span class="mx-auto" data-i18n="home.scale.senior">Senior / Experienced</span>
+                                    <span class="text-right" data-i18n="home.scale.guru">Guru</span>
                 </div>
 
                 <p x-text="data.userLevel?.reason ?? 'A 8 is defined by precise prompts, know capabilities and limits of AI, regular punctual usage.'"
@@ -152,7 +153,7 @@
 
         <section id="tips-level-up" class="card mb-5">
             <div class="card-body">
-                <h2 class="card-title">Tips how I can increase my user level</h2>
+            <h2 class="card-title" data-i18n="home.tips">Tips how I can increase my user level</h2>
                 <div class="d-flex flex-wrap" style="gap: 1rem;">
                     <template x-if="groupedTips && groupedTips.length">
                         <template x-for="(group, i) in groupedTips" :key="i">
@@ -169,7 +170,7 @@
                         </template>
                     </template>
                     <template x-if="!groupedTips || !groupedTips.length">
-                        <p class="text-muted mb-0">No tips available.</p>
+                        <p class="text-muted mb-0" data-i18n="home.noTips">No tips available.</p>
                     </template>
                 </div>
             </div>
@@ -238,8 +239,8 @@
                         const lang = btn.getAttribute('data-lang') || 'en';
                         setCookie('ui_lang', lang, 365);
                         applyLangState(lang);
-                        // Optionally, emit an event for future i18n logic
                         try { if (window.myApp && window.myApp.emit) window.myApp.emit('languageChanged', lang); } catch(_) {}
+                        try { if (window.I18n && window.I18n.setLang) window.I18n.setLang(lang); } catch(_) {}
                     });
                 });
             });

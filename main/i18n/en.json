@@ -1,0 +1,30 @@
+{
+  "nav": {
+    "viewPrompts": "View Example Prompts",
+    "backToProfile": "Back to Profile",
+    "showBeta": "Show Beta"
+  },
+  "home": {
+    "usedFor": "You used the AI for...",
+    "experience": "Your experience level",
+    "tips": "Tips how I can increase my user level",
+    "noTips": "No tips available.",
+    "scale": {
+      "beginner": "Interested user",
+      "senior": "Senior / Experienced",
+      "guru": "Guru"
+    }
+  },
+  "prompts": {
+    "title": "Example Prompts",
+    "lead": "A collection of example prompts for ChatGPT to create your profile.",
+    "howTo": "How to use this prompt",
+    "steps": {
+      "copy": "Copy the prompt below using the \"Copy Prompt\" button.",
+      "open": "Open ChatGPT and start a new conversation.",
+      "paste": "Paste the prompt into the chat.",
+      "use": "Copy the JSON output from ChatGPT's response in this page."
+    },
+    "copyButton": "Copy Prompt"
+  }
+}

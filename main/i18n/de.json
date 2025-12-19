@@ -1,0 +1,30 @@
+{
+  "nav": {
+    "viewPrompts": "Beispiel‑Prompts anzeigen",
+    "backToProfile": "Zurück zum Profil",
+    "showBeta": "Beta anzeigen"
+  },
+  "home": {
+    "usedFor": "Dafür hast du die KI genutzt…",
+    "experience": "Dein Erfahrungsniveau",
+    "tips": "Tipps, wie ich mein Level steigern kann",
+    "noTips": "Keine Tipps vorhanden.",
+    "scale": {
+      "beginner": "Interessierter Nutzer",
+      "senior": "Senior / Erfahren",
+      "guru": "Guru"
+    }
+  },
+  "prompts": {
+    "title": "Beispiel‑Prompts",
+    "lead": "Eine Sammlung von Beispiel‑Prompts für ChatGPT zur Erstellung deines Profils.",
+    "howTo": "So verwendest du diesen Prompt",
+    "steps": {
+      "copy": "Kopiere unten den Prompt über den Button \"Prompt kopieren\".",
+      "open": "Öffne ChatGPT und starte eine neue Unterhaltung.",
+      "paste": "Füge den Prompt in den Chat ein.",
+      "use": "Kopiere die JSON‑Ausgabe von ChatGPT auf dieser Seite ein."
+    },
+    "copyButton": "Prompt kopieren"
+  }
+}

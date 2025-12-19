@@ -8,14 +8,15 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/print.css">
+    <script src="js/i18n.js" defer></script>
 </head>
 
 <body >
     <header class="jumbotron jumbotron-fluid text-white bg-primary mb-4">
         <div class="container">
-            <h1>Example Prompts</h1>
+            <h1 data-i18n="prompts.title">Example Prompts</h1>
             <p class="lead">
-                A collection of example prompts for ChatGPT to create your profile.
+                <span data-i18n="prompts.lead">A collection of example prompts for ChatGPT to create your profile.</span>
             </p>
         </div>
     </header>
@@ -23,10 +24,10 @@
     <div class="container mb-4 d-flex justify-content-between align-items-center">
         <div class="custom-control custom-switch">
             <input type="checkbox" class="custom-control-input" id="betaSwitch">
-            <label class="custom-control-label" for="betaSwitch">Show Beta</label>
+            <label class="custom-control-label" for="betaSwitch" data-i18n="nav.showBeta">Show Beta</label>
         </div>
         <div class="d-flex align-items-center">
-            <a href="index.html" class="text-primary mr-2">Back to Profile</a>
+            <a href="index.html" class="text-primary mr-2" data-i18n="nav.backToProfile">Back to Profile</a>
             <button type="button" class="btn btn-sm btn-light lang-flag mr-1" data-lang="de" aria-label="Deutsch">🇩🇪</button>
             <button type="button" class="btn btn-sm btn-light lang-flag" data-lang="en" aria-label="English">🇬🇧</button>
         </div>
@@ -46,7 +47,7 @@
 
 
                 <div class="mt-4">
-                    <h3>How to use this prompt</h3>
+                    <h3 data-i18n="prompts.howTo">How to use this prompt</h3>
                     <ol>
                         <li><strong>Copy the prompt below</strong> using the "Copy Prompt" button.</li>
                         <li><strong><a href="https://chat.openai.com/" target="_blank" rel="noreferrer">Open ChatGPT</a></strong> and start a new conversation.</li>
@@ -57,7 +58,7 @@
 
             <div class="card-body">
                 <div class="d-flex justify-content-end mb-2">
-                    <button id="copy-btn" class="btn btn-sm btn-outline-secondary" onclick="copyToClipboard('prompt-1', this)">Copy Prompt</button>
+                    <button id="copy-btn" class="btn btn-sm btn-outline-secondary" onclick="copyToClipboard('prompt-1', this)" data-i18n="prompts.copyButton">Copy Prompt</button>
                 </div>
                 <pre class="prompt-code mb-2 p-3 bg-light rounded border" id="prompt-1">
 Analyze and create a comprehensive ChatGPT usage profile for 2025. Based on your knowledge of my interactions with you, provide:
@@ -149,11 +150,8 @@ FINETUNING NOTES:
             if (sw) sw.checked = !!isBeta;
         }
 
-        // Language toggle helpers
-        function getUiLang() {
-            return getCookie('ui_lang') || 'en';
-        }
-        function applyLangState(lang) {
+        function getUiLang(){ return getCookie('ui_lang') || 'en'; }
+        function applyLangState(lang){
             const current = lang || getUiLang();
             document.body.classList.remove('lang-en','lang-de');
             document.body.classList.add(current === 'de' ? 'lang-de' : 'lang-en');
@@ -182,6 +180,7 @@ FINETUNING NOTES:
                     const lang = btn.getAttribute('data-lang') || 'en';
                     setCookie('ui_lang', lang, 365);
                     applyLangState(lang);
+                    try { if (window.I18n && window.I18n.setLang) window.I18n.setLang(lang); } catch(_) {}
                 });
             });
         });
