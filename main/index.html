@@ -24,7 +24,6 @@
 </head>
 
 <body x-data="myApp" x-init="load()">
-
     <header class="jumbotron jumbotron-fluid text-white bg-primary mb-4">
         <div class="container">
             <h1 class="display-4" x-text="data.header?.title ?? 'ChatGPT Usage Type'">ChatGPT Usage Type</h1>
@@ -142,13 +141,13 @@
         <section id="tips-level-up" class="card mb-5">
             <div class="card-body">
                 <h2 class="card-title">Tips how I can increase my user level</h2>
-                <ul>
+                <ol>
                     <template x-if="data.tips && data.tips.length">
                         <template x-for="(tip, i) in data.tips" :key="i">
                             <li x-text="tip">Practice crafting clearer, more specific prompts.</li>
                         </template>
                     </template>
-                </ul>
+                </ol>
             </div>
         </section>
     </main>
