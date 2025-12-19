@@ -74,3 +74,8 @@ The app expects data in this structure:
 ## License
 
 This project is licensed under the GPLv3 License. See the LICENSE file for details.
+
+
+## Hints
+
+This is my first vibe coding trial. So do not judge code quality ;-)

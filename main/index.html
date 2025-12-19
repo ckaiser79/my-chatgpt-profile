@@ -47,7 +47,11 @@
                     <input type="checkbox" class="custom-control-input" id="betaSwitch">
                     <label class="custom-control-label" for="betaSwitch">Show Beta</label>
                 </div>
-                <a href="example-prompts.html" class="align-self-center text-primary">View Example Prompts</a>
+                <a href="example-prompts.html" class="align-self-center text-primary mr-2">View Example Prompts</a>
+                <div class="d-flex align-items-center">
+                    <button type="button" class="btn btn-sm btn-light lang-flag mr-1" data-lang="de" aria-label="Deutsch">🇩🇪</button>
+                    <button type="button" class="btn btn-sm btn-light lang-flag" data-lang="en" aria-label="English">🇬🇧</button>
+                </div>
             </div>
         </div>
 
@@ -199,6 +203,20 @@
                 if (sw) sw.checked = !!isBeta;
             }
 
+            // Language toggle helpers
+            function getUiLang() {
+                return getCookie('ui_lang') || 'en';
+            }
+            function applyLangState(lang) {
+                const current = lang || getUiLang();
+                document.body.classList.remove('lang-en','lang-de');
+                document.body.classList.add(current === 'de' ? 'lang-de' : 'lang-en');
+                document.querySelectorAll('.lang-flag').forEach(btn => {
+                    const isActive = btn.getAttribute('data-lang') === current;
+                    btn.classList.toggle('active', isActive);
+                });
+            }
+
             document.addEventListener('DOMContentLoaded', function () {
                 const isBeta = getCookie('feature_level') === 'BETA';
                 applyBetaState(isBeta);
@@ -212,6 +230,18 @@
                         try { if (window.myApp && window.myApp.onBetaToggle) window.myApp.onBetaToggle(checked); } catch(_) {}
                     });
                 }
+
+                // Init language UI and handlers
+                applyLangState();
+                document.querySelectorAll('.lang-flag').forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        const lang = btn.getAttribute('data-lang') || 'en';
+                        setCookie('ui_lang', lang, 365);
+                        applyLangState(lang);
+                        // Optionally, emit an event for future i18n logic
+                        try { if (window.myApp && window.myApp.emit) window.myApp.emit('languageChanged', lang); } catch(_) {}
+                    });
+                });
             });
         </script>
 </body>

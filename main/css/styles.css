@@ -145,3 +145,13 @@ h2.card-title::after {
   border-radius: 2px;
   opacity: .35;
 }
+
+/* Language flag buttons */
+.lang-flag {
+  line-height: 1;
+  padding: .25rem .5rem;
+}
+.lang-flag.active,
+.lang-flag:focus {
+  box-shadow: 0 0 0 .2rem rgba(0,123,255,.25);
+}
