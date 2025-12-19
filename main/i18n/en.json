@@ -28,6 +28,7 @@
   "nav.copyJsonResponse": "Copy JSON Response",
   "nav.showJsonForm": "Paste complete(!) JSON here",
   "nav.hideJsonForm": "Hide JSON form",
+  "nav.prompt": "Prompt",
   "header.title": "How du you use ChatGPT?",
   "header.leadPrefix": "A brief summary of how you used ChatGPT in ",
   "header.leadSuffix": ".",

@@ -32,11 +32,13 @@
 </nav>
 
 <script>
+    
     // Register click handler immediately (no DOMContentLoaded needed since partial loads after DOM is ready)
     const copyBtn = document.getElementById('copyDefaultPromptBtn');
     const isIphone = /iphone/i.test(navigator.userAgent || '');
 
     if (isIphone && copyBtn) {
+
         // On iPhone, use a direct link instead of clipboard
         const li = document.getElementById('iphoneCopyFailure') || copyBtn.parentElement;
 
