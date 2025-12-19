@@ -1,23 +1,26 @@
 <nav class="howto-nav">
-    
+
     <strong data-i18n="nav.howToUse">Short description</strong>
 
     <ul class="list-unstyled d-flex align-items-center flex-wrap mb-0" style="gap: .35rem .75rem;">
-      <li id="iphoneCopyFailure">
-        <button type="button" class="btn btn-link p-0 align-baseline" id="copyDefaultPromptBtn" data-i18n-attr="textContent=nav.copyDefaultPrompt">Copy default prompt</button>
-      </li>
-        <li class="text-muted">&rarr;</li>
-        <li>
-          <a href="https://chat.openai.com/" target="_blank" rel="noreferrer" data-i18n-attr="textContent=nav.openChatgpt">Open ChatGPT</a>
+        <li id="iphoneCopyFailure">
+            <button type="button" class="btn btn-link p-0 align-baseline" id="copyDefaultPromptBtn"
+                data-i18n-attr="textContent=nav.copyDefaultPrompt">Copy default prompt</button>
         </li>
         <li class="text-muted">&rarr;</li>
         <li>
-          <span data-i18n="nav.copyJsonResponse">Copy JSON Response</a>
+            <a href="https://chat.openai.com/" target="_blank" rel="noreferrer"
+                data-i18n-attr="textContent=nav.openChatgpt">Open ChatGPT</a>
+        </li>
+        <li class="text-muted">&rarr;</li>
+        <li>
+            <span data-i18n="nav.copyJsonResponse">Copy JSON Response</a>
         </li>
         <li class="text-muted">&rarr;</li>
         <li class="d-flex align-items-center">
             <button type="button" class="btn btn-link p-0 align-baseline" @click="showJsonForm = !showJsonForm"
-              x-text="showJsonForm ? PolyglotI18n.t('nav.hideJsonForm') : PolyglotI18n.t('nav.showJsonForm')">Show JSON Form</button>
+                x-text="showJsonForm ? PolyglotI18n.t('nav.hideJsonForm') : PolyglotI18n.t('nav.showJsonForm')">Show
+                JSON Form</button>
         </li>
         <li class="text-muted invisible">
             <div class="custom-control custom-switch">
@@ -29,54 +32,54 @@
 </nav>
 
 <script>
-  // Register click handler immediately (no DOMContentLoaded needed since partial loads after DOM is ready)
-  const copyBtn = document.getElementById('copyDefaultPromptBtn');
-  const isIphone = /iphone/i.test(navigator.userAgent || '');
+    // Register click handler immediately (no DOMContentLoaded needed since partial loads after DOM is ready)
+    const copyBtn = document.getElementById('copyDefaultPromptBtn');
+    const isIphone = /iphone/i.test(navigator.userAgent || '');
 
-  if (isIphone && copyBtn) {
-    // On iPhone, use a direct link instead of clipboard
-    const li = document.getElementById('iphoneCopyFailure') || copyBtn.parentElement;
-    
-    if (li) {
-    
-    const link = document.createElement('a');
-    
-    link.href = 'iphone-prompt.html';
-    link.target = '_blank';
-    link.rel = 'noreferrer noopener';
-    link.className = 'btn btn-link p-0 align-baseline';
-    link.setAttribute('data-i18n-attr', 'textContent=nav.copyDefaultPrompt');
-    link.textContent = copyBtn.textContent;
-    
-        li.innerHTML = '';
-      li.appendChild(link);
+    if (isIphone && copyBtn) {
+        // On iPhone, use a direct link instead of clipboard
+        const li = document.getElementById('iphoneCopyFailure') || copyBtn.parentElement;
+
+        if (li) {
+
+            const link = document.createElement('a');
+
+            link.href = 'iphone-prompt.html';
+            link.target = '_blank';
+            link.rel = 'noreferrer noopener';
+            link.className = 'btn btn-link p-0 align-baseline';
+            link.setAttribute('data-i18n-attr', 'textContent=nav.copyDefaultPrompt');
+            link.textContent = copyBtn.textContent;
+
+            li.innerHTML = '';
+            li.appendChild(link);
+        }
     }
-  }
 
-  if (copyBtn && !isIphone) {
-    copyBtn.addEventListener('click', function () {
-      fetch('data/default-prompt.txt')
-        .then(r => {
-          if (!r.ok) throw new Error('Failed to load prompt');
-          return r.text();
-        })
-        .then(text => {
-          // Get current UI language (de or en)
-          const currentLang = document.documentElement.lang || 'en';
-          
-          // Replace placeholder with current language
-          text = text.replace('{{LANGUAGE}}', currentLang);
-          return navigator.clipboard.writeText(text);
-        })
-        .then(() => {
-          copyBtn.textContent = PolyglotI18n.t('nav.copyDefaultPrompt.copied');
-          setTimeout(() => { copyBtn.textContent = PolyglotI18n.t('nav.copyDefaultPrompt'); }, 1800);
-        })
-        .catch(err => {
-          console.error('Copy failed', err);
-          copyBtn.textContent = PolyglotI18n.t('nav.copyDefaultPrompt.failed');
-          setTimeout(() => { copyBtn.textContent = PolyglotI18n.t('nav.copyDefaultPrompt'); }, 1800);
+    if (copyBtn && !isIphone) {
+        copyBtn.addEventListener('click', function () {
+            fetch('data/default-prompt.txt')
+                .then(r => {
+                    if (!r.ok) throw new Error('Failed to load prompt');
+                    return r.text();
+                })
+                .then(text => {
+                    // Get current UI language (de or en)
+                    const currentLang = document.documentElement.lang || 'en';
+
+                    // Replace placeholder with current language
+                    text = text.replace('{{LANGUAGE}}', currentLang);
+                    return navigator.clipboard.writeText(text);
+                })
+                .then(() => {
+                    copyBtn.textContent = PolyglotI18n.t('nav.copyDefaultPrompt.copied');
+                    setTimeout(() => { copyBtn.textContent = PolyglotI18n.t('nav.copyDefaultPrompt'); }, 1800);
+                })
+                .catch(err => {
+                    console.error('Copy failed', err);
+                    copyBtn.textContent = PolyglotI18n.t('nav.copyDefaultPrompt.failed');
+                    setTimeout(() => { copyBtn.textContent = PolyglotI18n.t('nav.copyDefaultPrompt'); }, 1800);
+                });
         });
-    });
-  }
+    }
 </script>
