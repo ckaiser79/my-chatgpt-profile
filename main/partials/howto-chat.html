@@ -36,15 +36,19 @@
   if (isIphone && copyBtn) {
     // On iPhone, use a direct link instead of clipboard
     const li = document.getElementById('iphoneCopyFailure') || copyBtn.parentElement;
+    
+    if (li) {
+    
     const link = document.createElement('a');
-    link.href = 'example-prompts.html';
+    
+    link.href = 'iphone-prompt.html';
     link.target = '_blank';
     link.rel = 'noreferrer noopener';
     link.className = 'btn btn-link p-0 align-baseline';
     link.setAttribute('data-i18n-attr', 'textContent=nav.copyDefaultPrompt');
     link.textContent = copyBtn.textContent;
-    if (li) {
-      li.innerHTML = '';
+    
+        li.innerHTML = '';
       li.appendChild(link);
     }
   }
