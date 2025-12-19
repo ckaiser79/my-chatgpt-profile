@@ -115,6 +115,25 @@ h1 {
   background: #f68e13 !important;
 }
 
+/* Header: tighten for mobile */
+.jumbotron.jumbotron-fluid {
+  padding: 2rem 1.5rem;
+}
+
+@media (max-width: 576px) {
+  .jumbotron.jumbotron-fluid {
+    padding: 1.25rem 1rem;
+  }
+  .jumbotron .display-4 {
+    font-size: 1.85rem;
+    line-height: 1.2;
+  }
+  .jumbotron .lead {
+    font-size: 1rem;
+    margin-bottom: 0;
+  }
+}
+
 #usage-profile .lead::before {
   content: '“';
   position: absolute;

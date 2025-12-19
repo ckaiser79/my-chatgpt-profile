@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mobile MVP</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/print.css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/polyglot.js/0.4.2/polyglot.min.js"
+        integrity="sha512-SXa0RggkqBgtv9e1Wy49C6agde9NAXf7t/Vz7pE9wgOOuNhOyhwn/a0rdHRZalIvLhxMYkG0FRHfsXDUJOVH2A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="js/polyglot-init.js" defer></script>
+    <script src="js/index.js" defer></script>
+    <script src="js/alpine-include.js" defer></script>
+    <script src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+</head>
+<body x-data="myApp" x-init="load()">
+    <header x-include="'partials/header.html'"></header>
+
+    <main class="container py-4">
+        <section id="step-copy-prompt" class="mb-4 card">
+            <div class="card-body">
+                <h2 class="h5 mb-2">Step 1: Copy Prompt</h2>
+                <p class="text-muted mb-3">Copy the prompt to your clipboard (or open it in a new tab on mobile).</p>
+                <!-- TODO: add prompt text / copy button -->
+            </div>
+        </section>
+
+        <section id="step-chatgpt" class="mb-4 card">
+            <div class="card-body">
+                <h2 class="h5 mb-2">Step 2: Open ChatGPT</h2>
+                <p class="text-muted mb-3">Open ChatGPT in a new tab, paste the prompt, and run it.</p>
+                <!-- TODO: add ChatGPT link and helper text -->
+            </div>
+        </section>
+
+        <section id="step-view-data" class="mb-4 card">
+            <div class="card-body">
+                <h2 class="h5 mb-2">Step 3: View ChatGPT Data</h2>
+                <p class="text-muted mb-3">Paste the JSON response here to view your profile.</p>
+                <!-- TODO: add JSON input / display toggle -->
+            </div>
+        </section>
+    </main>
+
+    <footer x-include="'partials/footer.html'"></footer>
+</body>
+</html>
