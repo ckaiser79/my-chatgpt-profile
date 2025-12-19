@@ -155,3 +155,12 @@ h2.card-title::after {
 .lang-flag:focus {
   box-shadow: 0 0 0 .2rem rgba(0,123,255,.25);
 }
+
+/* i18n missing key highlight */
+.i18n-missing {
+  background: #ffd6e7; /* soft pink */
+  color: #7a0040;
+  padding: 0 .25rem;
+  border-radius: 4px;
+  font-weight: 600;
+}
