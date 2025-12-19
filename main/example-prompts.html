@@ -20,7 +20,11 @@
         </div>
     </header>
 
-    <div class="container mb-4 d-flex justify-content-end">
+    <div class="container mb-4 d-flex justify-content-between align-items-center">
+        <div class="custom-control custom-switch">
+            <input type="checkbox" class="custom-control-input" id="betaSwitch">
+            <label class="custom-control-label" for="betaSwitch">Show Beta</label>
+        </div>
         <a href="index.html" class="text-primary">Back to Profile</a>
     </div>
 
@@ -116,6 +120,44 @@ FINETUNING NOTES:
     </main>
 
     <script>
+        // Beta feature toggle with cookie persistence
+        function setCookie(name, value, days) {
+            const d = new Date();
+            d.setTime(d.getTime() + (days*24*60*60*1000));
+            const expires = "expires=" + d.toUTCString();
+            document.cookie = name + "=" + encodeURIComponent(value) + ";" + expires + ";path=/";
+        }
+
+        function getCookie(name) {
+            const cname = name + "=";
+            const decodedCookie = decodeURIComponent(document.cookie || "");
+            const ca = decodedCookie.split(';');
+            for (let c of ca) {
+                while (c.charAt(0) === ' ') c = c.substring(1);
+                if (c.indexOf(cname) === 0) return c.substring(cname.length, c.length);
+            }
+            return "";
+        }
+
+        function applyBetaState(isBeta) {
+            document.body.classList.toggle('beta-on', !!isBeta);
+            const sw = document.getElementById('betaSwitch');
+            if (sw) sw.checked = !!isBeta;
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const isBeta = getCookie('feature_level') === 'BETA';
+            applyBetaState(isBeta);
+            const sw = document.getElementById('betaSwitch');
+            if (sw) {
+                sw.addEventListener('change', function(e) {
+                    const checked = !!e.target.checked;
+                    setCookie('feature_level', checked ? 'BETA' : 'PROD', 365);
+                    applyBetaState(checked);
+                });
+            }
+        });
+
         function copyToClipboard(elementId, button) {
             const element = document.getElementById(elementId);
             const text = element.textContent || element.innerText;

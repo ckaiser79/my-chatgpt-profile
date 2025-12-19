@@ -122,6 +122,10 @@ h1 {
   font-family: Georgia, serif;
 }
 
+/* Beta feature visibility */
+.beta-feature { display: none; }
+.beta-on .beta-feature { display: block; }
+
 /* ——— Make h2.card-title look like archetype name ——— */
 h2.card-title {
   font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
