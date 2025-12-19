@@ -36,23 +36,19 @@
         <section id="prompt-examples" class="card mb-3">
             <div class="card-body text-center">
                 <h2 class="card-title mb-1">
-                    <span class="display-4">
+                    <span class="display-4" data-i18n="prompts.heading">
                         Prompt for your GPT user profile
                     </span>
                 </h2>
             </div>
 
-
-
             <div class="mt-4">
                 <h3 data-i18n="prompts.howTo">How to use this prompt</h3>
                 <ol>
-                    <li><strong>Copy the prompt below</strong> using the "Copy Prompt" button.</li>
-                    <li><strong><a href="https://chat.openai.com/" target="_blank" rel="noreferrer">Open
-                                ChatGPT</a></strong> and start a new conversation.</li>
-                    <li><strong>Paste the prompt</strong> into the chat.</li>
-                    <li><strong>Copy the JSON output</strong> from ChatGPT's response in <a href="index.html">this
-                            page</a>.</li>
+                    <li><strong data-i18n="prompts.step1">Copy the prompt below using the "Copy Prompt" button.</strong></li>
+                    <li><strong><a href="https://chat.openai.com/" target="_blank" rel="noreferrer" data-i18n="prompts.step2">Open ChatGPT and start a new conversation.</a></strong></li>
+                    <li><strong data-i18n="prompts.step3">Paste the prompt into the chat.</strong></li>
+                    <li><strong data-i18n="prompts.step4">Copy the JSON output from ChatGPT's response in this page.</strong></li>
                 </ol>
             </div>
 
@@ -61,7 +57,7 @@
                     <button id="copy-btn" class="btn btn-sm btn-outline-secondary"
                         onclick="copyToClipboard('prompt-1', this)" data-i18n="prompts.copyButton">Copy Prompt</button>
                 </div>
-                <pre class="prompt-code mb-2 p-3 bg-light rounded border" id="prompt-1">Loading prompt...</pre>
+                <pre class="prompt-code mb-2 p-3 bg-light rounded border" id="prompt-1" data-i18n="prompts.loading">Loading prompt...</pre>
             </div>
         </section>
     </main>
@@ -106,7 +102,7 @@
                 })
                 .catch(err => {
                     console.error('Failed to load prompt:', err);
-                    document.getElementById('prompt-1').textContent = 'Error loading prompt';
+                    document.getElementById('prompt-1').textContent = Polyglot.t('prompts.error');
                 });
 
             // Beta feature toggle with cookie persistence

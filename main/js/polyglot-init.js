@@ -41,7 +41,13 @@
         // Handle text content translations
         document.querySelectorAll('[data-i18n]').forEach(el => {
             const key = el.getAttribute('data-i18n');
-            if (key) el.textContent = polyglot.t(key);
+            if (key) {
+                el.textContent = polyglot.t(key);
+            }
+            else {
+                console.warn('18n-missing:' + key);
+                el.textContent = '<span class="i18n-missing">' + key + '</span>';
+            }
         });
 
         // Handle attribute translations (including textContent)

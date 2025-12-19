@@ -7,15 +7,15 @@
 
         <form @submit.prevent="applyJson(); showJsonForm = false" novalidate>
             <div class="form-group">
-                <label for="jsonInput">Paste JSON (<a href="data/sample1.json" target="_blank">sample1.json</a>)</label>
+                <label for="jsonInput"><span data-i18n="home-json-form.pasteLabel">Paste JSON</span> (<a href="data/sample1.json" target="_blank">sample1.json</a>)</label>
                 <textarea id="jsonInput" x-model="jsonInput" rows="10" class="form-control"
                     placeholder='{"usageProfile": {...}}'></textarea>
             </div>
             <div class="mt-2 d-flex flex-wrap" style="gap: .5rem;">
-                <button class="btn btn-primary" type="submit">Apply JSON</button>
-                <button type="button" class="btn btn-secondary" @click="loadSample()">Load sample</button>
-                <button type="button" class="btn btn-light" @click="clearInput()">Clear</button>
-                <button type="button" class="btn btn-outline-secondary ml-auto" @click="showJsonForm = false">Close</button>
+                <button class="btn btn-primary" type="submit" data-i18n="home-json-form.apply">Apply JSON</button>
+                <button type="button" class="btn btn-secondary" @click="loadSample()" data-i18n="home-json-form.load">Load sample</button>
+                <button type="button" class="btn btn-light" @click="clearInput()" data-i18n="home-json-form.clear">Clear</button>
+                <button type="button" class="btn btn-outline-secondary ml-auto" @click="showJsonForm = false" data-i18n="home-json-form.close">Close</button>
             </div>
             <div class="text-danger mt-2" x-text="error" x-show="error"></div>
         </form>

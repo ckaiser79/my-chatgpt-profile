@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your yearly ChaetGPT profile</title>
+    <title data-i18n="home.title">Your yearly ChaetGPT profile</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/print.css">
@@ -58,13 +58,13 @@
         <section id="usage-profile" class="card mb-3">
             <div class="card-body text-center">
                 <h2 class="card-title mb-1">
-                    <span class="display-4" x-text="data.archetype.name">
+                    <span class="display-4" x-text="data.archetype.name" data-i18n="home.archetype.headline">
                         Archetype Headline
                     </span>
                 </h2>
             </div>
             <div class="card-body">
-                <p class="lead text-muted mb-2" x-text="data.archetype.summary">
+                <p class="lead text-muted mb-2" x-text="data.archetype.summary" data-i18n="home.archetype.summary">
                     Personal description of the archetype goes here.
                 </p>
             </div>
@@ -109,9 +109,8 @@
                     <span class="text-right" data-i18n="home.scale.guru">Guru</span>
                 </div>
 
-                <p x-text="data.userLevel?.reason ?? 'A 8 is defined by precise prompts, know capabilities and limits of AI, regular punctual usage.'"
-                    class="mt-3">A 8 is defined by precise prompts, know capabilities and limits of ai, regular punktual
-                    uasage.</p>
+                <p x-text="data.userLevel?.reason ?? PolyglotI18n.t('home.userLevel.defaultReason')"
+                    class="mt-3">An 8 is defined by precise prompts, knowing AI's capabilities and limits, and regular punctual usage.</p>
             </div>
         </section>
 
