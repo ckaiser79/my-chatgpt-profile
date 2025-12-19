@@ -74,3 +74,70 @@ h1 {
 .scale-labels {
   font-size: .85rem;
 }
+
+/* ——— Dedication-style styling for archetype name and summary ——— */
+#usage-profile .display-4 {
+  font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  color: #1f2d3d;
+  text-align: center;
+}
+
+#usage-profile .display-4::after {
+  content: '';
+  display: block;
+  width: 88px;
+  height: 3px;
+  background: #007bff; /* Bootstrap primary */
+  margin: .5rem auto 0;
+  border-radius: 2px;
+  opacity: .35;
+}
+
+#usage-profile .lead {
+  font-family: Georgia, "Times New Roman", serif;
+  font-style: italic;
+  color: #555;
+  line-height: 1.75;
+  max-width: 860px;
+  margin: 0.75rem auto 0;
+  text-align: center;
+  background: #ffffff;
+  border: 1px solid #eee;
+  border-radius: 10px;
+  padding: 1.25rem 1.5rem 1.25rem 3rem;
+  position: relative;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.04);
+}
+
+#usage-profile .lead::before {
+  content: '“';
+  position: absolute;
+  left: 12px;
+  top: -6px;
+  font-size: 64px;
+  line-height: 1;
+  color: rgba(0,0,0,0.08);
+  font-family: Georgia, serif;
+}
+
+/* ——— Make h2.card-title look like archetype name ——— */
+h2.card-title {
+  font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  color: #1f2d3d;
+  text-align: center;
+}
+
+h2.card-title::after {
+  content: '';
+  display: block;
+  width: 88px;
+  height: 3px;
+  background: #007bff; /* Bootstrap primary */
+  margin: .5rem auto 0;
+  border-radius: 2px;
+  opacity: .35;
+}
