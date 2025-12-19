@@ -20,11 +20,8 @@
 
     <header x-include="'partials/header.html'"></header>
 
-    <div class="container mb-4 d-flex justify-content-between align-items-center">
-        <div class="custom-control custom-switch">
-            <input type="checkbox" class="custom-control-input" id="betaSwitch">
-            <label class="custom-control-label" for="betaSwitch" data-i18n="nav.showBeta">Show Beta</label>
-        </div>
+    <div class="container mb-4 d-flex justify-content-between">
+        <div x-include="'partials/howto-chat.html'"></div>
         <div class="d-flex align-items-center">
             <a href="index.html" class="text-primary mr-2" data-i18n="nav.backToProfile">Back to Profile</a>
             <button type="button" class="btn btn-sm btn-light lang-flag mr-1" data-lang="de" aria-label="Deutsch"
@@ -64,66 +61,7 @@
                     <button id="copy-btn" class="btn btn-sm btn-outline-secondary"
                         onclick="copyToClipboard('prompt-1', this)" data-i18n="prompts.copyButton">Copy Prompt</button>
                 </div>
-                <pre class="prompt-code mb-2 p-3 bg-light rounded border" id="prompt-1">
-Analyze and create a comprehensive ChatGPT usage profile for 2025. Based on your knowledge of my interactions with you, provide:
-
-1. An archetype name that describes my usage style (e.g., "Creative Coder", "Researcher", "Content Creator")
-2. A brief summary of how I use AI in my work and projects
-3. My interaction types - the main ways I use ChatGPT about 15 points for a wordcloud (e.g. brainstorming, coding, writing, research) with importance weights from 1-10
-4. My experience level with AI on a scale of 0-10, including a brief reason for the rating
-5. 2 actionable tips in 3 or 4 groups for improving my AI usage and prompting skills
-
-The output langauge is defined in "header.outputLangeuage".
-
-Return the response ONLY as valid JSON (no other text) matching this exact structure:
-
-```json
-{
-    "header": {
-        "year": 2025,
-        "outputLangeuage": "GERMAN"
-    },
-    "archetype": {
-        "name": "Creative Coder",
-        "summary": "You are a Creative Coder who leverages AI to enhance your coding"
-    },
-    "interactionTypes": [
-        {
-            "word": "brainstorming",
-            "weight": 10
-        },
-        {
-            "word": "coding",
-            "weight": 9
-        }
-    ],
-    "userLevel": {
-        "value": 8,
-        "reason": "I have extensive experience using AI for various coding and creative tasks, allowing me to efficiently integrate AI into my workflow."
-    },
-    "tips": [
-        {
-            "category": "Prompting",
-            "text": "Practice crafting clearer, more specific prompts."
-        },
-        {
-            "category": "Model Capabilities",
-            "text": "Stay updated on latest AI model features and improvements."
-        },
-        {
-            "category": "Model Capabilities",
-            "text": "Implement feedback loops to refine AI outputs iteratively."
-        }
-    ]
-}
-
-FINETUNING NOTES:
-// ignore this prompt text in the final output
-// add roles, which should be taken especially into accout
-// e.g. my as a software developer, designer, content creator etc. 
-```
-
-                </pre>
+                <pre class="prompt-code mb-2 p-3 bg-light rounded border" id="prompt-1">Loading prompt...</pre>
             </div>
         </section>
     </main>
@@ -157,6 +95,21 @@ FINETUNING NOTES:
         }
 
         document.addEventListener('DOMContentLoaded', function () {
+            // Load prompt from file
+            fetch('data/default-prompt.txt')
+                .then(r => r.text())
+                .then(text => {
+                    const promptEl = document.getElementById('prompt-1');
+                    if (promptEl) {
+                        promptEl.textContent = text;
+                    }
+                })
+                .catch(err => {
+                    console.error('Failed to load prompt:', err);
+                    document.getElementById('prompt-1').textContent = 'Error loading prompt';
+                });
+
+            // Beta feature toggle with cookie persistence
             const isBeta = getCookie('feature_level') === 'BETA';
             applyBetaState(isBeta);
             const sw = document.getElementById('betaSwitch');

@@ -50,29 +50,7 @@
 
     </section>
 
-    <div class="modal-overlay" x-show="showJsonForm" x-cloak @keydown.escape.window="showJsonForm = false">
-        <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="jsonModalTitle" @click.outside="showJsonForm = false">
-            <div class="d-flex justify-content-between align-items-start mb-3">
-                <h2 id="jsonModalTitle" class="h4 mb-0" data-i18n="home-json-form.title">ChatGPT reponse here</h2>
-                <button type="button" class="close" aria-label="Close" @click="showJsonForm = false">&times;</button>
-            </div>
-
-            <form @submit.prevent="applyJson(); showJsonForm = false" novalidate>
-                <div class="form-group">
-                    <label for="jsonInput">Paste JSON (<a href="data/sample1.json" target="_blank">sample1.json</a>)</label>
-                    <textarea id="jsonInput" x-model="jsonInput" rows="10" class="form-control"
-                        placeholder='{"usageProfile": {...}}'></textarea>
-                </div>
-                <div class="mt-2 d-flex flex-wrap" style="gap: .5rem;">
-                    <button class="btn btn-primary" type="submit">Apply JSON</button>
-                    <button type="button" class="btn btn-secondary" @click="loadSample()">Load sample</button>
-                    <button type="button" class="btn btn-light" @click="clearInput()">Clear</button>
-                    <button type="button" class="btn btn-outline-secondary ml-auto" @click="showJsonForm = false">Close</button>
-                </div>
-                <div class="text-danger mt-2" x-text="error" x-show="error"></div>
-            </form>
-        </div>
-    </div>
+    <div x-include="'partials/show-json-dialog.html'"></div>
 
     <main class="container">
 

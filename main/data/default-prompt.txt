@@ -14,7 +14,7 @@ Return the response ONLY as valid JSON (no other text) matching this exact struc
 {
     "header": {
         "year": 2025,
-        "outputLangeuage": "GERMAN"
+        "outputLangeuage": "{{LANGUAGE}}"
     },
     "archetype": {
         "name": "Creative Coder",

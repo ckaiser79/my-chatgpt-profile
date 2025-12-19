@@ -31,7 +31,14 @@
           if (!r.ok) throw new Error('Failed to load prompt');
           return r.text();
         })
-        .then(text => navigator.clipboard.writeText(text))
+        .then(text => {
+          // Get current UI language (de or en)
+          const currentLang = document.documentElement.lang || 'en';
+          
+          // Replace placeholder with current language
+          text = text.replace('{{LANGUAGE}}', currentLang);
+          return navigator.clipboard.writeText(text);
+        })
         .then(() => {
           copyBtn.textContent = 'Copied!';
           setTimeout(() => { copyBtn.textContent = 'Copy default prompt'; }, 1800);
