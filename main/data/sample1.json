@@ -1,6 +1,7 @@
 {
     "header": {
-        "year": 2025
+        "year": 2025,
+        "outputLangeuage": "GERMAN "
     },
     "archetype": {
         "name": "Creative Coder",

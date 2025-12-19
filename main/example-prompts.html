@@ -47,14 +47,15 @@ Analyze and create a comprehensive ChatGPT usage profile for 2025. Based on your
 4. My experience level with AI on a scale of 0-10, including a brief reason for the rating
 5. 2 actionable tips in 3 or 4 groups for improving my AI usage and prompting skills
 
-The output langauge is GERMAN.
+The output langauge is defined in "header.outputLangeuage".
 
 Return the response ONLY as valid JSON (no other text) matching this exact structure:
 
 ```json
 {
     "header": {
-        "year": 2025
+        "year": 2025,
+        "outputLangeuage": "GERMAN"
     },
     "archetype": {
         "name": "Creative Coder",
@@ -89,6 +90,11 @@ Return the response ONLY as valid JSON (no other text) matching this exact struc
         }
     ]
 }
+
+FINETUNING NOTES:
+// ignore this prompt text in the final output
+// add roles, which should be taken especially into accout
+// e.g. my as a software developer, designer, content creator etc. 
 ```
 
                 </pre>
