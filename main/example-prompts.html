@@ -4,24 +4,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Example Prompts</title>
+    <title>Prompt</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/print.css">
     <script src="https://cdn.jsdelivr.net/npm/node-polyglot@2.5.0/build/polyglot.min.js"></script>
     <script src="js/polyglot-init.js"></script>
+
+    <script src="js/alpine-include.js" defer></script>
+    <script src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+
 </head>
 
-<body>
-    <header class="jumbotron jumbotron-fluid text-white bg-primary mb-4">
-        <div class="container">
-            <h1 data-i18n="prompts.title">Example Prompts</h1>
-            <p class="lead">
-                <span data-i18n="prompts.lead">A collection of example prompts for ChatGPT to create your
-                    profile.</span>
-            </p>
-        </div>
-    </header>
+<body x-data="{}">
+
+    <header x-include="'partials/header.html'"></header>
 
     <div class="container mb-4 d-flex justify-content-between align-items-center">
         <div class="custom-control custom-switch">
@@ -130,6 +127,8 @@ FINETUNING NOTES:
             </div>
         </section>
     </main>
+
+    <footer x-include="'partials/footer.html'"></footer>
 
     <script>
         // Beta feature toggle with cookie persistence

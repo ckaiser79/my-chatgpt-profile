@@ -14,29 +14,25 @@
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="js/polyglot-init.js" defer></script>
 
+
     <!--
     Script loading order (all with defer for non-blocking execution):
-    1. wordcloud2.js: Defines window.WordCloud for word cloud rendering.
-    2. js/index.js: Defines window.myApp with Alpine.js data and methods.
-    3. Alpine.js: Initializes x-data="myApp" and runs x-init="load()".
+    1. js/alpine-include.js: Registers the x-include directive before Alpine initializes.
+    2. wordcloud2.js: Defines window.WordCloud for word cloud rendering.
+    3. js/index.js: Defines window.myApp with Alpine.js data and methods.
+    4. Alpine.js: Initializes x-data="myApp" and runs x-init="load()".
     Defer ensures scripts load in parallel but execute in this order after DOM parsing,
     preventing race conditions and "undefined" errors.
     -->
     <!-- wordcloud2 is lazy-loaded when Beta is enabled via myApp listener -->
     <script src="js/index.js" defer></script>
+    <script src="js/alpine-include.js" defer></script>
     <script src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
 </head>
 
 <body x-data="myApp" x-init="load()">
-    <header class="jumbotron jumbotron-fluid text-white bg-primary mb-4">
-        <div class="container">
-            <h1 class="display-4" x-text="data.header?.title ?? 'ChatGPT Usage Type'">ChatGPT Usage Type</h1>
-            <p class="lead">
-                A brief summary of how you used chatGPT in
-                <span data-year x-text="data.header?.year">2025</span>.
-            </p>
-        </div>
-    </header>
+    
+    <header x-include="'partials/header.html'"></header>
 
     <!-- Toggle + JSON input form: paste custom JSON and apply it to the page (collapsed by default) -->
     <section class="container mb-4" id="custom-json-input">
@@ -46,18 +42,18 @@
                     x-text="showJsonForm ? 'Hide JSON form' : 'Show JSON form'">Show JSON Form</button>
                 <small class="text-muted">ChatGPT response</small>
             </div>
+            <div class="custom-control custom-switch mr-3">
+                <input type="checkbox" class="custom-control-input" id="betaSwitch">
+                <label class="custom-control-label" for="betaSwitch" data-i18n="nav.showBeta">Show Beta</label>
+            </div>
+            <a href="example-prompts.html" class="align-self-center text-primary mr-2"
+            data-i18n="nav.viewPrompts">View Example Prompts</a>
             <div class="d-flex align-items-center">
-                <div class="custom-control custom-switch mr-3">
-                    <input type="checkbox" class="custom-control-input" id="betaSwitch">
-                    <label class="custom-control-label" for="betaSwitch" data-i18n="nav.showBeta">Show Beta</label>
-                </div>
-                <a href="example-prompts.html" class="align-self-center text-primary mr-2"
-                    data-i18n="nav.viewPrompts">View Example Prompts</a>
+                <button type="button" class="btn btn-sm btn-light lang-flag mr-1" data-lang="de"
+                data-i18n-attr="aria-label=lang.de">🇩🇪</button>
+                <button type="button" class="btn btn-sm btn-light lang-flag" data-lang="en"
+                data-i18n-attr="aria-label=lang.en">🇬🇧</button>
                 <div class="d-flex align-items-center">
-                    <button type="button" class="btn btn-sm btn-light lang-flag mr-1" data-lang="de"
-                        data-i18n-attr="aria-label=lang.de">🇩🇪</button>
-                    <button type="button" class="btn btn-sm btn-light lang-flag" data-lang="en"
-                        data-i18n-attr="aria-label=lang.en">🇬🇧</button>
                 </div>
             </div>
         </div>
@@ -174,6 +170,8 @@
             </div>
         </section>
     </main>
+
+    <footer x-include="'partials/footer.html'"></footer>
 
     <!-- keep lightweight: no jQuery required; bootstrap JS omitted (only CSS used) -->
     <script>
