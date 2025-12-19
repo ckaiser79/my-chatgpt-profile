@@ -21,7 +21,7 @@
   "home-json-form.load": "Beispiel laden",
   "home-json-form.clear": "Leeren",
   "home-json-form.close": "Schließen",
-  "nav.copyDefaultPrompt": "Standard-Prompt kopieren",
+  "nav.copyDefaultPrompt": "Prompt kopieren",
   "nav.copyDefaultPrompt.copied": "Kopiert!",
   "nav.copyDefaultPrompt.failed": "Kopieren fehlgeschlagen",
   "nav.openChatgpt": "ChatGPT öffnen",

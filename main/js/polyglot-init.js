@@ -19,6 +19,20 @@
             });
     }
 
+    function detectBrowserLang() {
+        try {
+            const nav = navigator || {};
+            const langs = (nav.languages && nav.languages.length) ? nav.languages : [nav.language || nav.userLanguage || 'en'];
+            for (let l of langs) {
+                if (!l) continue;
+                const lc = String(l).toLowerCase();
+                if (lc.startsWith('de')) return 'de';
+                if (lc.startsWith('en')) return 'en';
+            }
+        } catch (_) {}
+        return 'en';
+    }
+
     function getCookie(name) {
         const cname = name + '=';
         const decoded = decodeURIComponent(document.cookie || '');
@@ -85,8 +99,9 @@
     }
 
     function init() {
-        const savedLang = getCookie('ui_lang') || 'en';
-        setLanguage(savedLang);
+        const savedLang = getCookie('ui_lang');
+        const initialLang = savedLang || detectBrowserLang();
+        setLanguage(initialLang);
 
         document.querySelectorAll('.lang-flag').forEach(btn => {
             btn.addEventListener('click', () => {
