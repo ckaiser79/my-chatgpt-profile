@@ -1,6 +1,6 @@
 {
     "header": {
-        "year": 2024
+        "year": 2025
     },
     "archetype": {
         "name": "Creative Coder",
@@ -9,15 +9,15 @@
     "interactionTypes": [
         {
             "word": "brainstorming",
-            "weight": 9
+            "weight": 10
         },
         {
             "word": "coding",
-            "weight": 8
+            "weight": 9
         },
         {
             "word": "editing",
-            "weight": 6
+            "weight": 8
         },
         {
             "word": "research",
@@ -25,7 +25,47 @@
         },
         {
             "word": "automation",
+            "weight": 6
+        },
+        {
+            "word": "debugging",
             "weight": 5
+        },
+        {
+            "word": "documentation",
+            "weight": 4
+        },
+        {
+            "word": "testing",
+            "weight": 3
+        },
+        {
+            "word": "optimization",
+            "weight": 2
+        },
+        {
+            "word": "learning",
+            "weight": 1
+        },
+        {
+            "word": "prototyping",
+            "weight": 10
+        },
+        {
+            "word": "collaboration",
+            "weight": 9
+        },
+        {
+            "word": "analysis",
+            "weight": 8
+        },
+        {
+            "word": "generation",
+            "weight": 7
+        },
+        {
+            "word": "integration",
+            "weight": 6
         }
     ],
     "userLevel": {
