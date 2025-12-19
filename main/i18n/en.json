@@ -1,30 +1,19 @@
 {
-  "nav": {
-    "viewPrompts": "View Example Prompts",
-    "backToProfile": "Back to Profile",
-    "showBeta": "Show Beta"
-  },
-  "home": {
-    "usedFor": "You used the AI for...",
-    "experience": "Your experience level",
-    "tips": "Tips how I can increase my user level",
-    "noTips": "No tips available.",
-    "scale": {
-      "beginner": "Interested user",
-      "senior": "Senior / Experienced",
-      "guru": "Guru"
-    }
-  },
-  "prompts": {
-    "title": "Example Prompts",
-    "lead": "A collection of example prompts for ChatGPT to create your profile.",
-    "howTo": "How to use this prompt",
-    "steps": {
-      "copy": "Copy the prompt below using the \"Copy Prompt\" button.",
-      "open": "Open ChatGPT and start a new conversation.",
-      "paste": "Paste the prompt into the chat.",
-      "use": "Copy the JSON output from ChatGPT's response in this page."
-    },
-    "copyButton": "Copy Prompt"
-  }
+  "nav.showBeta": "Show Beta",
+  "nav.viewPrompts": "View Example Prompts",
+  "nav.backToProfile": "Back to Profile",
+  "lang.de": "German",
+  "lang.en": "English",
+  "home.usedFor": "You used the AI for...",
+  "home.experience": "Your experience level",
+  "home.tips": "Tips how I can increase my user level",
+  "home.noTips": "No tips available.",
+  "home.scale.beginner": "Interested user",
+  "home.scale.senior": "Senior / Experienced",
+  "home.scale.guru": "Guru",
+  "home-json-form.title": "ChatGPT response here",
+  "prompts.title": "Example Prompts",
+  "prompts.lead": "A collection of example prompts for ChatGPT to create your profile.",
+  "prompts.howTo": "How to use this prompt",
+  "prompts.copyButton": "Copy Prompt"
 }

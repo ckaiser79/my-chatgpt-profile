@@ -4,12 +4,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title x-text="data.meta?.title ?? 'Simple Static Site'">Simple Static Site</title>
+    <title>Your yearly ChaetGPT profile</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/print.css">
 
-    <script src="https://cdn.jsdelivr.net/npm/node-polyglot@2.5.0/build/polyglot.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/polyglot.js/0.4.2/polyglot.min.js" integrity="sha512-SXa0RggkqBgtv9e1Wy49C6agde9NAXf7t/Vz7pE9wgOOuNhOyhwn/a0rdHRZalIvLhxMYkG0FRHfsXDUJOVH2A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="js/polyglot-init.js" defer></script>
 
     <!--
     Script loading order (all with defer for non-blocking execution):
@@ -50,8 +51,8 @@
                 </div>
                 <a href="example-prompts.html" class="align-self-center text-primary mr-2" data-i18n="nav.viewPrompts">View Example Prompts</a>
                 <div class="d-flex align-items-center">
-                    <button type="button" class="btn btn-sm btn-light lang-flag mr-1" data-lang="de" aria-label="Deutsch">🇩🇪</button>
-                    <button type="button" class="btn btn-sm btn-light lang-flag" data-lang="en" aria-label="English">🇬🇧</button>
+                    <button type="button" class="btn btn-sm btn-light lang-flag mr-1" data-lang="de" data-i18n-attr="aria-label=lang.de">🇩🇪</button>
+                    <button type="button" class="btn btn-sm btn-light lang-flag" data-lang="en" data-i18n-attr="aria-label=lang.en">🇬🇧</button>
                 </div>
             </div>
         </div>
