@@ -3,7 +3,7 @@
     <span data-i18n="nav.howToUse">Short description</span>
 
     <ul class="list-unstyled d-flex align-items-center flex-wrap mb-0" style="gap: .35rem .75rem;">
-      <li>
+      <li id="iphoneCopyFailure">
         <button type="button" class="btn btn-sm btn-outline-secondary" id="copyDefaultPromptBtn" data-i18n-attr="textContent=nav.copyDefaultPrompt">Copy default prompt</button>
       </li>
         <li class="text-muted">&rarr;</li>
@@ -31,7 +31,25 @@
 <script>
   // Register click handler immediately (no DOMContentLoaded needed since partial loads after DOM is ready)
   const copyBtn = document.getElementById('copyDefaultPromptBtn');
-  if (copyBtn) {
+  const isIphone = /iphone/i.test(navigator.userAgent || '');
+
+  if (isIphone && copyBtn) {
+    // On iPhone, use a direct link instead of clipboard
+    const li = document.getElementById('iphoneCopyFailure') || copyBtn.parentElement;
+    const link = document.createElement('a');
+    link.href = 'data/default-prompt.txt';
+    link.target = '_blank';
+    link.rel = 'noreferrer noopener';
+    link.className = 'btn btn-link p-0 align-baseline';
+    link.setAttribute('data-i18n-attr', 'textContent=nav.copyDefaultPrompt');
+    link.textContent = copyBtn.textContent;
+    if (li) {
+      li.innerHTML = '';
+      li.appendChild(link);
+    }
+  }
+
+  if (copyBtn && !isIphone) {
     copyBtn.addEventListener('click', function () {
       fetch('data/default-prompt.txt')
         .then(r => {
