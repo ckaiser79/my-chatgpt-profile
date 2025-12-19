@@ -36,10 +36,13 @@
 
     <!-- Toggle + JSON input form: paste custom JSON and apply it to the page (collapsed by default) -->
     <section class="container mb-4" id="custom-json-input">
-        <div class="d-flex justify-content-start">
-            <button class="btn btn-sm btn-light mr-2" @click="showJsonForm = !showJsonForm"
-                x-text="showJsonForm ? 'Hide JSON form' : 'Show JSON form'">Show JSON Form</button>
-            <small class="text-muted align-self-center">Insert custom JSON (collapsed by default)</small>
+        <div class="d-flex justify-content-between">
+            <div class="d-flex align-items-center">
+                <button class="btn btn-sm btn-light mr-2" @click="showJsonForm = !showJsonForm"
+                    x-text="showJsonForm ? 'Hide JSON form' : 'Show JSON form'">Show JSON Form</button>
+                <small class="text-muted">Insert custom JSON (collapsed by default)</small>
+            </div>
+            <a href="example-prompts.html" class="align-self-center text-primary">View Example Prompts</a>
         </div>
 
         <div x-show="showJsonForm" x-cloak x-transition class="mt-3">

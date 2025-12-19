@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Example Prompts</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/print.css">
+</head>
+
+<body >
+    <header class="jumbotron jumbotron-fluid text-white bg-primary mb-4">
+        <div class="container">
+            <h1>Example Prompts</h1>
+            <p class="lead">
+                A collection of example prompts for ChatGPT to create your profile.
+            </p>
+        </div>
+    </header>
+
+    <main class="container">
+
+        <section id="prompt-examples" class="card mb-3">
+            <div class="card-body text-center">
+                <h2 class="card-title mb-1">
+                    <span class="display-4">
+                        Prompt 1
+                    </span>
+                </h2>
+            </div>
+            <div class="card-body">
+                <div class="d-flex justify-content-end mb-2">
+                    <button class="btn btn-sm btn-outline-secondary" onclick="copyToClipboard('prompt-1')">Copy Prompt</button>
+                </div>
+                <pre class="prompt-code mb-2 p-3 bg-light rounded border" id="prompt-1">
+Create a detailed profile of my ChatGPT usage in the current year, 
+including my 
+
+- AI interaction types, 
+- user level in a range from 0 to 10,
+- tips for improvement
+
+Use JSON as output format. Use this structure as an example:
+
+```json
+                    {
+    "header": {
+        "year": 2025
+    },
+    "archetype": {
+        "name": "Creative Coder",
+        "summary": "You are a Creative Coder who leverages AI to enhance your coding"
+    },
+    "interactionTypes": [
+        {
+            "word": "brainstorming",
+            "weight": 10
+        },
+        {
+            "word": "coding",
+            "weight": 9
+        },
+        {
+            "word": "editing",
+            "weight": 8
+        },
+        {
+            "word": "research",
+            "weight": 7
+        },
+        {
+            "word": "automation",
+            "weight": 6
+        },
+        {
+            "word": "debugging",
+            "weight": 5
+        },
+        {
+            "word": "documentation",
+            "weight": 4
+        },
+        {
+            "word": "testing",
+            "weight": 3
+        },
+        {
+            "word": "optimization",
+            "weight": 2
+        },
+        {
+            "word": "learning",
+            "weight": 1
+        },
+        {
+            "word": "prototyping",
+            "weight": 10
+        },
+        {
+            "word": "collaboration",
+            "weight": 9
+        },
+        {
+            "word": "analysis",
+            "weight": 8
+        },
+        {
+            "word": "generation",
+            "weight": 7
+        },
+        {
+            "word": "integration",
+            "weight": 6
+        }
+    ],
+    "userLevel": {
+        "value": 8,
+        "reason": "Precise prompts, knows capabilities and limits of AI, regular punctual usage."
+    },
+    "tips": [
+        "Practice crafting clearer, more specific prompts.",
+        "Learn prompt engineering patterns and templates.",
+        "Explore APIs and automation to integrate AI into workflows.",
+        "Review model outputs critically and iterate on prompts.",
+        "Bla"
+    ]
+}
+```
+
+}
+
+                </pre>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        function copyToClipboard(elementId) {
+            const element = document.getElementById(elementId);
+            const text = element.textContent || element.innerText;
+            navigator.clipboard.writeText(text).then(() => {
+                alert('Prompt copied to clipboard!');
+            }).catch(err => {
+                console.error('Failed to copy: ', err);
+                // Fallback for older browsers
+                const textArea = document.createElement('textarea');
+                textArea.value = text;
+                document.body.appendChild(textArea);
+                textArea.select();
+                try {
+                    document.execCommand('copy');
+                    alert('Prompt copied to clipboard!');
+                } catch (fallbackErr) {
+                    console.error('Fallback copy failed: ', fallbackErr);
+                    alert('Failed to copy prompt. Please copy manually.');
+                }
+                document.body.removeChild(textArea);
+            });
+        }
+    </script>
+</body>
+
+</html>
