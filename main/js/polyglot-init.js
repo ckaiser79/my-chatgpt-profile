@@ -1,4 +1,11 @@
 (function () {
+    /*
+     Polyglot i18n bootstrap
+     - Language selection: uses 'ui_lang' cookie if present; otherwise detects browser language (de/en).
+     - Translation application: fills elements with data-i18n and applies attribute/text mappings from data-i18n-attr.
+     - Dynamic content: re-applies translations after partials are injected via 'x-include:loaded' and via a MutationObserver watching for new nodes.
+     - Conflict rule: do not combine data-i18n with Alpine's x-text on the same element; x-text controls dynamic content and should take precedence.
+    */
     const translations = {};
     let polyglot = new Polyglot();
 
@@ -110,9 +117,36 @@
                 setLanguage(lang);
             });
         });
+
+        // Re-apply translations after Alpine includes inject new nodes
+        document.addEventListener('x-include:loaded', () => {
+            applyTranslations();
+        });
+
+        // Observe DOM for dynamically injected content and re-apply translations
+        let applyScheduled = false;
+        const scheduleApply = () => {
+            if (applyScheduled) return;
+            applyScheduled = true;
+            requestAnimationFrame(() => {
+                applyScheduled = false;
+                applyTranslations();
+            });
+        };
+        try {
+            const observer = new MutationObserver((mutations) => {
+                for (const m of mutations) {
+                    if (m.type === 'childList' && m.addedNodes && m.addedNodes.length) {
+                        scheduleApply();
+                        break;
+                    }
+                }
+            });
+            observer.observe(document.body, { childList: true, subtree: true });
+        } catch (_) { /* noop */ }
     }
 
-    window.PolyglotI18n = { init, setLanguage, t: (key) => polyglot.t(key) };
+    window.PolyglotI18n = { init, setLanguage, apply: applyTranslations, t: (key) => polyglot.t(key) };
 
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', init);
