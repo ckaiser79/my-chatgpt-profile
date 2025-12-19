@@ -1,16 +1,16 @@
 <nav class="howto-nav">
     <ul class="list-unstyled d-flex align-items-center flex-wrap mb-0" style="gap: .35rem .75rem;">
-        <li>
-            <button type="button" class="btn btn-sm btn-outline-secondary" id="copyDefaultPromptBtn">Copy default prompt</button>
-        </li>
+      <li>
+        <button type="button" class="btn btn-sm btn-outline-secondary" id="copyDefaultPromptBtn" data-i18n-attr="textContent=nav.copyDefaultPrompt">Copy default prompt</button>
+      </li>
         <li class="text-muted">&rarr;</li>
         <li>
-            <a href="https://chat.openai.com/" target="_blank" rel="noreferrer">Open ChatGPT</a>
+          <a href="https://chat.openai.com/" target="_blank" rel="noreferrer" data-i18n-attr="textContent=nav.openChatgpt">Open ChatGPT</a>
         </li>
         <li class="text-muted">&rarr;</li>
         <li class="d-flex align-items-center">
             <button class="btn btn-sm btn-light mr-2" @click="showJsonForm = !showJsonForm"
-                x-text="showJsonForm ? 'Hide JSON form' : 'Show JSON form'">Show JSON Form</button>
+              x-text="showJsonForm ? PolyglotI18n.t('nav.hideJsonForm') : PolyglotI18n.t('nav.showJsonForm')">Show JSON Form</button>
         </li>
         <li class="text-muted invisible">
             <div class="custom-control custom-switch">
@@ -40,13 +40,13 @@
           return navigator.clipboard.writeText(text);
         })
         .then(() => {
-          copyBtn.textContent = 'Copied!';
-          setTimeout(() => { copyBtn.textContent = 'Copy default prompt'; }, 1800);
+          copyBtn.textContent = PolyglotI18n.t('nav.copyDefaultPrompt.copied');
+          setTimeout(() => { copyBtn.textContent = PolyglotI18n.t('nav.copyDefaultPrompt'); }, 1800);
         })
         .catch(err => {
           console.error('Copy failed', err);
-          copyBtn.textContent = 'Copy failed';
-          setTimeout(() => { copyBtn.textContent = 'Copy default prompt'; }, 1800);
+          copyBtn.textContent = PolyglotI18n.t('nav.copyDefaultPrompt.failed');
+          setTimeout(() => { copyBtn.textContent = PolyglotI18n.t('nav.copyDefaultPrompt'); }, 1800);
         });
     });
   }
