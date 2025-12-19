@@ -32,7 +32,7 @@
             </div>
             <div class="card-body">
                 <div class="d-flex justify-content-end mb-2">
-                    <button class="btn btn-sm btn-outline-secondary" onclick="copyToClipboard('prompt-1')">Copy Prompt</button>
+                    <button id="copy-btn" class="btn btn-sm btn-outline-secondary" onclick="copyToClipboard('prompt-1', this)">Copy Prompt</button>
                 </div>
                 <pre class="prompt-code mb-2 p-3 bg-light rounded border" id="prompt-1">
 Create a detailed profile of my ChatGPT usage in the current year, 
@@ -137,11 +137,14 @@ Use JSON as output format. Use this structure as an example:
     </main>
 
     <script>
-        function copyToClipboard(elementId) {
+        function copyToClipboard(elementId, button) {
             const element = document.getElementById(elementId);
             const text = element.textContent || element.innerText;
             navigator.clipboard.writeText(text).then(() => {
-                alert('Prompt copied to clipboard!');
+                button.textContent = 'Copied to Clipboard';
+                setTimeout(() => {
+                    button.textContent = 'Copy Prompt';
+                }, 2000);
             }).catch(err => {
                 console.error('Failed to copy: ', err);
                 // Fallback for older browsers
@@ -151,10 +154,16 @@ Use JSON as output format. Use this structure as an example:
                 textArea.select();
                 try {
                     document.execCommand('copy');
-                    alert('Prompt copied to clipboard!');
+                    button.textContent = 'Copied to Clipboard';
+                    setTimeout(() => {
+                        button.textContent = 'Copy Prompt';
+                    }, 2000);
                 } catch (fallbackErr) {
                     console.error('Fallback copy failed: ', fallbackErr);
-                    alert('Failed to copy prompt. Please copy manually.');
+                    button.textContent = 'Copy Failed';
+                    setTimeout(() => {
+                        button.textContent = 'Copy Prompt';
+                    }, 2000);
                 }
                 document.body.removeChild(textArea);
             });
