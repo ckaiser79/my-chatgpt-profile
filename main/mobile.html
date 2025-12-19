@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,10 +18,16 @@
     <script src="js/alpine-include.js" defer></script>
     <script src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
 </head>
+
 <body x-data="myApp" x-init="load()">
     <header x-include="'partials/header.html'"></header>
 
+    <div class="d-flex align-items-center">
+        <div x-include="'partials/language-switcher.html'"></div>
+    </div>
+
     <main class="container py-4">
+
         <section id="step-copy-prompt" class="mb-4 card">
             <div class="card-body">
                 <h2 class="h5 mb-2">Step 1: Copy Prompt</h2>
@@ -31,9 +38,11 @@
 
         <section id="step-chatgpt" class="mb-4 card">
             <div class="card-body">
-                <h2 class="h5 mb-2">Step 2: Open ChatGPT</h2>
-                <p class="text-muted mb-3">Open ChatGPT in a new tab, paste the prompt, and run it.</p>
-                <!-- TODO: add ChatGPT link and helper text -->
+                <h2 class="h5 mb-2"><a href="https://chat.openai.com/" target="chatgpt" rel="noreferrer">Step 2: Open
+                        ChatGPT</a></h2>
+                <p class="text-muted mb-3"><a href="https://chat.openai.com/" target="chatgpt" rel="noreferrer">Opens
+                        ChatGPT in a new tab</a>, paste the prompt, and run it.</p>
+                <p>Wait for the complete response, then copy the raw json information.</p>
             </div>
         </section>
 
@@ -41,11 +50,14 @@
             <div class="card-body">
                 <h2 class="h5 mb-2">Step 3: View ChatGPT Data</h2>
                 <p class="text-muted mb-3">Paste the JSON response here to view your profile.</p>
-                <!-- TODO: add JSON input / display toggle -->
+
+                <button type="button" class="btn btn-link p-0 align-baseline" data-i18n="nav.showJsonForm">Show
+                    JSON Form</button>
             </div>
         </section>
     </main>
 
     <footer x-include="'partials/footer.html'"></footer>
 </body>
+
 </html>
