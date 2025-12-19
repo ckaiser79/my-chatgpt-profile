@@ -3,6 +3,21 @@
   const DEFAULT_LANG = 'en';
   const SUPPORTED = ['en','de'];
   let currentLang = DEFAULT_LANG;
+  let SHOW_MISSING_KEYS = false;
+
+  function getQueryParamBool(name){
+    try{
+      const params = new URLSearchParams(window.location.search || '');
+      if(!params.has(name)) return null;
+      const v = (params.get(name) || '').toLowerCase();
+      // treat empty value or common truthy tokens as true
+      if(v === '' || v === '1' || v === 'true' || v === 'yes' || v === 'on') return true;
+      if(v === '0' || v === 'false' || v === 'no' || v === 'off') return false;
+      return true; // presence without recognized value => true
+    }catch(_){
+      return null;
+    }
+  }
 
   function getCookie(name) {
     const cname = name + '=';
@@ -27,7 +42,8 @@
   function t(key){
     const dict = MESSAGES[currentLang] || {};
     const val = key.split('.').reduce((acc,k)=> (acc && acc[k] != null) ? acc[k] : undefined, dict);
-    return (val == null) ? key : String(val);
+    // If key not found, either return the key (debug mode) or undefined to avoid changing content
+    return (val == null) ? (SHOW_MISSING_KEYS ? key : undefined) : String(val);
   }
 
   function apply(root){
@@ -35,7 +51,9 @@
     // text content
     scope.querySelectorAll('[data-i18n]')?.forEach(el => {
       const key = el.getAttribute('data-i18n');
-      if(key) el.textContent = t(key);
+      if(!key) return;
+      const value = t(key);
+      if(value != null) el.textContent = value;
     });
     // attribute mapping: data-i18n-attr="title=foo,placeholder=bar"
     scope.querySelectorAll('[data-i18n-attr]')?.forEach(el => {
@@ -43,7 +61,9 @@
       if(!map) return;
       map.split(',').forEach(pair => {
         const [attr, key] = pair.split('=');
-        if(attr && key) el.setAttribute(attr.trim(), t(key.trim()));
+        if(!attr || !key) return;
+        const value = t(key.trim());
+        if(value != null) el.setAttribute(attr.trim(), value);
       });
     });
   }
@@ -54,10 +74,17 @@
     apply(document);
   }
 
+  function setDebug(flag){
+    SHOW_MISSING_KEYS = !!flag;
+    apply(document);
+  }
+
   function init(){
     const cookieLang = (getCookie('ui_lang') || '').toLowerCase();
     currentLang = SUPPORTED.includes(cookieLang) ? cookieLang : DEFAULT_LANG;
     document.documentElement.setAttribute('lang', currentLang);
+    const dbg = getQueryParamBool('debug-missing-keys');
+    if(dbg !== null) SHOW_MISSING_KEYS = dbg;
     return fetchMessages(currentLang).then(()=>{
       apply(document);
       // prefetch the other language to make toggles instant
@@ -74,7 +101,7 @@
     });
   }
 
-  window.I18n = { init, setLang, t };
+  window.I18n = { init, setLang, t, setDebug };
 
   if(document.readyState === 'loading'){
     document.addEventListener('DOMContentLoaded', ()=>{ init().catch(()=>{}); });
