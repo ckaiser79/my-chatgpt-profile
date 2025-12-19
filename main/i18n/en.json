@@ -25,7 +25,8 @@
   "nav.copyDefaultPrompt.copied": "Copied!",
   "nav.copyDefaultPrompt.failed": "Copy failed",
   "nav.openChatgpt": "Open ChatGPT",
-  "nav.showJsonForm": "Show JSON form",
+  "nav.copyJsonResponse": "Copy JSON Response",
+  "nav.showJsonForm": "Paste complete(!) JSON here",
   "nav.hideJsonForm": "Hide JSON form",
   "header.title": "ChatGPT Usage Type",
   "header.leadPrefix": "A brief summary of how you used ChatGPT in ",
@@ -42,5 +43,7 @@
   "prompts.step4": "Copy the JSON output from ChatGPT's response in this page.",
   "prompts.copyButton": "Copy Prompt",
   "prompts.loading": "Loading prompt...",
-  "prompts.error": "Error loading prompt"
+  "prompts.error": "Error loading prompt",
+
+  "nav.howToUse": "Short description"
 }
