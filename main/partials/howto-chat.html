@@ -1,6 +1,6 @@
 <nav class="howto-nav">
     
-    <span data-i18n="nav.howToUse">Short description</span>
+    <strong data-i18n="nav.howToUse">Short description</strong>
 
     <ul class="list-unstyled d-flex align-items-center flex-wrap mb-0" style="gap: .35rem .75rem;">
       <li id="iphoneCopyFailure">
@@ -37,7 +37,7 @@
     // On iPhone, use a direct link instead of clipboard
     const li = document.getElementById('iphoneCopyFailure') || copyBtn.parentElement;
     const link = document.createElement('a');
-    link.href = 'data/default-prompt.txt';
+    link.href = 'example-prompts.html';
     link.target = '_blank';
     link.rel = 'noreferrer noopener';
     link.className = 'btn btn-link p-0 align-baseline';
