@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/print.css">
-    <script src="js/i18n.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/node-polyglot@2.5.0/build/polyglot.min.js"></script>
 </head>
 
 <body >
@@ -150,17 +150,6 @@ FINETUNING NOTES:
             if (sw) sw.checked = !!isBeta;
         }
 
-        function getUiLang(){ return getCookie('ui_lang') || 'en'; }
-        function applyLangState(lang){
-            const current = lang || getUiLang();
-            document.body.classList.remove('lang-en','lang-de');
-            document.body.classList.add(current === 'de' ? 'lang-de' : 'lang-en');
-            document.querySelectorAll('.lang-flag').forEach(btn => {
-                const isActive = btn.getAttribute('data-lang') === current;
-                btn.classList.toggle('active', isActive);
-            });
-        }
-
         document.addEventListener('DOMContentLoaded', function() {
             const isBeta = getCookie('feature_level') === 'BETA';
             applyBetaState(isBeta);
@@ -172,17 +161,6 @@ FINETUNING NOTES:
                     applyBetaState(checked);
                 });
             }
-
-            // Init language UI and handlers
-            applyLangState();
-            document.querySelectorAll('.lang-flag').forEach(btn => {
-                btn.addEventListener('click', () => {
-                    const lang = btn.getAttribute('data-lang') || 'en';
-                    setCookie('ui_lang', lang, 365);
-                    applyLangState(lang);
-                    try { if (window.I18n && window.I18n.setLang) window.I18n.setLang(lang); } catch(_) {}
-                });
-            });
         });
 
         function copyToClipboard(elementId, button) {

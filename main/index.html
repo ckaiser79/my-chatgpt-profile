@@ -9,6 +9,8 @@
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/print.css">
 
+    <script src="https://cdn.jsdelivr.net/npm/node-polyglot@2.5.0/build/polyglot.min.js"></script>
+
     <!--
     Script loading order (all with defer for non-blocking execution):
     1. wordcloud2.js: Defines window.WordCloud for word cloud rendering.
@@ -17,8 +19,6 @@
     Defer ensures scripts load in parallel but execute in this order after DOM parsing,
     preventing race conditions and "undefined" errors.
     -->
-   
-    <script src="js/i18n.js" defer></script>
     <!-- wordcloud2 is lazy-loaded when Beta is enabled via myApp listener -->
     <script src="js/index.js" defer></script>
     <script src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
@@ -204,20 +204,6 @@
                 if (sw) sw.checked = !!isBeta;
             }
 
-            // Language toggle helpers
-            function getUiLang() {
-                return getCookie('ui_lang') || 'en';
-            }
-            function applyLangState(lang) {
-                const current = lang || getUiLang();
-                document.body.classList.remove('lang-en','lang-de');
-                document.body.classList.add(current === 'de' ? 'lang-de' : 'lang-en');
-                document.querySelectorAll('.lang-flag').forEach(btn => {
-                    const isActive = btn.getAttribute('data-lang') === current;
-                    btn.classList.toggle('active', isActive);
-                });
-            }
-
             document.addEventListener('DOMContentLoaded', function () {
                 const isBeta = getCookie('feature_level') === 'BETA';
                 applyBetaState(isBeta);
@@ -231,18 +217,6 @@
                         try { if (window.myApp && window.myApp.onBetaToggle) window.myApp.onBetaToggle(checked); } catch(_) {}
                     });
                 }
-
-                // Init language UI and handlers
-                applyLangState();
-                document.querySelectorAll('.lang-flag').forEach(btn => {
-                    btn.addEventListener('click', () => {
-                        const lang = btn.getAttribute('data-lang') || 'en';
-                        setCookie('ui_lang', lang, 365);
-                        applyLangState(lang);
-                        try { if (window.myApp && window.myApp.emit) window.myApp.emit('languageChanged', lang); } catch(_) {}
-                        try { if (window.I18n && window.I18n.setLang) window.I18n.setLang(lang); } catch(_) {}
-                    });
-                });
             });
         </script>
 </body>
