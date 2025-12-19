@@ -43,9 +43,9 @@ Analyze and create a comprehensive ChatGPT usage profile for 2025. Based on your
 
 1. An archetype name that describes my usage style (e.g., "Creative Coder", "Researcher", "Content Creator")
 2. A brief summary of how I use AI in my work and projects
-3. My interaction types - the main ways I use ChatGPT (e.g., brainstorming, coding, writing, research) with importance weights from 1-10
+3. My interaction types - the main ways I use ChatGPT about 15 points for a wordcloud (e.g. brainstorming, coding, writing, research) with importance weights from 1-10
 4. My experience level with AI on a scale of 0-10, including a brief reason for the rating
-5. 3-5 actionable tips for improving my AI usage and prompting skills
+5. 2 actionable tips in 3 or 4 groups for improving my AI usage and prompting skills
 
 The output langauge is GERMAN.
 
@@ -58,7 +58,7 @@ Return the response ONLY as valid JSON (no other text) matching this exact struc
     },
     "archetype": {
         "name": "Creative Coder",
-        "summary": "A developer who uses AI for brainstorming ideas, rapid prototyping, and debugging code while maintaining critical thinking about generated outputs."
+        "summary": "You are a Creative Coder who leverages AI to enhance your coding"
     },
     "interactionTypes": [
         {
@@ -68,42 +68,25 @@ Return the response ONLY as valid JSON (no other text) matching this exact struc
         {
             "word": "coding",
             "weight": 9
-        },
-        {
-            "word": "problem-solving",
-            "weight": 9
-        },
-        {
-            "word": "debugging",
-            "weight": 8
-        },
-        {
-            "word": "documentation",
-            "weight": 7
-        },
-        {
-            "word": "learning",
-            "weight": 7
-        },
-        {
-            "word": "optimization",
-            "weight": 6
-        },
-        {
-            "word": "testing",
-            "weight": 5
         }
     ],
     "userLevel": {
         "value": 8,
-        "reason": "Demonstrates consistent use with well-formed prompts, understands AI capabilities and limitations, iterates on outputs effectively, and maintains quality control."
+        "reason": "I have extensive experience using AI for various coding and creative tasks, allowing me to efficiently integrate AI into my workflow."
     },
     "tips": [
-        "Provide context and constraints upfront - the more specific your prompt, the better the output.",
-        "Use follow-up questions to refine outputs rather than starting over.",
-        "Break complex tasks into smaller, manageable prompts for better accuracy.",
-        "Always review and critically evaluate AI-generated code before using it in production.",
-        "Share feedback in prompts - if an output is close but needs tweaking, explain what to adjust."
+        {
+            "category": "Prompting",
+            "text": "Practice crafting clearer, more specific prompts."
+        },
+        {
+            "category": "Model Capabilities",
+            "text": "Stay updated on latest AI model features and improvements."
+        },
+        {
+            "category": "Model Capabilities",
+            "text": "Implement feedback loops to refine AI outputs iteratively."
+        }
     ]
 }
 ```

@@ -6,6 +6,10 @@
         "name": "Creative Coder",
         "summary": "You are a Creative Coder who leverages AI to enhance your coding"
     },
+    "userLevel": {
+        "value": 8,
+        "reason": "I have extensive experience using AI for various coding and creative tasks, allowing me to efficiently integrate AI into my workflow."
+    },
     "interactionTypes": [
         {
             "word": "brainstorming",
@@ -82,7 +86,7 @@
             "text": "Stay updated on latest AI model features and improvements."
         },
         {
-            "category": "Feedback Loops",
+            "category": "Model Capabilities",
             "text": "Implement feedback loops to refine AI outputs iteratively."
         }
     ]

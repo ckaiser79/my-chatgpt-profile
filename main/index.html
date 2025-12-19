@@ -140,17 +140,28 @@
             </div>
         </section>
 
-        <!-- Tips how I can increase my user level -->
         <section id="tips-level-up" class="card mb-5">
             <div class="card-body">
                 <h2 class="card-title">Tips how I can increase my user level</h2>
-                <ol>
-                    <template x-if="data.tips && data.tips.length">
-                        <template x-for="(tip, i) in data.tips" :key="i">
-                            <li><strong x-text="tip.category">Category</strong>: <span x-text="tip.text">Tip text</span></li>
+                <div class="d-flex flex-wrap" style="gap: 1rem;">
+                    <template x-if="groupedTips && groupedTips.length">
+                        <template x-for="(group, i) in groupedTips" :key="i">
+                            <div class="card" style="min-width: 240px; max-width: 320px; flex: 1 1 240px;">
+                                <div class="card-body">
+                                    <h5 class="card-title" x-text="group.category">Category</h5>
+                                    <ul class="mb-0 pl-3">
+                                        <template x-for="(tip, j) in group.items" :key="j">
+                                            <li x-text="tip">Tip text</li>
+                                        </template>
+                                    </ul>
+                                </div>
+                            </div>
                         </template>
                     </template>
-                </ol>
+                    <template x-if="!groupedTips || !groupedTips.length">
+                        <p class="text-muted mb-0">No tips available.</p>
+                    </template>
+                </div>
             </div>
         </section>
     </main>
