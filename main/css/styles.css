@@ -169,10 +169,3 @@ h2.card-title::after {
 .invisible {
   display: none !important;
 }
-
-/* Hide the beta toggle switch globally */
-.custom-control.custom-switch,
-#betaSwitch,
-label[for="betaSwitch"] {
-  display: none !important;
-}
