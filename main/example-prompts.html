@@ -12,12 +12,13 @@
     <script src="js/polyglot-init.js"></script>
 </head>
 
-<body >
+<body>
     <header class="jumbotron jumbotron-fluid text-white bg-primary mb-4">
         <div class="container">
             <h1 data-i18n="prompts.title">Example Prompts</h1>
             <p class="lead">
-                <span data-i18n="prompts.lead">A collection of example prompts for ChatGPT to create your profile.</span>
+                <span data-i18n="prompts.lead">A collection of example prompts for ChatGPT to create your
+                    profile.</span>
             </p>
         </div>
     </header>
@@ -29,8 +30,10 @@
         </div>
         <div class="d-flex align-items-center">
             <a href="index.html" class="text-primary mr-2" data-i18n="nav.backToProfile">Back to Profile</a>
-            <button type="button" class="btn btn-sm btn-light lang-flag mr-1" data-lang="de" aria-label="Deutsch" data-i18n-attr="aria-label=lang.de">🇩🇪</button>
-            <button type="button" class="btn btn-sm btn-light lang-flag" data-lang="en" aria-label="English" data-i18n-attr="aria-label=lang.en">🇬🇧</button>
+            <button type="button" class="btn btn-sm btn-light lang-flag mr-1" data-lang="de" aria-label="Deutsch"
+                data-i18n-attr="aria-label=lang.de">🇩🇪</button>
+            <button type="button" class="btn btn-sm btn-light lang-flag" data-lang="en" aria-label="English"
+                data-i18n-attr="aria-label=lang.en">🇬🇧</button>
         </div>
     </div>
 
@@ -47,19 +50,22 @@
 
 
 
-                <div class="mt-4">
-                    <h3 data-i18n="prompts.howTo">How to use this prompt</h3>
-                    <ol>
-                        <li><strong>Copy the prompt below</strong> using the "Copy Prompt" button.</li>
-                        <li><strong><a href="https://chat.openai.com/" target="_blank" rel="noreferrer">Open ChatGPT</a></strong> and start a new conversation.</li>
-                        <li><strong>Paste the prompt</strong> into the chat.</li>
-                        <li><strong>Copy the JSON output</strong> from ChatGPT's response in <a href="index.html">this page</a>.</li>
-                    </ol>
-                </div>
+            <div class="mt-4">
+                <h3 data-i18n="prompts.howTo">How to use this prompt</h3>
+                <ol>
+                    <li><strong>Copy the prompt below</strong> using the "Copy Prompt" button.</li>
+                    <li><strong><a href="https://chat.openai.com/" target="_blank" rel="noreferrer">Open
+                                ChatGPT</a></strong> and start a new conversation.</li>
+                    <li><strong>Paste the prompt</strong> into the chat.</li>
+                    <li><strong>Copy the JSON output</strong> from ChatGPT's response in <a href="index.html">this
+                            page</a>.</li>
+                </ol>
+            </div>
 
             <div class="card-body">
                 <div class="d-flex justify-content-end mb-2">
-                    <button id="copy-btn" class="btn btn-sm btn-outline-secondary" onclick="copyToClipboard('prompt-1', this)" data-i18n="prompts.copyButton">Copy Prompt</button>
+                    <button id="copy-btn" class="btn btn-sm btn-outline-secondary"
+                        onclick="copyToClipboard('prompt-1', this)" data-i18n="prompts.copyButton">Copy Prompt</button>
                 </div>
                 <pre class="prompt-code mb-2 p-3 bg-light rounded border" id="prompt-1">
 Analyze and create a comprehensive ChatGPT usage profile for 2025. Based on your knowledge of my interactions with you, provide:
@@ -129,7 +135,7 @@ FINETUNING NOTES:
         // Beta feature toggle with cookie persistence
         function setCookie(name, value, days) {
             const d = new Date();
-            d.setTime(d.getTime() + (days*24*60*60*1000));
+            d.setTime(d.getTime() + (days * 24 * 60 * 60 * 1000));
             const expires = "expires=" + d.toUTCString();
             document.cookie = name + "=" + encodeURIComponent(value) + ";" + expires + ";path=/";
         }
@@ -151,12 +157,12 @@ FINETUNING NOTES:
             if (sw) sw.checked = !!isBeta;
         }
 
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             const isBeta = getCookie('feature_level') === 'BETA';
             applyBetaState(isBeta);
             const sw = document.getElementById('betaSwitch');
             if (sw) {
-                sw.addEventListener('change', function(e) {
+                sw.addEventListener('change', function (e) {
                     const checked = !!e.target.checked;
                     setCookie('feature_level', checked ? 'BETA' : 'PROD', 365);
                     applyBetaState(checked);

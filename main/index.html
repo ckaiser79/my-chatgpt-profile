@@ -9,7 +9,9 @@
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/print.css">
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/polyglot.js/0.4.2/polyglot.min.js" integrity="sha512-SXa0RggkqBgtv9e1Wy49C6agde9NAXf7t/Vz7pE9wgOOuNhOyhwn/a0rdHRZalIvLhxMYkG0FRHfsXDUJOVH2A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/polyglot.js/0.4.2/polyglot.min.js"
+        integrity="sha512-SXa0RggkqBgtv9e1Wy49C6agde9NAXf7t/Vz7pE9wgOOuNhOyhwn/a0rdHRZalIvLhxMYkG0FRHfsXDUJOVH2A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="js/polyglot-init.js" defer></script>
 
     <!--
@@ -49,10 +51,13 @@
                     <input type="checkbox" class="custom-control-input" id="betaSwitch">
                     <label class="custom-control-label" for="betaSwitch" data-i18n="nav.showBeta">Show Beta</label>
                 </div>
-                <a href="example-prompts.html" class="align-self-center text-primary mr-2" data-i18n="nav.viewPrompts">View Example Prompts</a>
+                <a href="example-prompts.html" class="align-self-center text-primary mr-2"
+                    data-i18n="nav.viewPrompts">View Example Prompts</a>
                 <div class="d-flex align-items-center">
-                    <button type="button" class="btn btn-sm btn-light lang-flag mr-1" data-lang="de" data-i18n-attr="aria-label=lang.de">🇩🇪</button>
-                    <button type="button" class="btn btn-sm btn-light lang-flag" data-lang="en" data-i18n-attr="aria-label=lang.en">🇬🇧</button>
+                    <button type="button" class="btn btn-sm btn-light lang-flag mr-1" data-lang="de"
+                        data-i18n-attr="aria-label=lang.de">🇩🇪</button>
+                    <button type="button" class="btn btn-sm btn-light lang-flag" data-lang="en"
+                        data-i18n-attr="aria-label=lang.en">🇬🇧</button>
                 </div>
             </div>
         </div>
@@ -112,49 +117,41 @@
 
                 <!-- visual 10-block scale (left = interested, right = guru) -->
                 <div class="user-level-scale my-3">
-                  <div class="d-flex align-items-center user-level-row">
-                    <template x-for="(__, index) in 10" :key="index">
-                      <button
-                        type="button"
-                        class="p-0 border-0 user-level-block"
-                        :aria-pressed="(index+1) <= (data.userLevel?.value ?? 8) ? 'true' : 'false'"
-                        @click="data.userLevel = data.userLevel || {}; data.userLevel.value = index+1"
-                        :title="(index+1) + '/10'"
-                        :style="(() => {
+                    <div class="d-flex align-items-center user-level-row">
+                        <template x-for="(__, index) in 10" :key="index">
+                            <button type="button" class="p-0 border-0 user-level-block"
+                                :aria-pressed="(index+1) <= (data.userLevel?.value ?? 8) ? 'true' : 'false'"
+                                @click="data.userLevel = data.userLevel || {}; data.userLevel.value = index+1"
+                                :title="(index+1) + '/10'" :style="(() => {
                           const i = index + 1;
                           const lightness = Math.round(96 - (i - 1) * 7); // ~96 -> ~31
                           const bg = `hsl(140,60%,${lightness}%)`;
                           return `background:${bg};`;
-                        })()"
-                      ></button>
-                    </template>
-                  </div>
+                        })()"></button>
+                        </template>
+                    </div>
 
-                  <!-- red dot pointer placed over scale based on userLevel.value -->
-                  <div
-                    class="user-level-pointer"
-                    x-cloak
-                    :style="{
+                    <!-- red dot pointer placed over scale based on userLevel.value -->
+                    <div class="user-level-pointer" x-cloak :style="{
                       left: (((data.userLevel.value ?? 1) - 1) / 9 * 100) + '%'
-                    }"
-                    aria-hidden="true"
-                  ></div>
+                    }" aria-hidden="true"></div>
                 </div>
 
-                                <div class="d-flex justify-content-between mt-2 small text-muted scale-labels">
-                                    <span data-i18n="home.scale.beginner">Interested user</span>
-                                    <span class="mx-auto" data-i18n="home.scale.senior">Senior / Experienced</span>
-                                    <span class="text-right" data-i18n="home.scale.guru">Guru</span>
+                <div class="d-flex justify-content-between mt-2 small text-muted scale-labels">
+                    <span data-i18n="home.scale.beginner">Interested user</span>
+                    <span class="mx-auto" data-i18n="home.scale.senior">Senior / Experienced</span>
+                    <span class="text-right" data-i18n="home.scale.guru">Guru</span>
                 </div>
 
                 <p x-text="data.userLevel?.reason ?? 'A 8 is defined by precise prompts, know capabilities and limits of AI, regular punctual usage.'"
-                   class="mt-3">A 8 is defined by precise prompts, know capabilities and limits of ai, regular punktual uasage.</p>
+                    class="mt-3">A 8 is defined by precise prompts, know capabilities and limits of ai, regular punktual
+                    uasage.</p>
             </div>
         </section>
 
         <section id="tips-level-up" class="card mb-5">
             <div class="card-body">
-            <h2 class="card-title" data-i18n="home.tips">Tips how I can increase my user level</h2>
+                <h2 class="card-title" data-i18n="home.tips">Tips how I can increase my user level</h2>
                 <div class="d-flex flex-wrap" style="gap: 1rem;">
                     <template x-if="groupedTips && groupedTips.length">
                         <template x-for="(group, i) in groupedTips" :key="i">
@@ -178,48 +175,48 @@
         </section>
     </main>
 
-        <!-- keep lightweight: no jQuery required; bootstrap JS omitted (only CSS used) -->
-        <script>
-            // Beta feature toggle with cookie persistence
-            function setCookie(name, value, days) {
-                const d = new Date();
-                d.setTime(d.getTime() + (days*24*60*60*1000));
-                const expires = "expires=" + d.toUTCString();
-                document.cookie = name + "=" + encodeURIComponent(value) + ";" + expires + ";path=/";
-            }
+    <!-- keep lightweight: no jQuery required; bootstrap JS omitted (only CSS used) -->
+    <script>
+        // Beta feature toggle with cookie persistence
+        function setCookie(name, value, days) {
+            const d = new Date();
+            d.setTime(d.getTime() + (days * 24 * 60 * 60 * 1000));
+            const expires = "expires=" + d.toUTCString();
+            document.cookie = name + "=" + encodeURIComponent(value) + ";" + expires + ";path=/";
+        }
 
-            function getCookie(name) {
-                const cname = name + "=";
-                const decodedCookie = decodeURIComponent(document.cookie || "");
-                const ca = decodedCookie.split(';');
-                for (let c of ca) {
-                    while (c.charAt(0) === ' ') c = c.substring(1);
-                    if (c.indexOf(cname) === 0) return c.substring(cname.length, c.length);
-                }
-                return "";
+        function getCookie(name) {
+            const cname = name + "=";
+            const decodedCookie = decodeURIComponent(document.cookie || "");
+            const ca = decodedCookie.split(';');
+            for (let c of ca) {
+                while (c.charAt(0) === ' ') c = c.substring(1);
+                if (c.indexOf(cname) === 0) return c.substring(cname.length, c.length);
             }
+            return "";
+        }
 
-            function applyBetaState(isBeta) {
-                document.body.classList.toggle('beta-on', !!isBeta);
-                const sw = document.getElementById('betaSwitch');
-                if (sw) sw.checked = !!isBeta;
+        function applyBetaState(isBeta) {
+            document.body.classList.toggle('beta-on', !!isBeta);
+            const sw = document.getElementById('betaSwitch');
+            if (sw) sw.checked = !!isBeta;
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const isBeta = getCookie('feature_level') === 'BETA';
+            applyBetaState(isBeta);
+            try { if (window.myApp && window.myApp.onBetaToggle && isBeta) window.myApp.onBetaToggle(true); } catch (_) { }
+            const sw = document.getElementById('betaSwitch');
+            if (sw) {
+                sw.addEventListener('change', function (e) {
+                    const checked = !!e.target.checked;
+                    setCookie('feature_level', checked ? 'BETA' : 'PROD', 365);
+                    applyBetaState(checked);
+                    try { if (window.myApp && window.myApp.onBetaToggle) window.myApp.onBetaToggle(checked); } catch (_) { }
+                });
             }
-
-            document.addEventListener('DOMContentLoaded', function () {
-                const isBeta = getCookie('feature_level') === 'BETA';
-                applyBetaState(isBeta);
-                try { if (window.myApp && window.myApp.onBetaToggle && isBeta) window.myApp.onBetaToggle(true); } catch(_) {}
-                const sw = document.getElementById('betaSwitch');
-                if (sw) {
-                    sw.addEventListener('change', function (e) {
-                        const checked = !!e.target.checked;
-                        setCookie('feature_level', checked ? 'BETA' : 'PROD', 365);
-                        applyBetaState(checked);
-                        try { if (window.myApp && window.myApp.onBetaToggle) window.myApp.onBetaToggle(checked); } catch(_) {}
-                    });
-                }
-            });
-        </script>
+        });
+    </script>
 </body>
 
 </html>

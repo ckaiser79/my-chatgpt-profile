@@ -1,101 +1,101 @@
-(function(){
-  const translations = {};
-  let polyglot = new Polyglot();
+(function () {
+    const translations = {};
+    let polyglot = new Polyglot();
 
-  function fetchTranslations(lang) {
-    
-    const locale = lang === 'de' ? 'de' : 'en';
+    function fetchTranslations(lang) {
 
-    if (translations[locale]) return Promise.resolve(translations[locale]);
-    
-    return fetch(`i18n/${locale}.json`)
-      .then(r => {
-        if (!r.ok) throw new Error('Translation load failed');
-        return r.json();
-      })
-      .then(json => {
-        translations[locale] = json;
-        return json;
-      });
-  }
+        const locale = lang === 'de' ? 'de' : 'en';
 
-  function getCookie(name) {
-    const cname = name + '=';
-    const decoded = decodeURIComponent(document.cookie || '');
-    const parts = decoded.split(';');
-    for (let c of parts) {
-      while (c.charAt(0) === ' ') c = c.substring(1);
-      if (c.indexOf(cname) === 0) return c.substring(cname.length);
+        if (translations[locale]) return Promise.resolve(translations[locale]);
+
+        return fetch(`i18n/${locale}.json`)
+            .then(r => {
+                if (!r.ok) throw new Error('Translation load failed');
+                return r.json();
+            })
+            .then(json => {
+                translations[locale] = json;
+                return json;
+            });
     }
-    return '';
-  }
 
-  function setCookie(name, value, days) {
-    const d = new Date();
-    d.setTime(d.getTime() + (days*24*60*60*1000));
-    const expires = 'expires=' + d.toUTCString();
-    document.cookie = name + '=' + encodeURIComponent(value) + ';' + expires + ';path=/';
-  }
-
-  function applyTranslations() {
-    // Handle text content translations
-    document.querySelectorAll('[data-i18n]').forEach(el => {
-      const key = el.getAttribute('data-i18n');
-      if (key) el.textContent = polyglot.t(key);
-    });
-
-    // Handle attribute translations (including textContent)
-    document.querySelectorAll('[data-i18n-attr]').forEach(el => {
-      const map = el.getAttribute('data-i18n-attr');
-      if (!map) return;
-      map.split(',').forEach(pair => {
-        const [attr, key] = pair.split('=');
-        if (attr && key) {
-          const attrName = attr.trim();
-          const translatedValue = polyglot.t(key.trim());
-          if (attrName === 'textContent' || attrName === 'innerText') {
-            el.textContent = translatedValue;
-          } else {
-            el.setAttribute(attrName, translatedValue);
-          }
+    function getCookie(name) {
+        const cname = name + '=';
+        const decoded = decodeURIComponent(document.cookie || '');
+        const parts = decoded.split(';');
+        for (let c of parts) {
+            while (c.charAt(0) === ' ') c = c.substring(1);
+            if (c.indexOf(cname) === 0) return c.substring(cname.length);
         }
-      });
-    });
-  }
+        return '';
+    }
 
-  function setLanguage(lang) {
-    const locale = lang === 'de' ? 'de' : 'en';
-    fetchTranslations(locale).then(phrases => {
-      polyglot.locale(locale);
-      polyglot.replace(phrases);
-      applyTranslations();
-      document.documentElement.setAttribute('lang', locale);
-      document.body.classList.remove('lang-en', 'lang-de');
-      document.body.classList.add('lang-' + locale);
-      document.querySelectorAll('.lang-flag').forEach(btn => {
-        btn.classList.toggle('active', btn.getAttribute('data-lang') === locale);
-      });
-    }).catch(err => console.error('Failed to load translations:', err));
-  }
+    function setCookie(name, value, days) {
+        const d = new Date();
+        d.setTime(d.getTime() + (days * 24 * 60 * 60 * 1000));
+        const expires = 'expires=' + d.toUTCString();
+        document.cookie = name + '=' + encodeURIComponent(value) + ';' + expires + ';path=/';
+    }
 
-  function init() {
-    const savedLang = getCookie('ui_lang') || 'en';
-    setLanguage(savedLang);
+    function applyTranslations() {
+        // Handle text content translations
+        document.querySelectorAll('[data-i18n]').forEach(el => {
+            const key = el.getAttribute('data-i18n');
+            if (key) el.textContent = polyglot.t(key);
+        });
 
-    document.querySelectorAll('.lang-flag').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const lang = btn.getAttribute('data-lang') || 'en';
-        setCookie('ui_lang', lang, 365);
-        setLanguage(lang);
-      });
-    });
-  }
+        // Handle attribute translations (including textContent)
+        document.querySelectorAll('[data-i18n-attr]').forEach(el => {
+            const map = el.getAttribute('data-i18n-attr');
+            if (!map) return;
+            map.split(',').forEach(pair => {
+                const [attr, key] = pair.split('=');
+                if (attr && key) {
+                    const attrName = attr.trim();
+                    const translatedValue = polyglot.t(key.trim());
+                    if (attrName === 'textContent' || attrName === 'innerText') {
+                        el.textContent = translatedValue;
+                    } else {
+                        el.setAttribute(attrName, translatedValue);
+                    }
+                }
+            });
+        });
+    }
 
-  window.PolyglotI18n = { init, setLanguage, t: (key) => polyglot.t(key) };
+    function setLanguage(lang) {
+        const locale = lang === 'de' ? 'de' : 'en';
+        fetchTranslations(locale).then(phrases => {
+            polyglot.locale(locale);
+            polyglot.replace(phrases);
+            applyTranslations();
+            document.documentElement.setAttribute('lang', locale);
+            document.body.classList.remove('lang-en', 'lang-de');
+            document.body.classList.add('lang-' + locale);
+            document.querySelectorAll('.lang-flag').forEach(btn => {
+                btn.classList.toggle('active', btn.getAttribute('data-lang') === locale);
+            });
+        }).catch(err => console.error('Failed to load translations:', err));
+    }
 
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', init);
-  } else {
-    init();
-  }
+    function init() {
+        const savedLang = getCookie('ui_lang') || 'en';
+        setLanguage(savedLang);
+
+        document.querySelectorAll('.lang-flag').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const lang = btn.getAttribute('data-lang') || 'en';
+                setCookie('ui_lang', lang, 365);
+                setLanguage(lang);
+            });
+        });
+    }
+
+    window.PolyglotI18n = { init, setLanguage, t: (key) => polyglot.t(key) };
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+    } else {
+        init();
+    }
 })();
