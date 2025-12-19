@@ -5,10 +5,11 @@
             <button type="button" class="close" aria-label="Close" @click="showJsonForm = false">&times;</button>
         </div>
 
-        <form @submit.prevent="applyJson(); showJsonForm = false" @keydown.enter.prevent="applyJson(); showJsonForm = false" novalidate>
+          <form @submit.prevent="applyJson(); if (!error) showJsonForm = false" @keydown.enter.prevent="applyJson(); if (!error) showJsonForm = false" novalidate
+              x-init="$watch('showJsonForm', v => { if (v) { $nextTick(() => { if ($refs.jsonInput) { $refs.jsonInput.focus(); $refs.jsonInput.select(); } }); } })">
             <div class="form-group">
                 <label for="jsonInput"><span data-i18n="home-json-form.pasteLabel">Paste JSON</span> (<a href="data/sample1.json" target="_blank">sample1.json</a>)</label>
-                <textarea id="jsonInput" x-model="jsonInput" rows="10" class="form-control"
+                <textarea id="jsonInput" x-ref="jsonInput" x-model="jsonInput" rows="10" class="form-control"
                     placeholder='{"usageProfile": {...}}'></textarea>
             </div>
             <div class="mt-2 d-flex flex-wrap" style="gap: .5rem;">
