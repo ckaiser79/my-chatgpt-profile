@@ -2,7 +2,7 @@ window.myApp = {
     data: {},
     jsonInput: '',
     error: '',
-    showJsonForm: true,
+    showJsonForm: false,
     groupedTips: [],
     _events: {},
     _listenersRegistered: false,

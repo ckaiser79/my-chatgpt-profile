@@ -1,0 +1,46 @@
+<nav class="howto-nav">
+    <ul class="list-unstyled d-flex align-items-center flex-wrap mb-0" style="gap: .35rem .75rem;">
+        <li>
+            <button type="button" class="btn btn-sm btn-outline-secondary" id="copyDefaultPromptBtn">Copy default prompt</button>
+        </li>
+        <li class="text-muted">&rarr;</li>
+        <li>
+            <a href="https://chat.openai.com/" target="_blank" rel="noreferrer">Open ChatGPT</a>
+        </li>
+        <li class="text-muted">&rarr;</li>
+        <li class="d-flex align-items-center">
+            <button class="btn btn-sm btn-light mr-2" @click="showJsonForm = !showJsonForm"
+                x-text="showJsonForm ? 'Hide JSON form' : 'Show JSON form'">Show JSON Form</button>
+        </li>
+        <li class="text-muted invisible">
+            <div class="custom-control custom-switch">
+                <input type="checkbox" class="custom-control-input" id="betaSwitch">
+                <label class="custom-control-label" for="betaSwitch" data-i18n="nav.showBeta">Show Beta</label>
+            </div>
+        </li>
+    </ul>
+</nav>
+
+<script>
+  // Register click handler immediately (no DOMContentLoaded needed since partial loads after DOM is ready)
+  const copyBtn = document.getElementById('copyDefaultPromptBtn');
+  if (copyBtn) {
+    copyBtn.addEventListener('click', function () {
+      fetch('data/default-prompt.txt')
+        .then(r => {
+          if (!r.ok) throw new Error('Failed to load prompt');
+          return r.text();
+        })
+        .then(text => navigator.clipboard.writeText(text))
+        .then(() => {
+          copyBtn.textContent = 'Copied!';
+          setTimeout(() => { copyBtn.textContent = 'Copy default prompt'; }, 1800);
+        })
+        .catch(err => {
+          console.error('Copy failed', err);
+          copyBtn.textContent = 'Copy failed';
+          setTimeout(() => { copyBtn.textContent = 'Copy default prompt'; }, 1800);
+        });
+    });
+  }
+</script>
