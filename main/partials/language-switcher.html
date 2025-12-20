@@ -1,6 +1,43 @@
-<div>
-    <button type="button" class="btn btn-sm btn-light lang-flag mr-1" data-lang="de" aria-label="Deutsch"
-        data-i18n-attr="aria-label=lang.de">🇩🇪</button>
-    <button type="button" class="btn btn-sm btn-light lang-flag" data-lang="en" aria-label="English"
-        data-i18n-attr="aria-label=lang.en">🇬🇧</button>
+<div class="language-switcher" 
+     x-data="{ currentLanguage: 'en' }"
+     x-init="currentLanguage = window.getCurrentLanguage(); window.addEventListener('languageChanged', (e) => currentLanguage = e.detail)">
+    <button type="button" 
+            class="btn lang-flag" 
+            data-lang="de" 
+            aria-label="Deutsch"
+            data-i18n-attr="aria-label=lang.de"
+            :class="{ 'active': currentLanguage === 'de' }"
+            @click="window.switchLanguage('de')">🇩🇪</button>
+    <button type="button" 
+            class="btn lang-flag" 
+            data-lang="en" 
+            aria-label="English"
+            data-i18n-attr="aria-label=lang.en"
+            :class="{ 'active': currentLanguage === 'en' }"
+            @click="window.switchLanguage('en')">🇬🇧</button>
 </div>
+
+<script>
+    window.switchLanguage = function(lang) {
+        if (!window.PolyglotI18n) {
+            console.error('PolyglotI18n not available');
+            return;
+        }
+        
+        // Set the language cookie
+        document.cookie = `ui_lang=${lang}; path=/; max-age=${365 * 24 * 60 * 60}`;
+        
+        // Switch language in Polyglot
+        window.PolyglotI18n.setLanguage(lang);
+        
+        // Reapply translations to all elements
+        if (window.PolyglotI18n.apply) {
+            window.PolyglotI18n.apply();
+        }
+        
+        // Dispatch event to update Alpine state
+        window.dispatchEvent(new CustomEvent('languageChanged', { detail: lang }));
+        
+        console.log('Language switched to:', lang);
+    };
+</script>

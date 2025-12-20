@@ -21,10 +21,11 @@
 </head>
 
 <body x-data="{ ...myApp, currentStep: 1 }" x-init="load()">
-    <header x-include="'partials/header.html'"></header>
-
-    <div class="d-flex align-items-center">
-        <div x-include="'partials/language-switcher.html'"></div>
+    <div style="position: relative;">
+        <header x-include="'partials/header.html'"></header>
+        <div class="language-switcher-container">
+            <div x-include="'partials/language-switcher.html'"></div>
+        </div>
     </div>
 
     <!-- Step Progress Indicator -->
