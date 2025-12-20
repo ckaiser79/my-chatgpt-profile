@@ -1,13 +1,6 @@
 <div id="prompt-content" x-init="loadPromptContent()">
-    <div class="d-flex justify-content-end mb-2">
-        <button id="copy-btn" class="btn btn-sm btn-outline-secondary" 
-            onclick="window.copyToClipboard('prompt-text', this)">
-            <span data-i18n="prompts.copyButton" id="copy-btn-text">Copy Prompt</span>
-            <span id="copy-status" style="display:none;"></span>
-        </button>
-    </div>
     <textarea id="prompt-text" readonly
-        style="max-height: 60vw; width: 100%; overflow-y: auto;">Loading...</textarea>
+        style="display:none;">Loading...</textarea>
 </div>
 
 <script>
