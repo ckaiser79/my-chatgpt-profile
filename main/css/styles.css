@@ -230,5 +230,7 @@ h2.card-title::after {
   }
   .modal-card textarea {
     min-height: 200px;
+    max-height: 40vh;
+    overflow-y: auto;
   }
 }

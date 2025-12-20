@@ -1,0 +1,70 @@
+<div id="prompt-content" x-init="loadPromptContent()">
+    <div class="d-flex justify-content-end mb-2">
+        <button id="copy-btn" class="btn btn-sm btn-outline-secondary" 
+            onclick="window.copyToClipboard('prompt-text', this)">
+            <span data-i18n="prompts.copyButton" id="copy-btn-text">Copy Prompt</span>
+            <span id="copy-status" style="display:none;"></span>
+        </button>
+    </div>
+    <textarea id="prompt-text" readonly
+        style="max-height: 60vw; width: 100%; overflow-y: auto;">Loading...</textarea>
+</div>
+
+<script>
+    window.loadPromptContent = async function() {
+        const promptEl = document.getElementById('prompt-text');
+        if (!promptEl) return;
+
+        try {
+            const response = await fetch('data/default-prompt.txt');
+            if (!response.ok) throw new Error('Failed to load prompt');
+            const text = await response.text();
+            promptEl.value = text;
+        } catch (err) {
+            console.error('Failed to load prompt:', err);
+            const fallback = (window.PolyglotI18n && PolyglotI18n.t) 
+                ? PolyglotI18n.t('prompts.error') 
+                : 'Error loading prompt';
+            promptEl.value = fallback;
+        }
+    };
+
+    window.copyToClipboard = function(elementId, button) {
+        const element = document.getElementById(elementId);
+        const text = element.value;
+        const labelSpan = button.querySelector('#copy-btn-text');
+        const statusSpan = button.querySelector('#copy-status');
+
+        navigator.clipboard.writeText(text).then(() => {
+            labelSpan.style.display = 'none';
+            statusSpan.style.display = 'inline';
+            statusSpan.textContent = 'Copied to Clipboard';
+            setTimeout(() => {
+                labelSpan.style.display = 'inline';
+                statusSpan.style.display = 'none';
+            }, 2000);
+        }).catch(err => {
+            console.error('Failed to copy: ', err);
+            element.select?.();
+            try {
+                document.execCommand('copy');
+                labelSpan.style.display = 'none';
+                statusSpan.style.display = 'inline';
+                statusSpan.textContent = 'Copied to Clipboard';
+                setTimeout(() => {
+                    labelSpan.style.display = 'inline';
+                    statusSpan.style.display = 'none';
+                }, 2000);
+            } catch (fallbackErr) {
+                console.error('Fallback copy failed: ', fallbackErr);
+                labelSpan.style.display = 'none';
+                statusSpan.style.display = 'inline';
+                statusSpan.textContent = 'Copy Failed';
+                setTimeout(() => {
+                    labelSpan.style.display = 'inline';
+                    statusSpan.style.display = 'none';
+                }, 2000);
+            }
+        });
+    };
+</script>

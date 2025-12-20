@@ -48,8 +48,8 @@
         <section id="step-copy-prompt" class="mb-4 card" x-show="currentStep === 1" x-cloak>
             <div class="card-body">
                 <h2 class="h5 mb-2">Step 1: Copy Prompt</h2>
-                <p class="text-muted mb-3">Copy the prompt to your clipboard (or open it in a new tab on mobile).</p>
-                <!-- TODO: add prompt text / copy button -->
+
+                <div x-include="'partials/prompt-content.html'"></div>
                 <button type="button" class="btn btn-primary mt-3" @click="currentStep = 2">Next Step →</button>
             </div>
         </section>
