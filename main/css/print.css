@@ -2,4 +2,128 @@
   #custom-json-input {
     display: none;
   }
+
+  /* Hide elements not needed in print */
+  .language-switcher-container,
+  .mobile-floating-footer,
+  .btn-custom,
+  .beta-feature,
+  .step-indicator {
+    display: none !important;
+  }
+
+  /* Improve header for print */
+  .jumbotron.jumbotron-fluid {
+    padding: 1.5rem 0;
+    page-break-after: avoid;
+    background: transparent;
+    border-bottom: 2px solid #f68e13;
+  }
+
+  #usage-profile .display-4 {
+    font-size: 2.2rem;
+    margin-bottom: 0.5rem;
+  }
+
+  #usage-profile .lead {
+    border: none;
+    box-shadow: none;
+    background: transparent;
+    padding: 0.75rem 0;
+    max-width: 100%;
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+
+  /* User level scale print styling */
+  .user-level-scale {
+    margin: 1.5rem 0;
+    page-break-inside: avoid;
+    display: flex;
+    align-items: flex-end;
+  }
+
+  .user-level-row {
+    display: flex;
+    gap: 8px;
+    flex: 1;
+    position: relative;
+    height: 28px;
+    align-items: flex-end;
+  }
+
+  .user-level-block {
+    flex: 1;
+    min-width: 22px;
+    height: 28px;
+    border-radius: 6px;
+    background-color: #28a745 !important;
+    border: 1px solid #207c32;
+    display: inline-block;
+  }
+
+  .user-level-pointer {
+    position: absolute;
+    top: -12px;
+    width: 34px;
+    height: 34px;
+    background: #e53e3e;
+    border-radius: 50%;
+    transform: translate(-50%, 0);
+    border: 2px solid #fff;
+    box-shadow: 0 0 0 1px #e53e3e;
+    z-index: 2;
+  }
+
+  .scale-labels {
+    font-size: 0.8rem;
+    margin-top: 0.5rem;
+    display: flex;
+    justify-content: space-between;
+    color: #666;
+  }
+
+  /* Card improvements for print */
+  .card {
+    page-break-inside: avoid;
+    border: 1px solid #ddd;
+    margin-bottom: 1.5rem;
+  }
+
+  h2.card-title {
+    font-size: 1.4rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid #f68e13;
+  }
+
+  h2.card-title::after {
+    display: none;
+  }
+
+  /* Body and page setup */
+  body {
+    padding-bottom: 0;
+    font-size: 11pt;
+    line-height: 1.5;
+    color: #000;
+  }
+
+  /* Link styling for print */
+  a {
+    color: #000;
+    text-decoration: none;
+  }
+
+  /* Remove shadows and transitions for print */
+  .modal-card,
+  .user-level-pointer,
+  .footer {
+    box-shadow: none !important;
+  }
+
+  /* Footer hide/simplify */
+  .footer {
+    display: none;
+  }
 }
