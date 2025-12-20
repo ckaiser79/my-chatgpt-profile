@@ -1,8 +1,10 @@
 # ChatGPT Usage Profile
 
-A dynamic, interactive web application that visualizes your ChatGPT usage patterns and experience level for a given year.
+A Javascript web application that visualizes your ChatGPT usage patterns and experience level for a given year.
 
 Input JSON data about your interactions, and the app renders an profile with your archetype and personalized tips for improvement.
+
+![Example Rendering](doc/sample-result.png)
 
 ## Features
 
