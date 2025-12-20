@@ -70,7 +70,7 @@
                 <h2 class="h5 mb-2">Step 3: View ChatGPT Data</h2>
                 <p class="text-muted mb-3">Paste the JSON response here to view your profile.</p>
 
-                <button type="button" class="btn btn-link p-0 align-baseline" data-i18n="nav.showJsonForm">Show
+                <button type="button" class="btn btn-link p-0 align-baseline" @click="showJsonForm = true" data-i18n="nav.showJsonForm">Show
                     JSON Form</button>
                 <button type="button" class="btn btn-primary mt-3" @click="currentStep = 4">View Profile →</button>
             </div>
@@ -82,6 +82,9 @@
     </main>
 
     <footer x-include="'partials/footer.html'"></footer>
+
+    <!-- JSON Dialog Modal -->
+    <div x-include="'partials/show-json-dialog.html'"></div>
 
     <div class="mobile-floating-footer">
         <button type="button" class="btn btn-outline-secondary btn-sm" @click="if(currentStep > 1) currentStep--" :disabled="currentStep === 1">← Back</button>
