@@ -13,9 +13,9 @@ SECTION 1 – Archetype
 
 Erfinde einen prägnanten Archetypen-Namen und eine kurze Beschreibung:
 
-- Der Name darf humorvoll, augenzwinkernd, überzeichnet bis hin zu albernd sein (z. B. Wortspiele, Insider-Humor, ironische Titel)
-- Die Beschreibung erklärt ebenfalls mit Augenzwinkern, wie der Name zustande kommt. Im weiteren Verlauf ist sie fachlich korrekt, wie ich ChatGPT nutze
-- Humor entsteht durch Sprache, nicht durch Übertreibung oder Unsachlichkeit
+- Der Name muss selbstironisch und überzeichnet sein. Kein Sexismus, kein Fäkalhumor, kein Rassismus!
+- Die Beschreibung erklärt ebenfalls mit Augenzwinkern, wie der Name zustande kommt. Im weiteren Verlauf ist sie fachlich korrekt, wie ChatGPT genutzt wird. Erkläre in der Beschreiung nicht!, dass der Name selbstirnoisch oder überzeichnet ist.
+- Humor entsteht durch Sprache, und pointierte Übertreibung, jedoch nicht falsche Aussagen.
 - Fokus auf meine Rollen, aus denen sich der Name ergibt
 
 ––––––––––––––––
@@ -65,10 +65,6 @@ OUTPUT FORMAT (EXAKT EINHALTEN)
     "name": "...",
     "summary": "..."
   },
-  "interactionTypes": [
-    { "word": "...", "weight": 1-10 }
-    // ca. 12–15 Einträge, geeignet für eine Wordcloud
-  ],
   "userLevel": {
     "value": 0-10,
     "reason": "..."

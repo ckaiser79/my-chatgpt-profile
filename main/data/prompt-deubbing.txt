@@ -1,0 +1,12 @@
+Gib 10 Beispiele für Section 1 aus. Formatiere sie als Tabelle zur manuellen Ansicht, nicht als JSON für eine QS: 
+
+- Spalte A: Rolle, die bei mir siehst und für die Einschätzung zugrunde legst
+- Spalte B: Archetype.Name
+- Spalte C: Archetype.Suammary
+
+Am Schluss 3 Beispiele für mein gesamtes Verhalten mit ChatGPT:
+
+- Spalte A: Gesamtes Verhalten mit mir im aktuellen Jahr
+- Spalte B: Archetype.Name
+- Spalte C: Archetype.Suammary
+
