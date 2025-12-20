@@ -89,6 +89,11 @@ body {
     z-index: 999;
 }
 
+/* Prevent header title from overlapping with language flags */
+#title h1 {
+    padding-right: 150px;
+}
+
 /* Language Switcher */
 .language-switcher {
     display: flex;
