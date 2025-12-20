@@ -71,11 +71,16 @@
                 <p><span>Paste the JSON response here to view your profile.</span>
                 </p>
                 <div class="d-flex justify-content-between mt-3">
-                    <button type="button" class="btn btn-primary" @click="showJsonForm = true"
+                    <button type="button" class="btn" @click="showJsonForm = true"
+                    :class="{ 'btn-primary': !(data && data.archetype), 'btn-secondary': (data && data.archetype) }"
+                        
                         data-i18n="nav.showJsonForm">Show
                         JSON Form</button>
                     
-                    <button type="button" class="btn btn-secondary" @click="currentStep = 4">View Profile →</button>
+                    <button type="button" class="btn"
+                        :class="{ 'btn-primary': (data && data.archetype), 'btn-secondary': !(data && data.archetype) }"
+                        :disabled="!(data && data.archetype)"
+                        @click="currentStep = 4">View Profile →</button>
                 </div>
             </div>
         </section>
