@@ -57,14 +57,13 @@
             </div>
         </section>
 
-        <section id="profile-result" class="mb-4">
-            <!-- Profile results will be displayed here after JSON is parsed -->
+        <section id="profile-result" class="mb-4 invisible>
+            <div x-include="'partials/profile-sections.html'"></div>
         </section>
     </main>
 
     <footer x-include="'partials/footer.html'"></footer>
 
-    <!-- Floating bottom nav for quick access to step 1 -->
     <div class="mobile-floating-footer">
         <a href="#step-copy-prompt" class="btn btn-primary btn-block">Back to Step 1: Copy Prompt</a>
     </div>

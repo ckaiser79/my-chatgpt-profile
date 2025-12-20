@@ -1,0 +1,87 @@
+<div id="chatgpt-json-result">
+    <!-- My personal AI Usage Profile -->
+    <section id="usage-profile" class="card mb-3">
+        <div class="card-body text-center">
+            <h2 class="card-title mb-1">
+                <span class="display-4" x-text="data.archetype.name">
+                    Archetype Headline
+                </span>
+            </h2>
+        </div>
+        <div class="card-body">
+            <p class="lead text-muted mb-2" x-text="data.archetype.summary">
+                Personal description of the archetype goes here.
+            </p>
+        </div>
+    </section>
+
+    <section id="interaction-types" class="card mb-3 beta-feature">
+        <div class="card-body">
+            <h2 class="card-title" data-i18n="home.usedFor">You used the AI for...</h2>
+            <div id="wordcloud" style="width: 100%; height: 400px; border: 1px solid #ccc;"></div>
+        </div>
+    </section>
+
+    <section id="user-level" class="card mb-3">
+        <div class="card-body">
+            <h2 class="card-title text-center" data-i18n="home.experience">Your experience level</h2>
+
+            <!-- visual 10-block scale (left = interested, right = guru) -->
+            <div class="user-level-scale my-3">
+                <div class="d-flex align-items-center user-level-row">
+                    <template x-for="(__, index) in 10" :key="index">
+                        <button type="button" class="p-0 border-0 user-level-block"
+                            :aria-pressed="(index+1) <= (data.userLevel?.value ?? 8) ? 'true' : 'false'"
+                            @click="data.userLevel = data.userLevel || {}; data.userLevel.value = index+1"
+                            :title="(index+1) + '/10'" :style="(() => {
+                      const i = index + 1;
+                      const lightness = Math.round(96 - (i - 1) * 7); // ~96 -> ~31
+                      const bg = `hsl(140,60%,${lightness}%)`;
+                      return `background:${bg};`;
+                    })()"></button>
+                    </template>
+                </div>
+
+                <!-- red dot pointer placed over scale based on userLevel.value -->
+                <div class="user-level-pointer" x-cloak :style="{
+                  left: (((data.userLevel.value ?? 1) - 1) / 9 * 100) + '%'
+                }" aria-hidden="true"></div>
+            </div>
+
+            <div class="d-flex justify-content-between mt-2 small text-muted scale-labels">
+                <span data-i18n="home.scale.beginner">Interested user</span>
+                <span class="mx-auto" data-i18n="home.scale.senior">Senior / Experienced</span>
+                <span class="text-right" data-i18n="home.scale.guru">Guru</span>
+            </div>
+
+            <p x-text="data.userLevel?.reason ?? PolyglotI18n.t('home.userLevel.defaultReason')" class="mt-3">An
+                8 is defined by precise prompts, knowing AI's capabilities and limits, and regular punctual
+                usage.</p>
+        </div>
+    </section>
+
+    <section id="tips-level-up" class="card mb-5">
+        <div class="card-body">
+            <h2 class="card-title" data-i18n="home.tips">Tips how I can increase my user level</h2>
+            <div class="d-flex flex-wrap" style="gap: 1rem;">
+                <template x-if="groupedTips && groupedTips.length">
+                    <template x-for="(group, i) in groupedTips" :key="i">
+                        <div class="card" style="min-width: 240px; max-width: 320px; flex: 1 1 240px;">
+                            <div class="card-body">
+                                <h5 class="card-title" x-text="group.category">Category</h5>
+                                <ul class="mb-0 pl-3">
+                                    <template x-for="(tip, j) in group.items" :key="j">
+                                        <li x-text="tip">Tip text</li>
+                                    </template>
+                                </ul>
+                            </div>
+                        </div>
+                    </template>
+                </template>
+                <template x-if="!groupedTips || !groupedTips.length">
+                    <p class="text-muted mb-0" data-i18n="home.noTips">No tips available.</p>
+                </template>
+            </div>
+        </div>
+    </section>
+</div>
