@@ -8,7 +8,8 @@
   .mobile-floating-footer,
   .btn-custom,
   .beta-feature,
-  .step-indicator {
+  .step-indicator,
+  #tips-level-up {
     display: none !important;
   }
 
