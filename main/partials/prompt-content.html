@@ -11,6 +11,33 @@
 </div>
 
 <script>
+    window.getCurrentLanguage = function() {
+        let currentLang = 'en';
+        
+        // Try to get language from cookie
+        const cookies = document.cookie.split(';').map(c => c.trim());
+        const langCookie = cookies.find(c => c.startsWith('ui_lang='));
+        if (langCookie) {
+            currentLang = langCookie.split('=')[1];
+        } else {
+            // Fall back to browser language detection
+            const browserLangs = navigator.languages || [navigator.language];
+            for (let lang of browserLangs) {
+                const lc = String(lang).toLowerCase();
+                if (lc.startsWith('de')) {
+                    currentLang = 'de';
+                    break;
+                }
+                if (lc.startsWith('en')) {
+                    currentLang = 'en';
+                    break;
+                }
+            }
+        }
+        
+        return currentLang;
+    };
+
     window.loadPromptContent = async function() {
         const promptEl = document.getElementById('prompt-text');
         if (!promptEl) return;
@@ -18,7 +45,13 @@
         try {
             const response = await fetch('data/default-prompt.txt');
             if (!response.ok) throw new Error('Failed to load prompt');
-            const text = await response.text();
+            let text = await response.text();
+            
+            // Replace {{LANGUAGE}} placeholder with current language
+            const currentLang = window.getCurrentLanguage();
+            console.log('Prompt language set to:', currentLang);
+            text = text.replace(/{{LANGUAGE}}/g, currentLang);
+            
             promptEl.value = text;
         } catch (err) {
             console.error('Failed to load prompt:', err);
