@@ -29,12 +29,11 @@
     </div>
 
     <!-- Step Progress Indicator -->
-    <div class="container py-3 invisible">
+    <div class="container py-3">
         <div class="step-indicator d-flex justify-content-between align-items-center">
             <template x-for="step in 4" :key="step">
-                <div class="step-item" 
-                     :class="{ 'active': currentStep === step, 'completed': currentStep > step }"
-                     @click="currentStep = step">
+                <div class="step-item" :class="{ 'active': currentStep === step, 'completed': currentStep > step }"
+                    @click="currentStep = step">
                     <div class="step-circle">
                         <span x-text="step"></span>
                     </div>
@@ -69,11 +68,15 @@
         <section id="step-view-data" class="mb-4 card" x-show="currentStep === 3" x-cloak>
             <div class="card-body">
                 <h2 class="h5 mb-2">Step 3: View ChatGPT Data</h2>
-                <p class="text-muted mb-3">Paste the JSON response here to view your profile.</p>
-
-                <button type="button" class="btn btn-link p-0 align-baseline" @click="showJsonForm = true" data-i18n="nav.showJsonForm">Show
-                    JSON Form</button>
-                <button type="button" class="btn btn-primary mt-3" @click="currentStep = 4">View Profile →</button>
+                <p><span>Paste the JSON response here to view your profile.</span>
+                </p>
+                <div class="d-flex justify-content-between mt-3">
+                    <button type="button" class="btn btn-primary" @click="showJsonForm = true"
+                        data-i18n="nav.showJsonForm">Show
+                        JSON Form</button>
+                    
+                    <button type="button" class="btn btn-secondary" @click="currentStep = 4">View Profile →</button>
+                </div>
             </div>
         </section>
 
@@ -88,9 +91,11 @@
     <div x-include="'partials/show-json-dialog.html'"></div>
 
     <div class="mobile-floating-footer">
-        <button type="button" class="btn btn-outline-secondary btn-sm" @click="if(currentStep > 1) currentStep--" :disabled="currentStep === 1">← Back</button>
+        <button type="button" class="btn btn-outline-secondary btn-sm" @click="if(currentStep > 1) currentStep--"
+            :disabled="currentStep === 1">← Back</button>
         <span class="mx-2 text-muted">Step <span x-text="currentStep"></span> of 4</span>
-        <button type="button" class="btn btn-outline-secondary btn-sm" @click="if(currentStep < 4) currentStep++" :disabled="currentStep === 4">Next →</button>
+        <button type="button" class="btn btn-outline-secondary btn-sm" @click="if(currentStep < 4) currentStep++"
+            :disabled="currentStep === 4">Next →</button>
     </div>
 </body>
 

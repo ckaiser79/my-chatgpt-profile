@@ -7,10 +7,7 @@ window.myApp = {
     _events: {},
     _listenersRegistered: false,
     load(){
-      fetch('data/sample1.json')
-        .then(r=>r.json())
-        .then(d=>{ this.data = d; this.jsonInput = ''; this.groupTips(); this.registerDefaultListeners(); })
-        .catch(e=>console.warn('load failed',e))
+      
     },
     loadSample(){
       fetch('data/sample1.json')
