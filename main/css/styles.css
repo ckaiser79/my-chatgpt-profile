@@ -123,11 +123,10 @@ h1 {
 @media (max-width: 576px) {
   .jumbotron.jumbotron-fluid {
     padding: 1.25rem 1rem;
-  }
-  .jumbotron .display-4 {
-    font-size: 1.85rem;
-    line-height: 1.2;
-  }
+    .jumbotron .display-4 {
+      font-size: 1.85rem;
+      line-height: 1.2;
+    }
   .jumbotron .lead {
     font-size: 1rem;
     margin-bottom: 0;
@@ -139,6 +138,7 @@ h1 {
   position: absolute;
   left: 12px;
   top: -6px;
+}
   font-size: 64px;
   line-height: 1;
   color: rgba(0,0,0,0.08);
@@ -230,7 +230,47 @@ h2.card-title::after {
   }
   .modal-card textarea {
     min-height: 200px;
-    max-height: 40vh;
-    overflow-y: auto;
   }
 }
+
+.language-switcher .lang-flag {
+    min-width: 60px;
+    height: 60px;
+    padding: 0.5rem;
+    font-size: 2.2rem;
+    border: 3px solid transparent;
+    border-radius: 12px;
+    background-color: #f8f9fa;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0.6;
+}
+
+.language-switcher .lang-flag.active {
+    opacity: 1;
+    background-color: #e9ecef;
+    border-color: #f68e13;
+    font-weight: bold;
+}
+
+.language-switcher .lang-flag:hover {
+    background-color: #e9ecef;
+    border-color: #dee2e6;
+    opacity: 1;
+}
+
+.language-switcher .lang-flag:active {
+    transform: scale(0.95);
+    background-color: #dee2e6;
+}
+
+@media (max-width: 576px) {
+    .language-switcher .lang-flag {
+        min-width: 60px;
+        height: 60px;
+        font-size: 2.2rem;
+    }
+}
+

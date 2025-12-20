@@ -100,44 +100,4 @@ body {
     gap: 0.75rem;
 }
 
-.language-switcher .lang-flag {
-    min-width: 60px;
-    height: 60px;
-    padding: 0.5rem;
-    font-size: 2.2rem;
-    border: 3px solid transparent;
-    border-radius: 12px;
-    background-color: #f8f9fa;
-    transition: all 0.2s ease;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    opacity: 0.6;
-}
-
-.language-switcher .lang-flag.active {
-    opacity: 1;
-    background-color: #e9ecef;
-    border-color: #f68e13;
-    font-weight: bold;
-}
-
-.language-switcher .lang-flag:hover {
-    background-color: #e9ecef;
-    border-color: #dee2e6;
-    opacity: 1;
-}
-
-.language-switcher .lang-flag:active {
-    transform: scale(0.95);
-    background-color: #dee2e6;
-}
-
-@media (max-width: 576px) {
-    .language-switcher .lang-flag {
-        min-width: 60px;
-        height: 60px;
-        font-size: 2.2rem;
-    }
-}
 
