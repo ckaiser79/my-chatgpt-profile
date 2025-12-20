@@ -26,19 +26,17 @@
         <div class="card-body">
             <h2 class="card-title text-center" data-i18n="home.experience">Your experience level</h2>
 
-            <!-- visual 10-block scale (left = interested, right = guru) -->
+            <!-- visual 10-block scale using divs instead of buttons -->
             <div class="user-level-scale my-3">
                 <div class="d-flex align-items-center user-level-row">
                     <template x-for="(__, index) in 10" :key="index">
-                        <button type="button" class="p-0 border-0 user-level-block"
-                            :aria-pressed="(index+1) <= (data.userLevel?.value ?? 8) ? 'true' : 'false'"
-                            @click="data.userLevel = data.userLevel || {}; data.userLevel.value = index+1"
-                            :title="(index+1) + '/10'" :style="(() => {
+                        <div class="user-level-block"
+                            :style="(() => {
                       const i = index + 1;
-                      const lightness = Math.round(96 - (i - 1) * 7); // ~96 -> ~31
+                      const lightness = Math.round(96 - (i - 1) * 7);
                       const bg = `hsl(140,60%,${lightness}%)`;
                       return `background:${bg};`;
-                    })()"></button>
+                    })()"></div>
                     </template>
                 </div>
 
