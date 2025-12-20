@@ -8,8 +8,16 @@
   --bs-btn-border-color: #f68e13 !important;
 }
 
-.btn-primary:hover {
-  --bs-btn-bg: #d67d0f !important;
+.btn:hover {
+  background-color: #f4b86f;
+  border-color: #f4b86f;
+}
+
+.btn-primary:focus,
+.btn-primary:active,
+.btn-primary:visited {
+  background-color: #d67d0f;
+  border-color: #d67d0f;
 }
 
 a {
