@@ -25,6 +25,7 @@
   "nav.copyDefaultPrompt": "Prompt kopieren",
   "nav.copyDefaultPrompt.copied": "Kopiert!",
   "nav.copyDefaultPrompt.failed": "Kopieren fehlgeschlagen",
+  "nav.linkTo": "Link zu",
   "nav.openChatgpt": "ChatGPT öffnen",
   "nav.openChatgptButton": "ChatGPT öffnen",
   "nav.nextStep": "Nächster Schritt →",
