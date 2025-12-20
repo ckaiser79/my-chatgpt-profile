@@ -68,7 +68,7 @@
 
   .user-level-pointer {
     position: absolute;
-    top: 25%;
+    top: 32px;
     width: 34px;
     height: 34px;
     background: #e53e3e !important;
@@ -130,8 +130,4 @@
     box-shadow: none !important;
   }
 
-  /* Footer hide/simplify */
-  .footer {
-    display: none;
-  }
 }

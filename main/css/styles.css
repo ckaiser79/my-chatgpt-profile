@@ -71,7 +71,7 @@ h1 {
 /* made slightly larger than the green boxes and vertically centered */
 .user-level-pointer {
   position: absolute;
-  top: 25%;
+  top: 15px;
   width: 34px;    /* slightly bigger than block height (28px) */
   height: 34px;   /* slightly bigger than block height (28px) */
   background: #e53e3e; /* red */
