@@ -1,57 +1,84 @@
-Analyze and create a comprehensive ChatGPT usage profile for 2025. Based on your knowledge of my interactions with you, provide:
+Analysiere meine bisherige Nutzung von ChatGPT und erstelle ein ChatGPT Usage Profile für 2025.
 
-1. An archetype name that describes my usage style (e.g., "Creative Coder", "Researcher", "Content Creator")
-2. A brief summary of how I use AI in my work and projects
-3. My interaction types - the main ways I use ChatGPT about 15 points for a wordcloud (e.g. brainstorming, coding, writing, research) with importance weights from 1-10
-4. My experience level with AI on a scale of 0-10, including a brief reason for the rating
-5. 2 actionable tips in 3 or 4 groups for improving my AI usage and prompting skills
+WICHTIG:
+- Zielgruppe: professionelle Nutzer (z. B. Software Engineer, Produktmenschen, Wissensarbeiter)
+- Tonalität: kompetent, selbstironisch, leicht humorvoll – nicht albern
+- Ergebnis wird visuell aufbereitet (Infografik / Card UI)
 
-The output langauge is defined in "header.outputLangeuage".
+Gib das Ergebnis AUSSCHLIESSLICH als valides JSON zurück (kein zusätzlicher Text).
 
-Return the response ONLY as valid JSON (no other text) matching this exact structure:
+––––––––––––––––
+SECTION 1 – Archetype
+––––––––––––––––
 
-```json
+Erfinde einen prägnanten Archetypen-Namen und eine kurze Beschreibung:
+
+- Der Name darf humorvoll, augenzwinkernd, überzeichnet bis hin zu albernd sein (z. B. Wortspiele, Insider-Humor, ironische Titel)
+- Die Beschreibung erklärt ebenfalls mit Augenzwinkern, wie der Name zustande kommt. Im weiteren Verlauf ist sie fachlich korrekt, wie ich ChatGPT nutze
+- Humor entsteht durch Sprache, nicht durch Übertreibung oder Unsachlichkeit
+- Fokus auf meine Rollen, aus denen sich der Name ergibt
+
+––––––––––––––––
+SECTION 2 – Erfahrungslevel
+––––––––––––––––
+
+Bewerte mein AI-Erfahrungslevel auf einer Skala von 0–10:
+
+Skalendefinition:
+- 0 = hat ChatGPT noch nie sinnvoll benutzt oder ist nicht angemeldet
+- 3–4 = gelegentlicher Nutzer
+- 6–7 = regelmäßiger, versierter Nutzer
+- 8–9 = Power User (strategisch, reflektiert, produktiv)
+- 10 = könnte direkt bei OpenAI als Berater einsteigen
+
+Regeln:
+- Gib einen ganzzahligen Wert zurück
+- Die Begründung ist sachlich, nüchtern und nachvollziehbar.
+- Erkläre anhand von Nutzungstiefe, Regelmäßigkeit, Reflexionsgrad und Professionalität,
+  warum du genau zu diesem Wert kommst
+- Motivierend aber kein Marketing-Sprech, keine Überhöhung
+
+––––––––––––––––
+SECTION 3 – Praktische Verbesserungstipps
+––––––––––––––––
+Gib mir konkrete, umsetzbare Tipps, wie ich mein Nutzerlevel weiter steigern kann:
+
+- Erstelle 3–4 frei erfundene Kategorien (z. B. Denkweise, Prompt-Design, Workflow, Qualitätskontrolle, Meta-Nutzung)
+- Pro Kategorie genau 2 Tipps
+- Jeder Tipp ist:
+  - konkret
+  - praxisnah
+  - sofort anwendbar
+- Keine generischen Aussagen wie „sei präziser“
+- Schreibe so, dass ein erfahrener Nutzer noch echten Mehrwert hat
+
+––––––––––––––––
+OUTPUT FORMAT (EXAKT EINHALTEN)
+––––––––––––––––
+
 {
-    "header": {
-        "year": 2025,
-        "outputLangeuage": "{{LANGUAGE}}"
-    },
-    "archetype": {
-        "name": "Creative Coder",
-        "summary": "You are a Creative Coder who leverages AI to enhance your coding"
-    },
-    "interactionTypes": [
-        {
-            "word": "brainstorming",
-            "weight": 10
-        },
-        {
-            "word": "coding",
-            "weight": 9
-        }
-    ],
-    "userLevel": {
-        "value": 8,
-        "reason": "I have extensive experience using AI for various coding and creative tasks, allowing me to efficiently integrate AI into my workflow."
-    },
-    "tips": [
-        {
-            "category": "Prompting",
-            "text": "Practice crafting clearer, more specific prompts."
-        },
-        {
-            "category": "Model Capabilities",
-            "text": "Stay updated on latest AI model features and improvements."
-        },
-        {
-            "category": "Model Capabilities",
-            "text": "Implement feedback loops to refine AI outputs iteratively."
-        }
-    ]
+  "header": {
+    "year": 2025,
+    "outputLangeuage": "de"
+  },
+  "archetype": {
+    "name": "...",
+    "summary": "..."
+  },
+  "userLevel": {
+    "value": 0-10,
+    "reason": "..."
+  },
+  "tips": [
+    {
+      "category": "...",
+      "text": "..."
+    }
+  ]
 }
 
-FINETUNING NOTES:
-// ignore this prompt text in the final output
-// add roles, which should be taken especially into accout
-// e.g. my as a software developer, designer, content creator etc. 
-```
+Optional:
+
+- Vermeide Floskeln
+- Schreibe so, als würdest du einen sehr guten Kollegen einschätzen
+- Bevorzuge Klarheit vor Nettigkeit
