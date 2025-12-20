@@ -91,7 +91,7 @@ prodction_ssh_key = /path/to/ssh/key
 
 ## License
 
-This project is licensed under the GPLv3 License. See the LICENSE file for details.
+This project is licensed under the GPLv3 License. See the [LICENSE](LICENSE) file for details.
 
 
 ## Hints
