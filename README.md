@@ -9,12 +9,9 @@ Input JSON data about your interactions, and the app renders an profile with you
 ## Features
 
 - **Archetype-based Profile**: Display your AI usage style with an elegant "personal dedication" layout.
-- **Word Cloud Visualization**: Interactive word cloud showing your main interaction types with weighted importance.
 - **Experience Level Scale**: 10-block visual scale to rate your proficiency with AI (0–10).
 - **Categorized Tips**: Tips grouped by category (Prompting, API usage, Model Capabilities, etc.) for easy browsing.
 - **JSON Input Form**: Paste or load custom JSON data directly in the app to see your profile update in real-time.
-- **Example Prompts**: Separate page with ChatGPT prompts you can copy and use to generate your own profile JSON.
-- **Responsive Design**: Built with Bootstrap for mobile-friendly viewing.
 
 ## JSON Data Format
 
@@ -30,11 +27,6 @@ The app expects data in this structure:
         "name": "Creative Coder",
         "summary": "A developer who uses AI for brainstorming, rapid prototyping, and debugging..."
     },
-    "interactionTypes": [
-        {"word": "brainstorming", "weight": 10},
-        {"word": "coding", "weight": 9},
-        ...
-    ],
     "userLevel": {
         "value": 8,
         "reason": "Demonstrates consistent use with well-formed prompts..."
@@ -89,13 +81,13 @@ prodction_ssh_key = /path/to/ssh/key
 
 ## Usage
 
-1. Open `main/index.html` in your browser.
-1. Goto `example prompts`
-2. Copy the example prompt and paste it into ChatGPT.
-3. Ask ChatGPT to describe your usage (optionally provide context about how you use AI).
+1. Open `index.html` in your browser.
+1. Copy the prompt and paste it into ChatGPT.
+3. Ask ChatGPT to describe your usage. Maybe it is nice for you, to see you in a specific role, just add this to the prompt.
 4. ChatGPT returns JSON matching the required structure.
 5. Copy the JSON output.
-6. Return to `index.html`, paste your JSON, and click **"Apply JSON"**.
+6. Return to `index.html`, paste your JSON, and click **Apply**.
+7. Your result is on Step 4.
 
 ## License
 
