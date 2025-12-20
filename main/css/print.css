@@ -58,9 +58,12 @@
     min-width: 22px;
     height: 28px;
     border-radius: 6px;
-    background-color: #28a745 !important;
     border: 1px solid #207c32;
     display: inline-block;
+    background-color: hsl(140,60%,96%) !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+    color-adjust: exact;
   }
 
   .user-level-pointer {
@@ -68,12 +71,17 @@
     top: -12px;
     width: 34px;
     height: 34px;
-    background: #e53e3e;
+    background: #e53e3e !important;
     border-radius: 50%;
-    transform: translate(-50%, 0);
+    transform: translate(-50%, 0) !important;
     border: 2px solid #fff;
-    box-shadow: 0 0 0 1px #e53e3e;
+    box-shadow: 0 0 0 1px #e53e3e !important;
     z-index: 2;
+    display: block !important;
+    left: 50% !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+    color-adjust: exact;
   }
 
   .scale-labels {
