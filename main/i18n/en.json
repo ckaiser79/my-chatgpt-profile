@@ -26,6 +26,8 @@
   "nav.copyDefaultPrompt.copied": "Copied!",
   "nav.copyDefaultPrompt.failed": "Copy failed, open content in new tab",
   "nav.openChatgpt": "Open ChatGPT",
+  "nav.openChatgptButton": "Open ChatGPT",
+  "nav.nextStep": "Next Step →",
   "nav.copyJsonResponse": "Copy JSON Response",
   "nav.showJsonForm": "Paste complete(!) JSON here",
   "nav.hideJsonForm": "Hide JSON form",

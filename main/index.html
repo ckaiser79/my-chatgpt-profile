@@ -52,31 +52,29 @@
     <main class="container py-4">
 
         <section id="step-copy-prompt" class="mb-4 card" x-show="currentStep === 1" x-cloak>
-            <div class="card-body">
+            <div class="card-body d-flex flex-column">
                 <h2 class="h5 mb-2">Step 1: Copy Prompt</h2>
 
                 <div x-include="'partials/prompt-content.html'"></div>
-                <button type="button" class="btn btn-primary mt-3" @click="currentStep = 2">Next Step →</button>
+                <button type="button" class="btn btn-primary mt-3 align-self-end" @click="currentStep = 2" data-i18n="nav.nextStep">Next Step →</button>
             </div>
         </section>
 
         <section id="step-chatgpt" class="mb-4 card" x-show="currentStep === 2" x-cloak>
-            <div class="card-body">
-                <h2 class="h5 mb-2"><a href="https://chat.openai.com/" target="chatgpt" rel="noreferrer">Step 2: Open
-                        ChatGPT</a></h2>
-                <p class="text-muted mb-3"><a href="https://chat.openai.com/" target="chatgpt" rel="noreferrer">Opens
-                        ChatGPT in a new tab</a>, paste the prompt, and run it.</p>
-                <p>Wait for the complete response, then copy the raw json information.</p>
-                <button type="button" class="btn btn-primary mt-3" @click="currentStep = 3">Next Step →</button>
+            <div class="card-body d-flex flex-column">
+                <h2 class="h5 mb-2">Step 2: Open ChatGPT</h2>
+                <p class="text-muted mb-3">Paste the prompt and run it in ChatGPT. Wait for the <strong>complete response</strong>, then copy the raw json information.</p>
+                <a href="https://chat.openai.com/" target="chatgpt" rel="noreferrer" class="btn btn-primary mt-3" data-i18n="nav.openChatgptButton">Open ChatGPT →</a>
+                <button type="button" class="btn btn-primary mt-3 align-self-end" @click="currentStep = 3" data-i18n="nav.nextStep">Next Step →</button>
             </div>
         </section>
 
         <section id="step-view-data" class="mb-4 card" x-show="currentStep === 3" x-cloak>
-            <div class="card-body">
+            <div class="card-body d-flex flex-column">
                 <h2 class="h5 mb-2">Step 3: View ChatGPT Data</h2>
                 <p><span>Paste the JSON response here to view your profile.</span>
                 </p>
-                <div class="d-flex justify-content-between mt-3">
+                <div class="d-flex justify-content-between mt-3 align-self-end">
                     <button type="button" class="btn" @click="showJsonForm = true"
                     :class="{ 'btn-primary': !(data && data.archetype), 'btn-secondary': (data && data.archetype) }"
                         
@@ -86,7 +84,7 @@
                     <button type="button" class="btn"
                         :class="{ 'btn-primary': (data && data.archetype), 'btn-secondary': !(data && data.archetype) }"
                         :disabled="!(data && data.archetype)"
-                        @click="currentStep = 4">View Profile →</button>
+                        @click="currentStep = 4" data-i18n="nav.nextStep">Next Step →</button>
                 </div>
             </div>
         </section>

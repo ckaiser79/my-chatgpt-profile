@@ -1,0 +1,87 @@
+Analysiere meine bisherige Nutzung von ChatGPT und erstelle ein ChatGPT Usage Profile für 2025.
+
+WICHTIG:
+- Zielgruppe: professionelle Nutzer (z. B. Software Engineer, Produktmenschen, Wissensarbeiter)
+- Tonalität: kompetent, selbstironisch, leicht humorvoll – nicht albern
+- Ergebnis wird visuell aufbereitet (Infografik / Card UI)
+
+Gib das Ergebnis AUSSCHLIESSLICH als valides JSON zurück (kein zusätzlicher Text).
+
+––––––––––––––––
+SECTION 1 – Archetype
+––––––––––––––––
+Erfinde einen prägnanten Archetypen-Namen und eine kurze Beschreibung:
+
+- Der Name darf humorvoll, augenzwinkernd oder leicht überzeichnet sein  
+  (z. B. Wortspiele, Insider-Humor, ironische Titel)
+- Die Beschreibung erklärt ernsthaft und fachlich korrekt, wie ich ChatGPT nutze
+- Humor entsteht durch Sprache, nicht durch Übertreibung oder Unsachlichkeit
+- Fokus auf meine Rollen (z. B. Software Engineer, Qualitätsfokus, agile Arbeit, Wissensarbeit)
+
+––––––––––––––––
+SECTION 2 – Erfahrungslevel
+––––––––––––––––
+Bewerte mein AI-Erfahrungslevel auf einer Skala von 0–10:
+
+Skalendefinition:
+- 0 = hat ChatGPT noch nie sinnvoll benutzt oder ist nicht angemeldet
+- 3–4 = gelegentlicher Nutzer
+- 6–7 = regelmäßiger, versierter Nutzer
+- 8–9 = Power User (strategisch, reflektiert, produktiv)
+- 10 = könnte direkt bei OpenAI als Berater einsteigen
+
+Regeln:
+- Gib einen ganzzahligen Wert zurück
+- Die Begründung ist sachlich, nüchtern und nachvollziehbar.
+- Erkläre anhand von Nutzungstiefe, Regelmäßigkeit, Reflexionsgrad und Professionalität,
+  warum du genau zu diesem Wert kommst
+- Motivierend aber kein Marketing-Sprech, keine Überhöhung
+
+––––––––––––––––
+SECTION 3 – Praktische Verbesserungstipps
+––––––––––––––––
+Gib mir konkrete, umsetzbare Tipps, wie ich mein Nutzerlevel weiter steigern kann:
+
+- Erstelle 3–4 frei erfundene Kategorien (z. B. Denkweise, Prompt-Design, Workflow, Qualitätskontrolle, Meta-Nutzung)
+- Pro Kategorie genau 2 Tipps
+- Jeder Tipp ist:
+  - konkret
+  - praxisnah
+  - sofort anwendbar
+- Keine generischen Aussagen wie „sei präziser“
+- Schreibe so, dass ein erfahrener Nutzer noch echten Mehrwert hat
+
+––––––––––––––––
+OUTPUT FORMAT (EXAKT EINHALTEN)
+––––––––––––––––
+
+{
+  "header": {
+    "year": 2025,
+    "outputLangeuage": "de"
+  },
+  "archetype": {
+    "name": "...",
+    "summary": "..."
+  },
+  "interactionTypes": [
+    { "word": "...", "weight": 1-10 }
+    // ca. 12–15 Einträge, geeignet für eine Wordcloud
+  ],
+  "userLevel": {
+    "value": 0-10,
+    "reason": "..."
+  },
+  "tips": [
+    {
+      "category": "...",
+      "text": "..."
+    }
+  ]
+}
+
+Optional:
+
+- Vermeide Floskeln
+- Schreibe so, als würdest du einen sehr guten Kollegen einschätzen
+- Bevorzuge Klarheit vor Nettigkeit
