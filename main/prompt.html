@@ -27,17 +27,22 @@
     <script src="js/prompt.js" defer></script>
     <script src="js/alpine-include.js" defer></script>
     <script src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+
+
 </head>
 
-<body>
-
-    <header x-include="'partials/header.html'"></header>
+<body  x-init="load()">
+    <div style="position: relative;">
+        <header x-include="'partials/header.html'"></header>
+        <div class="language-switcher-container">
+            <div x-include="'partials/language-switcher.html'"></div>
+        </div>
+    </div>
 
     <div class="container mb-4 d-flex justify-content-between">
-        <div x-include="'partials/howto-chat.html'"></div>
         <div class="d-flex align-items-center">
-            <a href="index.html" class="text-primary mr-2" data-i18n="nav.backToProfile">Back to Profile</a>
-            <div x-include="'partials/language-switcher.html'"></div>
+            <strong><a href="index.html" class="text-primary mr-2" data-i18n="nav.backToProfile">Back to Profile</a>
+            </strong>
         </div>
     </div>
 
