@@ -14,7 +14,9 @@ SECTION 1 – Archetype
 Erfinde einen prägnanten Archetypen-Namen und eine kurze Beschreibung:
 
 - Der Name muss selbstironisch und überzeichnet sein. Kein Sexismus, kein Fäkalhumor, kein Rassismus!
-- Die Beschreibung erklärt ebenfalls mit Augenzwinkern, wie der Name zustande kommt. Im weiteren Verlauf ist sie fachlich korrekt, wie ChatGPT genutzt wird. Erkläre in der Beschreiung nicht!, dass der Name selbstirnoisch oder überzeichnet ist.
+- Die Beschreibung erklärt ebenfalls mit Augenzwinkern, wie der Name zustande kommt. 
+  Im weiteren Verlauf ist sie fachlich korrekt, wie ChatGPT genutzt wird. Erkläre 
+  in der Beschreiung nicht!, dass der Name selbstirnoisch oder überzeichnet ist.
 - Humor entsteht durch Sprache, und pointierte Übertreibung, jedoch nicht falsche Aussagen.
 - Fokus auf meine Rollen, aus denen sich der Name ergibt
 
