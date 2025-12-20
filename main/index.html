@@ -4,105 +4,104 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title data-i18n="home.title">Your yearly ChaetGPT profile</title>
+    <title>Mobile MVP</title>
+
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/mobile.css">
     <link rel="stylesheet" href="css/print.css">
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/polyglot.js/0.4.2/polyglot.min.js"
         integrity="sha512-SXa0RggkqBgtv9e1Wy49C6agde9NAXf7t/Vz7pE9wgOOuNhOyhwn/a0rdHRZalIvLhxMYkG0FRHfsXDUJOVH2A=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="js/polyglot-init.js" defer></script>
-
-
-    <!--
-    Script loading order (all with defer for non-blocking execution):
-    1. js/alpine-include.js: Registers the x-include directive before Alpine initializes.
-    2. wordcloud2.js: Defines window.WordCloud for word cloud rendering.
-    3. js/index.js: Defines window.myApp with Alpine.js data and methods.
-    4. Alpine.js: Initializes x-data="myApp" and runs x-init="load()".
-    Defer ensures scripts load in parallel but execute in this order after DOM parsing,
-    preventing race conditions and "undefined" errors.
-    -->
-    <!-- wordcloud2 is lazy-loaded when Beta is enabled via myApp listener -->
     <script src="js/index.js" defer></script>
     <script src="js/alpine-include.js" defer></script>
     <script src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
 </head>
 
-<body x-data="myApp" x-init="load()">
+<body x-data="{ ...myApp, currentStep: 1 }" x-init="load()">
+    <div style="position: relative;">
+        <header x-include="'partials/header.html'"></header>
+        <div class="language-switcher-container">
+            <div x-include="'partials/language-switcher.html'"></div>
+        </div>
+    </div>
 
-    <header x-include="'partials/header.html'"></header>
+    <!-- Step Progress Indicator -->
+    <div class="container py-3">
+        <div class="step-indicator d-flex justify-content-between align-items-center">
+            <template x-for="step in 4" :key="step">
+                <div class="step-item" :class="{ 'active': currentStep === step, 'completed': currentStep > step }"
+                    @click="currentStep = step">
+                    <div class="step-circle">
+                        <span x-text="step"></span>
+                    </div>
+                    <div class="step-line" x-show="step < 4"></div>
+                </div>
+            </template>
+        </div>
+    </div>
 
-    <!-- Toggle + JSON input form: paste custom JSON and apply it to the page (collapsed by default) -->
-    <section class="container mb-4" id="custom-json-input">
-        <div class="d-flex justify-content-between">
-            <div x-include="'partials/howto-chat.html'"></div>
-            <div class="d-flex align-items-center language-switcher">
-                <button type="button" class="btn btn-sm btn-light lang-flag mr-1" data-lang="de"
-                    data-i18n-attr="aria-label=lang.de">🇩🇪</button>
-                <button type="button" class="btn btn-sm btn-light lang-flag" data-lang="en"
-                    data-i18n-attr="aria-label=lang.en">🇬🇧</button>
-                <div class="d-flex align-items-center">
+    <main class="container py-4">
+
+        <section id="step-copy-prompt" class="mb-4 card" x-show="currentStep === 1" x-cloak>
+            <div class="card-body">
+                <h2 class="h5 mb-2">Step 1: Copy Prompt</h2>
+
+                <div x-include="'partials/prompt-content.html'"></div>
+                <button type="button" class="btn btn-primary mt-3" @click="currentStep = 2">Next Step →</button>
+            </div>
+        </section>
+
+        <section id="step-chatgpt" class="mb-4 card" x-show="currentStep === 2" x-cloak>
+            <div class="card-body">
+                <h2 class="h5 mb-2"><a href="https://chat.openai.com/" target="chatgpt" rel="noreferrer">Step 2: Open
+                        ChatGPT</a></h2>
+                <p class="text-muted mb-3"><a href="https://chat.openai.com/" target="chatgpt" rel="noreferrer">Opens
+                        ChatGPT in a new tab</a>, paste the prompt, and run it.</p>
+                <p>Wait for the complete response, then copy the raw json information.</p>
+                <button type="button" class="btn btn-primary mt-3" @click="currentStep = 3">Next Step →</button>
+            </div>
+        </section>
+
+        <section id="step-view-data" class="mb-4 card" x-show="currentStep === 3" x-cloak>
+            <div class="card-body">
+                <h2 class="h5 mb-2">Step 3: View ChatGPT Data</h2>
+                <p><span>Paste the JSON response here to view your profile.</span>
+                </p>
+                <div class="d-flex justify-content-between mt-3">
+                    <button type="button" class="btn" @click="showJsonForm = true"
+                    :class="{ 'btn-primary': !(data && data.archetype), 'btn-secondary': (data && data.archetype) }"
+                        
+                        data-i18n="nav.showJsonForm">Show
+                        JSON Form</button>
+                    
+                    <button type="button" class="btn"
+                        :class="{ 'btn-primary': (data && data.archetype), 'btn-secondary': !(data && data.archetype) }"
+                        :disabled="!(data && data.archetype)"
+                        @click="currentStep = 4">View Profile →</button>
                 </div>
             </div>
-        </div>
+        </section>
 
-    </section>
-
-    <div x-include="'partials/show-json-dialog.html'"></div>
-
-    <main class="container">
-<div x-include="'partials/profile-sections.html'">
-    </div>
+        <section id="profile-result" class="mb-4" x-show="currentStep === 4" x-cloak>
+            <div x-include="'partials/profile-sections.html'"></div>
+        </section>
     </main>
 
     <footer x-include="'partials/footer.html'"></footer>
 
-    <!-- keep lightweight: no jQuery required; bootstrap JS omitted (only CSS used) -->
-    <script>
-        // Beta feature toggle with cookie persistence
-        function setCookie(name, value, days) {
-            const d = new Date();
-            d.setTime(d.getTime() + (days * 24 * 60 * 60 * 1000));
-            const expires = "expires=" + d.toUTCString();
-            document.cookie = name + "=" + encodeURIComponent(value) + ";" + expires + ";path=/";
-        }
+    <!-- JSON Dialog Modal -->
+    <div x-include="'partials/show-json-dialog.html'"></div>
 
-        function getCookie(name) {
-            const cname = name + "=";
-            const decodedCookie = decodeURIComponent(document.cookie || "");
-            const ca = decodedCookie.split(';');
-            for (let c of ca) {
-                while (c.charAt(0) === ' ') c = c.substring(1);
-                if (c.indexOf(cname) === 0) return c.substring(cname.length, c.length);
-            }
-            return "";
-        }
-
-        function applyBetaState(isBeta) {
-            document.body.classList.toggle('beta-on', !!isBeta);
-            const sw = document.getElementById('betaSwitch');
-            if (sw) sw.checked = !!isBeta;
-        }
-
-        document.addEventListener('DOMContentLoaded', function () {
-            const isBeta = getCookie('feature_level') === 'BETA';
-            applyBetaState(isBeta);
-            try { if (window.myApp && window.myApp.onBetaToggle && isBeta) window.myApp.onBetaToggle(true); } catch (_) { }
-            const sw = document.getElementById('betaSwitch');
-            if (sw) {
-                sw.addEventListener('change', function (e) {
-                    const checked = !!e.target.checked;
-                    setCookie('feature_level', checked ? 'BETA' : 'PROD', 365);
-                    applyBetaState(checked);
-                    try { if (window.myApp && window.myApp.onBetaToggle) window.myApp.onBetaToggle(checked); } catch (_) { }
-                });
-            }
-
-
-        });
-    </script>
+    <div class="mobile-floating-footer">
+        <button type="button" class="btn btn-outline-secondary btn-sm" @click="if(currentStep > 1) currentStep--"
+            :disabled="currentStep === 1">← Back</button>
+        <span class="mx-2 text-muted">Step <span x-text="currentStep"></span> of 4</span>
+        <button type="button" class="btn btn-outline-secondary btn-sm" @click="if(currentStep < 4) currentStep++"
+            :disabled="currentStep === 4">Next →</button>
+    </div>
 </body>
 
 </html>
