@@ -61,6 +61,30 @@ The app expects data in this structure:
 
 3. **No build step needed** — this is a static site with deferred script loading.
 
+## Build & Deploy
+
+### Available Make Targets
+
+- **`make package`** - Builds the project into the `target/` directory
+- **`make clean`** - Removes the build artifacts
+- **`make deploy_local`** - Deploys to local web server (requires sudo)
+- **`make deploy_production`** - Deploys to production server via rsync
+- **`make debug_production`** - Shows production configuration and tests SSH connection
+
+### Configuration
+
+Create a `local.config` file (copy from `local.example.config`) to configure deployment:
+
+```makefile
+deploy_local_target_dir = /usr/local/var/www/my-chatgpt-profile
+production_directory = /path/to/production
+prodction_ssh_host = ssh.example.com
+prodction_ssh_user = username
+prodction_ssh_key = /path/to/ssh/key
+```
+
+**Note:** `local.config` is gitignored to keep credentials secure.
+
 ## Usage
 
 1. Open `main/index.html` in your browser.

@@ -5,6 +5,7 @@
 deploy_local_target_dir ?= /var/www/html/my-chatgpt-profile
 target_dir = target
 
+# doc in local.example.config
 -include local.config
 
 .PHONY: deploy_local deploy_production
