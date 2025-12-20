@@ -12,8 +12,8 @@ target_dir = target
 
 deploy_local: package
 	sudo mkdir -p $(deploy_local_target_dir)
-	sudo cp -r $(target_dir)/* $(deploy_local_target_dir)/
-
+	sudo rsync -avz --delete $(target_dir)/ $(deploy_local_target_dir)/
+	
 clean:
 	rm -rf $(target_dir)
 	
