@@ -8,6 +8,7 @@
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/mobile.css">
     <link rel="stylesheet" href="css/print.css">
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/polyglot.js/0.4.2/polyglot.min.js"
@@ -55,9 +56,18 @@
                     JSON Form</button>
             </div>
         </section>
+
+        <section id="profile-result" class="mb-4">
+            <!-- Profile results will be displayed here after JSON is parsed -->
+        </section>
     </main>
 
     <footer x-include="'partials/footer.html'"></footer>
+
+    <!-- Floating bottom nav for quick access to step 1 -->
+    <div class="mobile-floating-footer">
+        <a href="#step-copy-prompt" class="btn btn-primary btn-block">Back to Step 1: Copy Prompt</a>
+    </div>
 </body>
 
 </html>
